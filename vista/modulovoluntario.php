@@ -1,12 +1,12 @@
 <?php
 require_once ('../modelo/conexion.php');
-require_once ('../modelo/Detallecampania.php');
+require_once ('../modelo/campania.php');
 conectar();
 session_start();
 ?>
 
 <!DOCTYPE html>
-<html> 
+<html > 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,49 +26,59 @@ session_start();
 
 <?php include("menu-voluntario.php"); ?>
 
-<div id="page-content-wrapper">
-    <div class="container-fluid">                  
-      
-        <div class="header"> 
-            <h1 class="page-header">Campañas Sociales </h1>     
-        </div>
-               
-<?php                           
-                
-            $cod = $_SESSION["cod"];           
 
-            $campania = new Detallecampania();
-            $campania->setUserid($cod);
-            $r = $campania->campaniasporvoluntario();
+<div id="page-content-wrapper">
+    <div class="container-fluid">      
+
+        <div class="header"> 
+            <h1 class="page-header"> Campañas Sociales </h1>    
+        </div>      
+          
+
+<?php
+                              
+$cod = $_SESSION["cod"];                 
+                     
+
+            $campania = new Campania();                
+            $r = $campania->campanias();
             while ($row = mysqli_fetch_array($r)) {
 
-            echo "        
-                <div class='col-md-4 col-sm-6 col-xs-12 hero-feature' >
-                <div class='w3-container' >
+            echo "
+        
+            <div class='col-md-4 col-sm-6 col-xs-12 hero-feature' >
+            <div class='w3-container' >
                 <div class='w3-card-4' >
-                    <img src='img/".$row["4"]."' alt='Norway' width='100%'' height='200'>
+                    <img src='img/".$row["7"]."' alt='Norway' width='100%'' height='200'>
                     <div class='w3-container w3-center' >
                         <br/>
-                        <p>".$row["0"]."</p>
-                        <p>".$row["2"]."</p>
-                        <p>".$row["3"]."</p>                      
+                        <p>".$row["1"]."</p>
+                        <p> Fecha de inicio : ".$row["5"]."</p>    
+                        <p> Fecha final : ".$row["6"]."</p>                             
+                        <p> Vacantes : ".$row["4"]."</p>                     
                         <br/>
+
+                 <a href='../controlador/sumarsecampania.php?idcamp=".$row["0"]."'><button class='btn btn-primary btn-block'>Sumarse</button></a>         
+
+                    <br/>
+
                     </div>
                 </div>
-                </div>
-                <br/>               
-                </div> ";
-            }
+            </div>
+            <br/>            
+            </div> ";
+              }
 
-?>                      
-            
+?>  
+                       
 </div>
        
 </div>
 
-</div>     
+</div>   
+ 
     
-<footer> 
+<footer>        
 </footer>
            
 <script src="js/jquery.js"></script>

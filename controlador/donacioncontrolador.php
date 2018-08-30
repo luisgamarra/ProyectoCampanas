@@ -4,7 +4,7 @@ require_once ('../modelo/conexion.php');
 require_once ('../modelo/donacion.php');
 
 conectar();
-
+session_start();
 
  $action = '';
     if (isset($_POST['action'])) {
@@ -27,46 +27,37 @@ conectar();
 function create(){
 
 $idcam = $_REQUEST["idcam"];
-$idusu = $_REQUEST["idusu"];
-session_start();
+$idvol = $_REQUEST["idvol"];
 
-    $don=new Donacion();
-    $don->setCategory($_POST["txtcate"]);
-    $don->setName($_POST["txtnombre"]);  
+    $don=new Donacion();    
     $don->setDescription($_POST["txtdes"]);
     $don->setQuantility($_POST["txtcant"]);   
-    $don->setUserid($idusu);
+    $don->setUserid($idvol);
     $don->setCampaignid($idcam);
     $guardar=$don->guardar();
 
 
     echo "<script>alert('Registraste Donacion')
- document.location=('../vista/donaciones.php')</script>";
-    
+    document.location=('../vista/lista-donaciones.php')</script>";    
     
 }
     
+function modificar(){
 
-/**function modificar(){
-
-session_start();
-
-$idcamp = $_REQUEST["idcamp"];
-
-    
+$iddon = $_REQUEST["iddon"];    
  
-    $camp = new Campania();
-    $camp->setTitle($_POST["txtitle"]);
-    $camp->setPlace($_POST["txtplace"]);
-    $camp->setVacant($_POST["txtvacant"]);    
-    $camp->setId($idcamp);
-    $actualizar = $camp->actualizar();
+    $don = new Donacion();
+    $don->setDescription($_POST["txtdes"]);
+    $don->setQuantility($_POST["txtcant"]);   
+    $don->setId($iddon);
+    $actualizar = $don->actualizar();
 
     echo "<script>alert('Actualizado Correctamente')
- document.location=('../vista/detallecampania.php')</script>";
+    document.location=('../vista/lista-donaciones.php')</script>";
 }
 
-function eliminar(){
+
+/**function eliminar(){
 
 session_start();
 

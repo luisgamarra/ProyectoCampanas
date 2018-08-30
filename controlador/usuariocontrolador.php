@@ -1,8 +1,9 @@
 <?php 
 
 require_once ('../modelo/conexion.php');
-
 require_once ('../modelo/user.php');
+conectar();
+session_start();
 
 
  $action = '';
@@ -24,6 +25,9 @@ require_once ('../modelo/user.php');
             case 'cambiarcontrasenia' :
                 cambiarcontrasenia();
                 break;
+            case 'recuperar' :
+                recuperar();
+                break;    
             
         }
     }
@@ -31,14 +35,12 @@ require_once ('../modelo/user.php');
 
 function create(){
 
-conectar();
-
 $u = new User();
 $u->setEmail($_POST["txtcorreo"]);
 $row = $u->getUserbyEmail();
 if($row){
     echo "<script>alert('EL CORREO YA EXITE, VUELVA INTENTAR CON OTRO CORREO')
- document.location=('../vista/registrousuario.php')</script>";
+          document.location=('../vista/registrousuario.php')</script>";
 }else{    
     $usuario=new User();
     $usuario->setFirstName($_POST["txtnom"]);
@@ -50,70 +52,68 @@ if($row){
     $save=$usuario->save();
 
     echo "<script>alert('Registro Correcto')
- document.location=('../vista/login.php')</script>";
-    //header("location:../../View/Login.php");
+    document.location=('../vista/login.php')</script>";    
     
 }
-	//$sql1="insert into users values(null,'$nom','$ape','$cor','$cla','$cel',$tipo)";
-    //ejecutar($sql1) or die(mysql_error());
-    //header("location:../../View/Login.php");
+	
 }
 
 
-function modificar(){
-    session_start();
+function modificar(){    
 
     $cod=$_SESSION["cod"];
-    conectar();
+    
     $us = new User();
     $us->setFirstName($_POST["txtnom"]);
     $us->setLastname($_POST["txtape"]);
     $us->setEmail($_POST["txtemail"]);
     $us->setCellphone($_POST["txtcel"]);
+    $us->setPhoto($_FILES['txtphoto']['name']);
     $us->setId($cod);
     $actualizar = $us->update();
 
+$im = $_FILES['txtphoto']['tmp_name'];
+$thumb_db = $_FILES['txtphoto']['name'];
+
+$ruta = '../vista/img/' . $thumb_db;
+
+move_uploaded_file($im, $ruta);
+
     echo "<script>alert('Actualizado Correctamente')
- document.location=('../../vista/miperfil.php')</script>";
+         document.location=('../vista/miperfil.php')</script>";
 }
-
-
 
 
 function login(){
-session_start();
-conectar();
 
     $usu = new User();
-    $usu->setEmail($_POST["txtusu"]);
+    $usu->setEmail($_POST["txtemail"]);
     $usu->setPassword($_POST["txtpass"]);
     $log = $usu->logeo();
     if($log){
-        if($log[6] == "1"){
-        $_SESSION["cod"] = $log[0];
-        $_SESSION["tipo"] = $log[6];
-        $_SESSION["usuario"]=$log[1]." ".$log[2];
+        if($log[7] == "1"){
+                $_SESSION["cod"] = $log[0];
+                $_SESSION["photo"] = $log[6];
+                $_SESSION["tipo"] = $log[7];
+                $_SESSION["usuario"]=$log[1]." ".$log[2];
         echo "<script>alert('Bienvenido Administrador')
-    document.location=('../vista/panelcontrol.php')</script>";  
+              document.location=('../vista/panelcontrol.php')</script>";  
         }else{
             $_SESSION["cod"] = $log[0];
-        $_SESSION["usuario"]=$log[1]." ".$log[2];
+            $_SESSION["photo"] = $log[6];
+            $_SESSION["usuario"]=$log[1]." ".$log[2];
         echo "<script>alert('Bienvenido Voluntario')
-    document.location=('../vista/modulousuario.php')</script>";  
+             document.location=('../vista/modulovoluntario.php')</script>";  
         }  
 
-}else{
-
-	echo "<script>alert('EMAIL y/o CONTRASEÑA INCORRECTOS')
-	document.location=('../vista/login.php')</script>";
-}
-
+    }else{
+	       echo "<script>alert('EMAIL y/o CONTRASEÑA INCORRECTOS')
+	       document.location=('../vista/login.php')</script>";
+    }
 }
 
 
 function cambiarcontrasenia(){
-session_start();
-conectar();
 
     $usu = new User();
     $usu->setPassword($_POST["txtca"]);
@@ -125,26 +125,30 @@ conectar();
         $u->updatepass();
 
         echo "<script>alert('CONTRASEÑA ACTUALIZADA')
-    document.location=('../vista/login.php')</script>";
+             document.location=('../vista/login.php')</script>";
 
-}else{
+    }else{
 
-    echo "<script>alert('CONTRASEÑA INCORRECTA')
-    document.location=('../vista/cambiarcontra.php')</script>";
+        echo "<script>alert('CONTRASEÑA INCORRECTA')
+        document.location=('../vista/cambiarcontra.php')</script>";
+    }
+
 }
 
-}
+function recuperar(){
 
-function logout(){
+    $usu = new User();
+    $usu->setEmail($_POST["txtemail"]);
+    $row = $usu->getUserbyEmail();
+    
+    if($row){
+        echo "<script>alert('SE HA ENVIADO A SU CORREO')
+             document.location=('../vista/login.php')</script>";
+    }else{    
+        echo "<script>alert('EL CORREO QUE HA INGRESADO NO EXISTE')
+        document.location=('../vista/recuperarcontrasenia.php')</script>";       
 
-   session_start();
-   session_destroy();
-   echo "<script>alert('SALISTE DEL SISTEMA')
-	document.location=('../index.html')</script>";
-
-  
-}
-
+}}
 
 
  ?>

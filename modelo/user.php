@@ -1,5 +1,6 @@
 <?php
-//funcion para conectarnos a una bd
+conectar();
+
 class User {
 
     private $id;
@@ -8,15 +9,17 @@ class User {
     private $email;
     private $password;
     private $cellphone;
+    private $photo;
     private $type;
     
- function __construct($id=0,$firstname="",$lastname="",$email="",$password="",$cellphone="",$type=""){
+ function __construct($id=0,$firstname="",$lastname="",$email="",$password="",$cellphone="",$photo="",$type=""){
  $this->id = $id;
  $this->firstname = $firstname;
  $this->lastname = $lastname;
  $this->email = $email;
  $this->password = $password;
  $this->cellphone = $cellphone;
+ $this->photo = $photo;
  $this->type = $type;
  }
     
@@ -67,6 +70,14 @@ class User {
     	return $this->cellphone;
     }
 
+    public function setPhoto($photo){
+        $this->photo = $photo;
+    }
+
+    public function getPhoto($photo){
+        return $this->photo;
+    }
+
     public function setType($type){
         $this->type = $type;
 
@@ -78,26 +89,27 @@ class User {
 
 
     public function save(){
-        conectar();
-        $query="INSERT INTO users (user_id,firstname,lastname,email,password,cellphone,type_id,estado)
+        
+        $query="INSERT INTO users (user_id,firstname,lastname,email,password,cellphone,photo,type_id,estado)
                 VALUES(0,
                        '".$this->firstname."',
                        '".$this->lastname."',
                        '".$this->email."',
                        '".$this->password."',
                        '".$this->cellphone."',
+                       'user.png',
                        '".$this->type."',1);";
         $save=ejecutar($query);
-        //$this->db()->error;
+    
         return $save;
 
  	}
 
      public function update(){
         conectar();
-        $query="UPDATE users SET firstname='".$this->firstname."', lastname='".$this->lastname."',email='".$this->email."',cellphone='".$this->cellphone."' where user_id='".$this->id."'";
+        $query="UPDATE users SET firstname='".$this->firstname."', lastname='".$this->lastname."',email='".$this->email."',cellphone='".$this->cellphone."', photo = '".$this->photo."'  where user_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+        
         return $actualizar;
 
     }
@@ -109,7 +121,7 @@ class User {
         $query="SELECT * from users where email='".$this->email."' and password='".$this->password."' and estado = 1";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
-        //$this->db()->error;
+        
         return $row;
 
     }
@@ -121,7 +133,7 @@ class User {
         $query="select * from users where email='".$this->email."' and estado = 1";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
-        //$this->db()->error;
+       
         return $row;
 
     }
@@ -131,7 +143,7 @@ class User {
         $query="select * from users where user_id='".$this->id."'";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
-        //$this->db()->error;
+        
         return $row;
 
     }
@@ -141,7 +153,7 @@ class User {
         $query="select * from users where password='".$this->password."'";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
-        //$this->db()->error;
+        
         return $row;
 
     }
@@ -150,7 +162,7 @@ class User {
         conectar();
         $query="UPDATE users SET password='".$this->password."' where user_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+        
         return $actualizar;
 
     }

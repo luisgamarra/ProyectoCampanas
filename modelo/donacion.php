@@ -1,23 +1,18 @@
 <?php 
 
-/**
- * 
- */
+conectar();
+
 class Donacion{
     
-    private $id;
-    private $category;
-    private $name;    
+    private $id;    
     private $description;
     private $quantility; 
     private $userid;
     private $campaignid; 
    
     
- function __construct($id=0,$category="",$name="",$description="",$quantility="",$userid="",$campaignid=""){
- $this->id = $id;
- $this->category = $category;
- $this->name = $name; 
+ function __construct($id=0,$description="",$quantility="",$userid="",$campaignid=""){
+ $this->id = $id; 
  $this->description = $description;
  $this->quantility = $quantility; 
  $this->userid = $userid; 
@@ -30,23 +25,7 @@ class Donacion{
 
     public function getId($id){
         return $this->id;
-    }
-
-    public function setCategory($category){
-        $this->category = $category;
-    }
-
-    public function getCategory($category){
-        return $this->category;
-    }
-
-    public function setName($name){
-        $this->name = $name;
-    }
-
-    public function getName($name){
-        return $this->name;
-    } 
+    }  
 
     public function setDescription($description){
         $this->description = $description;
@@ -81,49 +60,47 @@ class Donacion{
     }
 
     public function Guardar(){
-        conectar();
-        $query="INSERT INTO donations (donation_id,category,name,description,quantility,user_id,campaign_id,estado)
-                VALUES(0,
-                       '".$this->category."',
-                       '".$this->name."',
+       
+        $query="INSERT INTO donations (donation_id,description,quantility,user_id,campaign_id,estado)
+                VALUES(0,                       
                        '".$this->description."',
                        '".$this->quantility."',
                        '".$this->userid."',
                        '".$this->campaignid."',1);";
         $guardar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+        
         return $guardar;
 
     }
 
      public function actualizar(){
-        conectar();
-        $query="UPDATE donations SET category='".$this->category."',name='".$this->name."',description='".$this->description."',
-        quantility='".$this->quantility."' where donation_id='".$this->id."'";
+        
+        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."' where donation_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+        
         return $actualizar;
 
     }
 
     public function eliminar(){
-        conectar();
+        
         $query="UPDATE donations SET estado = '0' where donation_id='".$this->id."'";
         $eliminar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+       
         return $eliminar;
 
     }
 
-    /**public function campaniaporusuario(){
-        conectar();
-        $query="SELECT * from campaigns where user_id='".$this->id."' and estado = 1 " ;        
+   public function donacionesporvoluntario(){
+        
+        $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.estado=1";    
         $tabla=ejecutar($query);
         
-        //$this->db()->error;
         return $tabla;
 
     }
+
+     /**
 
      public function campanias(){
         conectar();

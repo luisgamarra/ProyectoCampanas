@@ -1,25 +1,27 @@
 <?php 
+conectar();
 
-/**
- * 
- */
 class Campania
-{
-	
+{	
 	private $id;
     private $title;
+    private $description;
     private $place;    
     private $vacant;
-    private $fecha;
+    private $startdate;
+    private $enddate;
     private $image;
     private $userid;
    
     
- function __construct($id=0,$title="",$place="",$vacant="",$fecha="",$image="",$userid=""){
+ function __construct($id=0,$title="",$description="",$place="",$vacant="",$startdate="",$enddate="",$image="",$userid=""){
  $this->id = $id;
  $this->title = $title;
+ $this->description = $description;
  $this->place = $place;
  $this->vacant = $vacant;
+ $this->startdate = $startdate;
+ $this->enddate = $enddate;
  $this->image = $image;
  $this->userid = $userid; 
  }
@@ -40,6 +42,14 @@ class Campania
         return $this->title;
     }
 
+     public function setDescription($description){
+        $this->description = $description;
+    }
+
+    public function getDescription($description){
+        return $this->description;
+    }
+
     public function setPlace($place){
     	$this->place = $place;
     }
@@ -56,12 +66,20 @@ class Campania
         return $this->vacant;
     }
 
-    public function setFecha($fecha){
-        $this->fecha = $fecha;
+    public function setStartdate($startdate){
+        $this->startdate = $startdate;
     }
 
-    public function getFecha($fecha){
-        return $this->fecha;
+    public function getStartdate($startdate){
+        return $this->startdate;
+    }
+
+     public function setEnddate($enddate){
+        $this->enddate = $enddate;
+    }
+
+    public function getEnddate($enddate){
+        return $this->enddate;
     }
 
     public function setImage($image){
@@ -80,13 +98,15 @@ class Campania
     }
 
     public function Guardar(){
-        conectar();
-        $query="INSERT INTO campaigns (campaign_id,title,place,vacant,dates,imagen,user_id,estado)
+        
+        $query="INSERT INTO campaigns (campaign_id,title,description,place,vacant,start_date,end_date,imagen,user_id,estado)
                 VALUES(0,
                        '".$this->title."',
                        '".$this->place."',
+                       '".$this->description."',
                        '".$this->vacant."',
-                       '".$this->fecha."',
+                       '".$this->startdate."',
+                       '".$this->enddate."',
                        '".$this->image."',
                        '".$this->userid."',1);";
         $guardar=ejecutar($query) or die (mysqli_error());
@@ -96,42 +116,42 @@ class Campania
  	}
 
      public function actualizar(){
-        conectar();
-        $query="UPDATE campaigns SET title='".$this->title."', place='".$this->place."',vacant='".$this->vacant."' where campaign_id='".$this->id."'";
+       
+        $query="UPDATE campaigns SET title='".$this->title."', place='".$this->place."',vacant='".$this->vacant."',start_date='".$this->startdate."',end_date='".$this->enddate."' where campaign_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+        
         return $actualizar;
 
     }
 
     public function eliminar(){
-        conectar();
+        
         $query="UPDATE campaigns SET estado = '0' where campaign_id='".$this->id."'";
         $eliminar=ejecutar($query) or die (mysqli_error());
-        //$this->db()->error;
+        
         return $eliminar;
 
     }
 
     public function campaniaporusuario(){
-        conectar();
+       
         $query="SELECT * from campaigns where user_id='".$this->id."' and estado = 1 " ;        
         $tabla=ejecutar($query);
-        
-        //$this->db()->error;
+
         return $tabla;
 
     }
 
      public function campanias(){
-        conectar();
-        $query="SELECT * from campaigns where estado = 1 " ;        
-        $tabla=ejecutar($query);
         
-        //$this->db()->error;
+        $query="SELECT * from campaigns where estado = 1 " ;       
+        $tabla=ejecutar($query);        
+       
         return $tabla;
 
     }
+
+     
    
 }
 

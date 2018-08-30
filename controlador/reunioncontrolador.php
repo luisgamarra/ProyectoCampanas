@@ -2,9 +2,8 @@
 
 require_once ('../modelo/conexion.php');
 require_once ('../modelo/reunion.php');
-
 conectar();
-
+session_start();
 
  $action = '';
     if (isset($_POST['action'])) {
@@ -26,9 +25,6 @@ conectar();
 
 function create(){
 
-
-session_start();
-
     $reu=new Reunion();
     $reu->setTopic($_POST["txtasunto"]);
     $reu->setDates($_POST["txtfecha"]);     
@@ -36,34 +32,27 @@ session_start();
     $reu->setCampaignid($_POST["camp"]);
     $guardar=$reu->guardar();
 
-
     echo "<script>alert('Registraste reunion')
- document.location=('../vista/planificar-reuniones.php')</script>";
-    
+    document.location=('../vista/planificar-reuniones.php')</script>";    
     
 }
     
 
-/**function modificar(){
+function modificar(){
 
-session_start();
-
-$idcamp = $_REQUEST["idcamp"];
-
-    
+$idreu = $_REQUEST["idreu"];    
  
-    $camp = new Campania();
-    $camp->setTitle($_POST["txtitle"]);
-    $camp->setPlace($_POST["txtplace"]);
-    $camp->setVacant($_POST["txtvacant"]);    
-    $camp->setId($idcamp);
-    $actualizar = $camp->actualizar();
+    $reu = new Reunion();
+    $reu->setTopic($_POST["txtasunto"]);
+    $reu->setDates($_POST["txtfecha"]);       
+    $reu->setId($idreu);
+    $actualizar = $reu->actualizar();
 
     echo "<script>alert('Actualizado Correctamente')
- document.location=('../vista/detallecampania.php')</script>";
+    document.location=('../vista/planificar-reuniones.php')</script>";
 }
 
-function eliminar(){
+/**function eliminar(){
 
 session_start();
 

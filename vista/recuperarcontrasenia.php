@@ -10,9 +10,9 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
 
-<body background="img/login.jpg">
+<body>
 
-<nav class="navbar navbar-default" style="background-color: #000000;">
+<nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -22,12 +22,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../index.php">Sistema de Campañas Sociales</a>
+          <a class="navbar-brand" href="#">Sistema de Campañas Sociales</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="login.php">Iniciar Sesión</a></li>
+            <li><a href="login.php">Iniciar Sesión</a></li>
             <li><a href="registrousuario.php">Regístrate</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -37,13 +37,11 @@
 
 <div class="container">
     <form class="form-horizontal" action="../controlador/usuariocontrolador.php" data-toggle="validator" method="post">
-                
+                     
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">
-            <center><img src="img/logeo.png" width="40%" height="40%" align="center"></center>
-          <h3>Ingresa a tu cuenta</h3>
-          <p>Escribe tu correo y contraseña:</p>
+          <h3>Ingresa tu correo</h3>          
           </div>
         </div>      
 
@@ -53,26 +51,16 @@
           <input type="email" name="txtemail" placeholder="Correo Electrónico" class="form-control input-md" data-error="correo invalido ej:luis@gmail.com" required>
           <div class="help-block with-errors"></div>
           </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">                                   
-          <input type="password" name="txtpass" placeholder="Contraseña" class="form-control input-md" id="password" data-error="falta contraseña" required>
-          <div class="help-block with-errors"></div>
-          <a href="recuperarcontrasenia.php">recuperar contraseña</a>
-          </div>
-          </br>
-        </div>
+        </div>        
 
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">     
-          <input type="hidden" value="login" name="action"/>
-          <button type="submit" class="btn btn-success" value="login">Ingresar</button>
+          <input type="hidden" value="recuperar" name="action"/>
+          <button type="submit" class="btn btn-success" value="recuperar">Aceptar</button>
           </div>
         </div>   
-                 
+                   
     </form>    
 </div>
 

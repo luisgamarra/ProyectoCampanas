@@ -1,7 +1,6 @@
 <?php
+
 //funcion para conectarnos a una bd
-
-
 function conectar(){
     $con = new mysqli("localhost", "root", "","bdcampanias");
     
