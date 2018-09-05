@@ -156,8 +156,8 @@ $mail->Host = "smtp.live.com";
 //indico el puerto que usa Hotmail
 $mail->Port       = 25;  
 //indico un usuario / clave de un usuario de Hotmail
-$mail->Username   = "luisg_038@hotmail.com";
-$mail->Password   = "ALBERTO"; 
+$mail->Username   = "luisg_al_1994@hotmail.com";
+$mail->Password   = "sialem2000"; 
 $mail->SetFrom('luisg_038@hotmail.com', 'luisg_038@hotmail.com'); // El segundo parametro es el nombre del mail o seudonimo
 $mail->Subject    = "RECUPERACION DE CONTRASENIA";  // Asunto
 $mail->MsgHTML("Te enviamos tu contrasenia: '".$row[4]."'");
