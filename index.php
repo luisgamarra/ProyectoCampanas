@@ -5,64 +5,53 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title></title>
+  <title>Campañas sociales</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="vista/css/normalize.css">
-  <link rel="stylesheet" href="vista/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="vista/css/all.min.css">
+  <link rel="stylesheet" href="vista/css/normalize.css"> 
   <link rel="stylesheet" href="vista/css/main.css">
+  <link rel="stylesheet" href="vista/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vista/css/simple-sidebar.css">
+  <link rel="stylesheet" href="vista/css/colorbox.css">
+  
 </head>
 
 <body>
 
+  <?php include_once ('vista/templates/header.php'); ?>
 
-  <header class="site-header">
-    <div class="hero">
-      <div class="contenido-header">
-        <nav class="redes-sociales">
-          <a href="#"><i class="fab fa-facebook-square"></i></a>
-          <a href="#"><i class="fab fa-twitter-square"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-        </nav>
-        <div class="informacion-evento">
-          <div class="clearfix">
-            <p class="fecha"><i class="fas fa-calendar-alt"></i> Setiembre, 15</p>
-            <p class="ciudad"><i class="fas fa-map-marker-alt"></i> Ticlio</p>
+<nav class=" barra navbar navbar-default" style="background-color: #da273e;">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php"><img src="vista/img/logo.png" height="30px" alt="logo de la UTP" style="background: white;" ></a>
           </div>
-          <h1 class="nombre-sitio">REGALANDO SONRISAS</h1>
-          <p class="slogan">El mejor regalo es una <span>sonrisa sincera</span></p>
-      </div> <!--. Informacion de evento más proximo-->
 
-    </div> <!--.hero-->
-  </header>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right" >
+              <li><a href="vista/templates/reuniones.php"  style="color: #FFFFFF">Reuniones</a></li>
+               <li><a href="vista/templates/calendario.php" style="color: #FFFFFF">Calendario</a></li>
+              
+              <li><a href="vista/login.php" style="color: #FFFFFF">Ingresar</a></li>
+              <li><a href="vista/registrousuario.php" style="color: #FFFFFF">Registrar</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
 
-  <div class="barra">
-    <div class="contenedor clearfix">
-      <div class="logo">
-        <img src="vista/img/logo.png" alt="logo de la UTP">
-      </div>
+        </div><!-- /.container-fluid -->
+  </nav>
 
-      <div class="menu-movil">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <nav class="navegacion-principal clearfix" >
-        <a href="#reuniones">Reuniones</a>
-        <a href="#campanas">Campañas</a>
-        <a href="#">Modulo 3</a>
-        <a href="vista/login.php">Ingresar</a>
-      </nav>
-    </div><!-- cierre de contenedor -->
-  </div><!-- cierre de barra -->
   <section class="seccion contenedor">
     <h2>REGALANDO SONRISAS</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -110,53 +99,39 @@
                   <p><i class="fas fa-user" aria-hidden="true"></i> Yamil Quiñones</p>
                 </div>
 
-                <a href="#" class="button float-right"> Ver todos</a>
+                <a href="vista/templates/reuniones.php" class="button float-right"> Ver todos</a>
               </div>
             </div>
           </div>
         </div>
   </section>
-<section id="campanas" class="campanas contenedor seccion">
+
+  <?php include_once ('vista/templates/campanas.php'); ?>
+<!--<section id="campanas" class="campanas contenedor seccion">
     <h2>Nuestras campañas</h2>
     <ul class="lista-campanas clearfix">
-      <li>
-        <div class="campana">
-          <img src="vista/img/campana1.jpg" alt="Campaña1">
-          <p>Friaje en Ticlio</p>
-        </div>
-      </li>
-      <li>
-        <div class="campana">
-          <img src="vista/img/campana2.jpg" alt="Campaña2">
-          <p>Asilos</p>
-        </div>
-      </li>
-      <li>
-        <div class="campana">
-          <img src="vista/img/campana3.jpg" alt="Campaña3">
-          <p>Hospital</p>
-        </div>
-      </li>
-      <li>
-        <div class="campana">
-          <img src="vista/img/campana4.jpg" alt="Campaña4">
-          <p>Orfanato</p>
-        </div>
-      </li>
-      <li>
-        <div class="campana">
-          <img src="vista/img/campana5.jpg" alt="Campaña5">
-          <p>Inundaciones</p>
-        </div>
-      </li>
-      <li>
-        <div class="campana">
-          <img src="vista/img/campana6.jpg" alt="Campaña5">
-          <p>Sismos</p>
-        </div>
-      </li>
+
+//<?php 
+
+//$campania = new Campania();
+//$r = $campania->campanias();
+
+//while($row = mysqli_fetch_array($r)){
+
+//  echo "
+//  <li>
+//        <div class='campana'>
+//          <img src='vista/img/".$row[7]."'>
+//          <p>".$row[1]."</p>
+//        </div>
+//      </li>";
+//}
+
+ //?>
+
+     
     </ul>
-</section>
+</section>-->
 <div class="contador parallax">
   <div class="contenedor">
       <ul class="resumen-campana clearfix">
@@ -169,13 +144,17 @@
 
 </div>
 
-<footer>
-<?php
- 
- include_once("vista/footer.php");
+<?php include_once ('vista/templates/footer.php'); ?>
 
-   ?>
-  </footer>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="vista/js/bootstrap.min.js"></script>
+
+
+  <script src="vista/js/jquery.colorbox-min.js"></script>
+  <script src="vista/js/jquery.animateNumber.min.js"></script>
+  <script src="vista/js/main.js"></script>
 </body>
 
 </html>

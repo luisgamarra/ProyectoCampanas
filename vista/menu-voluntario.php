@@ -2,7 +2,7 @@
     <ul class="sidebar-nav">
 
         <li class="sidebar-brand">
-            <a href="modulousuario.php"> Menú </a>
+            <a href="modulovoluntario.php"> Menú </a>
         </li>       
 
         <li data-toggle="collapse" data-target="#campanias" class="collapsed">

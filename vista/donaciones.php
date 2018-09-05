@@ -19,7 +19,7 @@ session_start();
     <link href="css/simple-sidebar.css" rel="stylesheet">  
 </head>
 
-<body>
+<body background="img/fondito1.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -92,21 +92,23 @@ session_start();
   </form>      
        
 <?php  
-    echo "<form class='form-horizontal' action='../controlador/donacioncontrolador.php?idcam=".$codcamp."&&idvol=".$codvol."' method='post' > " 
+    echo "<form class='form-horizontal' action='../controlador/donacioncontrolador.php?idcam=".$codcamp."&&idvol=".$codvol."' method='post' data-toggle='validator' > " 
 ?>               
 
     <div class="form-group">
           <label class="col-md-4 control-label" for="Descripcion" >Descripcion : </label>
           <div class="col-md-4">
-          <input id="Descripcion" name="txtdes" type="text" placeholder="Descripcion" class="form-control input-md"  required="">
+          <input id="Descripcion" name="txtdes" type="text" placeholder="Descripcion" class="form-control input-md"  required>
           </div>
+          <div class="help-block with-errors"></div>
     </div>
 
     <div class="form-group">
           <label class="col-md-4 control-label" for="Cantidad">Cantidad : </label>
           <div class="col-md-4">
-          <input id="cantidad" name="txtcant" type="number" placeholder="Cantidad" class="form-control input-md"  required="">
+          <input id="cantidad" name="txtcant" type="number" placeholder="Cantidad" class="form-control input-md"  required>
           </div>
+           <div class="help-block with-errors"></div>
     </div>
 
     <div class="form-group">
@@ -130,6 +132,7 @@ session_start();
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/validator.js"></script> 
 
 <script>
     $("#menu-toggle").click(function(e) {

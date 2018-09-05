@@ -15,10 +15,13 @@ session_start();
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/normalize.css"> 
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colorbox.css">
+    
 </head>
 
-<body>
+<body background="img/fondito.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -34,17 +37,49 @@ session_start();
                 <h1 class="page-header"> Campañas Sociales </h1>            
             </div>
 
-            </br>                 
+              
+
+         <section id="campanas" class="campanas contenedor seccion">
+
+          <ul class="lista-campanas clearfix">               
 
 <?php                             
             
     $cod = $_SESSION["cod"];           
 
     $campania = new Campania();
-    $campania->setId($cod);
+    $campania->setUserid($cod);
     $r = $campania->campaniaporusuario();
 
-    while ($row = mysqli_fetch_array($r)) {
+
+                while ($row = mysqli_fetch_array($r)) {
+
+                    echo "
+                        <li>
+                          <div class='campana'>
+                            <a class='campana-info' href='#campana".$row["0"]."'>
+                            <img src='img/".$row["7"]."' alt='Campaña1'>
+                            <p>".$row["1"]."</p>
+                            </a>
+                          </div>
+                        </li>
+                        <div style='display:none;'>
+                          <div class='campana-info' id='campana".$row["0"]."'>
+                              <h2>".$row["1"]."</h2>
+                              <h3> <p>Lugar: ".$row["3"]."</p></h3>
+                              <img src='img/".$row["7"]."' alt='Campaña1'>
+                              <p>".$row["2"]."</p>
+                              <p> Fecha de inicio :".$row["5"]."</p>
+                              <p> Fecha final :".$row["6"]."</p>     
+                              <p> Vacantes : ".$row["4"]."</p>       
+                          </div>
+
+                        </div>";
+               }
+     
+
+
+    /**while ($row = mysqli_fetch_array($r)) {
 
     echo "        
         <div class='col-md-4 col-sm-6 col-xs-12 hero-feature'>
@@ -55,17 +90,22 @@ session_start();
                         <br/>
                         <p>".$row["1"]."</p>
                         <p> Fecha de inicio :".$row["5"]."</p>
-                        <p> Fecha final :".$row["6"]."</p>                      
+                        <p> Fecha final :".$row["6"]."</p>     
+                        <p> Vacantes : ".$row["4"]."</p>       
+                        <a style='color:red' href='vercampania.php?idcamp=".$row["0"]."'>Ver campaña</a>              
                         <br/>
                     </div>
                 </div>
             </div>
             <br/>                 
         </div> ";
-              }
+              }**/
 ?>                           
            
-           
+            </ul>
+    </section>
+
+
     </div>
 </div>
 
@@ -76,6 +116,10 @@ session_start();
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+<script src="js/jquery.colorbox-min.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/main.js"></script>
 
 <script>
     $("#menu-toggle").click(function(e) {

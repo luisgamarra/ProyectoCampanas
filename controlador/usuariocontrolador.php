@@ -2,6 +2,7 @@
 
 require_once ('../modelo/conexion.php');
 require_once ('../modelo/user.php');
+require_once ('../modelo/class.phpmailer.php');
 conectar();
 session_start();
 
@@ -142,8 +143,36 @@ function recuperar(){
     $row = $usu->getUserbyEmail();
     
     if($row){
+
+$mail = new PHPMailer();
+//indico a la clase que use SMTP
+$mail->IsSMTP(); 
+//Debo de hacer autenticación SMTP
+
+$mail->SMTPAuth   = true; 
+$mail->SMTPSecure = "tls";  
+//indico el servidor de Hotmail para SMTP
+$mail->Host = "smtp.live.com"; 
+//indico el puerto que usa Hotmail
+$mail->Port       = 25;  
+//indico un usuario / clave de un usuario de Hotmail
+$mail->Username   = "luisg_038@hotmail.com";
+$mail->Password   = "ALBERTO"; 
+$mail->SetFrom('luisg_038@hotmail.com', 'luisg_038@hotmail.com'); // El segundo parametro es el nombre del mail o seudonimo
+$mail->Subject    = "RECUPERACION DE CONTRASENIA";  // Asunto
+$mail->MsgHTML("Te enviamos tu contrasenia: '".$row[4]."'");
+//indico destinatario
+$address = $_POST["txtemail"];
+$mail->AddAddress($address, $address); // Segundo parametro es el seudonimo
+if(!$mail->Send()) {
+echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+echo "Enviamos un correo";
+}
+
+
         echo "<script>alert('SE HA ENVIADO A SU CORREO')
-             document.location=('../vista/login.php')</script>";
+        document.location=('../vista/login.php')</script>";
     }else{    
         echo "<script>alert('EL CORREO QUE HA INGRESADO NO EXISTE')
         document.location=('../vista/recuperarcontrasenia.php')</script>";       

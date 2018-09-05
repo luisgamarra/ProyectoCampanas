@@ -15,7 +15,7 @@ session_start();
     <link href="css/simple-sidebar.css" rel="stylesheet">   
 </head>
 
-<body>
+<body background="img/fondito1.jpg">
 
 <?php include("menutop.php"); ?>
 

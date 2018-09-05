@@ -18,7 +18,7 @@ session_start();
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
-<body>
+<body background="img/fondito1.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -47,7 +47,7 @@ session_start();
           $cod = $_SESSION["cod"];           
 
           $campania = new Campania();
-          $campania->setId($cod);
+          $campania->setUserid($cod);
           $r = $campania->campaniaporusuario();
                 
           $numeracion=1;

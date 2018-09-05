@@ -17,7 +17,7 @@ session_start();
     <link href="css/simple-sidebar.css" rel="stylesheet">   
 </head>
 
-<body>
+<body background="img/fondito1.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -62,7 +62,7 @@ session_start();
         <div class="form-group">
           <label class="col-md-4 control-label" for="photo" >Foto : </label>
           <div class="col-md-4">          
-          <input type="file" name="txtphoto" id="photo"/>
+          <input value="<?=$r[6]?>" type="file" name="txtphoto" id="photo"/>
           </div>
         </div>
 

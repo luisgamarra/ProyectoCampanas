@@ -99,16 +99,7 @@ class Reunion{
         return $tabla;
 
     }
-/**
-     public function campanias(){
-        conectar();
-        $query="SELECT * from campaigns where estado = 1 " ;        
-        $tabla=ejecutar($query);
-        
-        //$this->db()->error;
-        return $tabla;
 
-    }**/
    
 }
 

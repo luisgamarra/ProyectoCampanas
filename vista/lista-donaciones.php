@@ -18,7 +18,7 @@ session_start();
     <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
 
-<body>
+<body background="img/fondito1.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -61,7 +61,7 @@ while($row=mysqli_fetch_array($r)){
     </br></br></br>        
     <h4>Donaciones recibidas : </h4>
     <div class="table-responsive">
-    <table class="table table-striped" border="2" >
+    <table class="table table-hover" border="2" >
     <tr>
     <th style="text-align:center;">Nº</th>
     <th style="text-align:center;">Nombre</th>

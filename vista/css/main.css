@@ -524,6 +524,100 @@ p.numero{
   margin: 0 0 10px 0;
 }
 
+/** Footer **/
+footer{
+    background-color: #353535;
+    padding-top: 40px;
+    margin-top: 20px;
+}
+footer .contenedor > div{
+    color: #fff;
+    padding: 0 20px;
+    font-size: 12px;
+}
+@media only screen and (min-width:768px){
+    footer .contenedor > div{
+        width: 33.3%;
+        float: left;
+    }
+}
+footer h3{
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Oswald',sans-serif;
+    margin-bottom: 20px;
+}
+footer h3 span{
+    color: #da273e;
+}
+footer .utlimos-tweets li{
+    margin-bottom: 10px;
+}
+footer nav.redes-sociales{
+ text-align: left;
+}
+p.copyright{
+    background-color: #2e2e2e;
+    color: #fff;
+    padding: 10px 0;
+    margin: 20px 0 0 0;
+    text-align: center;
+}
+
+/** Calendario **/
+div.calendario h3 {
+  background-color: #2e2e2e;
+  clear: both;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+div.calendario::after {
+  clear: both;
+  display: block;
+  content: '';
+}
+div.dia {
+  width: 50%;
+  float: left;
+  border: 2px solid #e1e1e1;
+  transition: all .3s ease;
+}
+@media only screen and (min-width:768px) {
+  div.dia {
+    width: 33.3%;
+    min-height: 240px;
+    padding-top: 20px;
+  }
+}
+div.dia:hover {
+  background-color: #e1e1e1;
+  -webkit-transform: scale(1.1);
+}
+div.dia p.titulo {
+  color: #da273e;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+div.dia p {
+  font-size: 1em;
+}
+div.dia i {
+  color: #da273e;
+  font-size: 1.6em;
+}
+
+/**PRUEBAS**/
+
+div.cboxElement{
+  padding: 30px!important;
+  text-align: center;
+
+}
+div.cboxElement img{
+  max-width: 100%;
+  margin: 0 auto;
+}
 
 /* ==========================================================================
    Helper classes

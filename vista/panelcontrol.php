@@ -1,5 +1,8 @@
 <?php
+require_once('../modelo/conexion.php');
+conectar();
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +17,7 @@ session_start();
     <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
 
-<body>
+<body background="img/utpnoche.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -25,9 +28,51 @@ session_start();
 
 <div id="page-content-wrapper">
 <div class="container-fluid">
-<div class="col-lg-12">
+
+    
+<div class="col-md-4" align="center">
+<?php 
+
+echo "<img src='img/campanias.jpg' class='img-thumbnail' width='78%'  >";
+
+$sql1 = "SELECT COUNT(campaign_id) from campaigns";
+$resp1 = ejecutar($sql1);
+$r1 = mysqli_fetch_array($resp1);
+
+
+
+echo "<h1 style='color: #FFFFFF'> $r1[0] campañas</h1>";
+?>
+</div>
+
+
+<div class="col-md-4" align="center">
+<?php 
+
+echo "<img src='img/voluntarios.jpg' class='img-thumbnail' width='78%'>";
+
+$sql = "SELECT COUNT(user_id) from users where type_id=2";
+$resp = ejecutar($sql);
+$r = mysqli_fetch_array($resp);
+
+echo "<h1 style='color: #FFFFFF'>$r[0] voluntarios</h1>";
+
+?>
+</div>
+
+<div class="col-md-4" align="center">
+<?php 
+
+echo "<img src='img/donaciones.jpg' class='img-thumbnail' >";
+$sql2 = "SELECT COUNT(donation_id) from donations";
+$resp2 = ejecutar($sql2);
+$r2 = mysqli_fetch_array($resp2);
+
+echo "<h1 style='color: #FFFFFF'>$r2[0] donaciones</h1>";
+
+ ?>
+</div>
       
-</div>       
 </div>
 </div>
 

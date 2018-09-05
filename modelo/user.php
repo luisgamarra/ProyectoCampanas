@@ -106,7 +106,7 @@ class User {
  	}
 
      public function update(){
-        conectar();
+        
         $query="UPDATE users SET firstname='".$this->firstname."', lastname='".$this->lastname."',email='".$this->email."',cellphone='".$this->cellphone."', photo = '".$this->photo."'  where user_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
         
@@ -117,7 +117,7 @@ class User {
     
 
      public function logeo(){
-        conectar();
+       
         $query="SELECT * from users where email='".$this->email."' and password='".$this->password."' and estado = 1";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
@@ -129,7 +129,7 @@ class User {
 
     public function getUserbyEmail(){
 
-        conectar();
+        
         $query="select * from users where email='".$this->email."' and estado = 1";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
@@ -139,7 +139,7 @@ class User {
     }
 
      public function getUserbyCode(){
-        conectar();
+        
         $query="select * from users where user_id='".$this->id."'";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
@@ -149,7 +149,7 @@ class User {
     }
 
      public function getUserbypass(){
-        conectar();
+        
         $query="select * from users where password='".$this->password."'";        
         $tabla=ejecutar($query);
         $row=mysqli_fetch_array($tabla);
@@ -159,7 +159,7 @@ class User {
     }
 
     public function updatepass(){
-        conectar();
+        
         $query="UPDATE users SET password='".$this->password."' where user_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
         

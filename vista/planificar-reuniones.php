@@ -18,7 +18,7 @@ session_start();
     <link href="css/simple-sidebar.css" rel="stylesheet">    
 </head>
 
-<body>
+<body background="img/fondito1.jpg">
 
 <?php include("menutop.php"); ?>
 
@@ -33,27 +33,29 @@ session_start();
          <h1 class="page-header"> Reuniones </h1>           
       </div>   
     
-  <form class="form-horizontal" action="../controlador/reunioncontrolador.php" method="post">      
+  <form class="form-horizontal" action="../controlador/reunioncontrolador.php" data-toggle="validator" method="post">      
                             
         <!-- Text input-->
         <div class="form-group" >
           <label class="col-md-4 control-label" for="asunto" >Asunto : </label>
           <div class="col-md-4" >
-          <input id="asunto" name="txtasunto" type="text" placeholder="Asunto" class="form-control input-md" required="">
+          <input id="asunto" name="txtasunto" type="text" placeholder="Asunto" class="form-control input-md" required>
+          <div class="help-block with-errors"></div>
           </div>
         </div>        
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha" >Fecha : </label>
           <div class="col-md-4">
-          <input id="fecha" name="txtfecha" type="date" placeholder="Fecha" class="form-control input-md"  required="">
+          <input id="fecha" name="txtfecha" type="date" placeholder="Fecha" class="form-control input-md"  required>
+          <div class="help-block with-errors"></div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="camp" >Para Campaña : </label>
           <div class="col-md-4">
-          <select class="form-control" name="camp" id="camp">
+          <select class="form-control" name="camp" id="camp" required>
          <option value="0" >-- Seleccione --</option>
 
          <?php    
@@ -63,9 +65,9 @@ session_start();
 
           $campania = new Campania();
           $campania->setId($cod);
-          $r = $campania->campaniaporusuario();  
+          $rc = $campania->campaniaporusuario();  
           
-          while($row=mysqli_fetch_array($r)){
+          while($row=mysqli_fetch_array($rc)){
           if($codcamp == $row[0]){
           echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
           }else{
@@ -74,6 +76,7 @@ session_start();
           }
           ?>      
           </select>
+          <div class="help-block with-errors"></div>
           </div>
         </div>     
           
@@ -91,7 +94,7 @@ session_start();
   </br>
 
     <div class="table-responsive">
-    <table class="table table-striped" border="2" >
+    <table class="table table-hover" border="2" >
     <tr>
     <th style="text-align:center;">Nº</th>
     <th style="text-align:center;">Asunto</th>
@@ -195,6 +198,8 @@ if(empty($_GET['idreu'])){
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/validator.js"></script> 
+
 
 <script>
   $("#menu-toggle").click(function(e) {

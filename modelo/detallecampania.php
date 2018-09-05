@@ -42,7 +42,7 @@ class Detallecampania
 
     public function campaniasporvoluntario(){
        
-        $query="SELECT c.title,c.place,c.start_date,c.end_date,c.imagen from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 " ;        
+        $query="SELECT c.title,c.place,c.start_date,c.end_date,c.imagen,c.campaign_id,d.detail_campaign_id,c.description from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 and d.estado = 1" ;        
         $tabla=ejecutar($query);        
         
         return $tabla;
@@ -51,7 +51,24 @@ class Detallecampania
 
     public function voluntariosporcampania(){
         
-        $query = "SELECT u.firstname,u.lastname,u.email,u.cellphone,d.user_id from details_campaigns d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."'";
+        $query = "SELECT u.firstname,u.lastname,u.email,u.cellphone,d.user_id,d.detail_campaign_id from details_campaigns d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.estado = 1";
+        $tabla = ejecutar($query);
+
+        return $tabla;
+    }
+
+    public function unirsecampania(){
+        $query="INSERT INTO details_campaigns (detail_campaign_id,campaign_id,user_id,estado)
+                VALUES(0,                       
+                       '".$this->campaignid."',                       
+                       '".$this->userid."',1);";
+        $guardar=ejecutar($query) or die (mysqli_error());
+        
+        return $guardar;
+    }
+
+    public function buscarporcampyvol(){
+        $query = "SELECT * from details_campaigns where campaign_id = '".$this->campaignid."' and user_id = '".$this->userid."'";
         $tabla = ejecutar($query);
 
         return $tabla;
