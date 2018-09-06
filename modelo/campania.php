@@ -143,7 +143,7 @@ class Campania
 
     }
 
-     public function campaniaporid(){
+   /**  public function campaniaporid(){
        
         $query="SELECT * from campaigns where campaign_id='".$this->id."' and estado = 1 " ;        
         $tabla=ejecutar($query);
@@ -151,7 +151,7 @@ class Campania
 
         return $row;
 
-    }
+    }**/
 
 
      public function campanias(){

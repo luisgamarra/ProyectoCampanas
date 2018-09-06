@@ -56,8 +56,8 @@
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">     
-          <input type="hidden" value="recuperar" name="action"/>
-          <button type="submit" class="btn btn-success" value="recuperar">Aceptar</button>
+          
+          <button type="submit" class="btn btn-success" value="recuperar" name="action">Aceptar</button>
           </div>
         </div>   
                    

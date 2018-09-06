@@ -70,8 +70,8 @@
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">     
-          <input type="hidden" value="login" name="action"/>
-          <button type="submit" class="btn btn-success" value="login">Ingresar</button>
+          
+          <button type="submit" class="btn btn-success" name="action" value="login">Ingresar</button>
           </div>
         </div>   
                  

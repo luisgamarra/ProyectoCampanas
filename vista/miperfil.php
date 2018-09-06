@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/user.php');
 conectar();
 session_start();
@@ -69,28 +69,28 @@ session_start();
        <div class="form-group">
           <label class="col-md-4 control-label" for="Nombre" >Nombre : </label>
           <div class="col-md-4">
-          <input value="<?=$r[1]?>" id="Nombre" name="txtnom" type="text" class="form-control input-md " required="">
+          <input value="<?=$r[1]?>" id="Nombre" name="txtnom" type="text" class="form-control input-md " >
           </div>
        </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="Apellido" >Apellido : </label>
           <div class="col-md-4">
-          <input value="<?=$r[2]?>" id="Apellido" name="txtape" type="text" class="form-control input-md " required="">
+          <input value="<?=$r[2]?>" id="Apellido" name="txtape" type="text" class="form-control input-md " >
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="Email" >Email : </label>
           <div class="col-md-4">
-          <input value="<?=$r[3]?>" id="Email" name="txtemail" type="text" class="form-control input-md " required="">
+          <input value="<?=$r[3]?>" id="Email" name="txtemail" type="text" class="form-control input-md " >
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="Apellido" >Apellido : </label>
           <div class="col-md-4">                 
-          <input value="<?=$r[5]?>" id="Celular" name="txtcel" type="text"  class="form-control input-md " required="">
+          <input value="<?=$r[5]?>" id="Celular" name="txtcel" type="text"  class="form-control input-md " >
           </div>
         </div>       
 
@@ -109,8 +109,8 @@ session_start();
             </div>
 
             <div class="col-md-2">
-            <input type="hidden" value="modificar" name="action"/>                            
-            <button class="btn btn-success" block="true" type="submit" value="modificar"> Guardar Cambios </button>
+                                       
+            <button class="btn btn-success" block="true" type="submit" name="action" value="modificar"> Guardar Cambios </button>
             </div>
         </div>                
       

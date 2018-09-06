@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 session_start();
 ?>
 
@@ -71,8 +71,8 @@ session_start();
       <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">
-          <input type="hidden" value="cambiarcontrasenia" name="action"/>                            
-          <button class="btn btn-primary" block="true" type="submit" value="cambiarcontrasenia"> Aceptar </button>
+                               
+          <button class="btn btn-primary" block="true" type="submit" name="action" value="cambiarcontrasenia"> Aceptar </button>
           </div>
       </div>
 

@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 require_once ('../modelo/reunion.php');
 conectar();
@@ -64,7 +64,7 @@ session_start();
           $codcamp=$_SESSION["cam"]=@$_POST["camp"];
 
           $campania = new Campania();
-          $campania->setId($cod);
+          $campania->setUserid($cod);
           $rc = $campania->campaniaporusuario();  
           
           while($row=mysqli_fetch_array($rc)){
@@ -84,8 +84,8 @@ session_start();
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">
-          <input type="hidden" value="create" name="action"/>                            
-          <button class="btn btn-primary" block="true" type="submit" value="create"> Guardar </button>
+                                    
+          <button class="btn btn-primary" block="true" type="submit" name="action" value="create"> Guardar </button>
           </div>
         </div>
 
@@ -160,8 +160,8 @@ if(empty($_GET['idreu'])){
 }else {
   if ($_GET['idreu']==$row["0"]) {
     echo "<div class='form-group row'><td align='center'>
-          <input type='hidden' value='modificar' name='action'/>  
-          <input class='btn btn-warning' id='modificar' type='submit' value='Guardar' name='btnenviar'>
+           
+          <input class='btn btn-warning' id='modificar' type='submit' name='action' value='modificar' name='btnenviar'>
           <a class='btn btn-info col-md-offset-1' href='planificar-reuniones.php'>Cancelar</a></td></div>";
   }else {
     echo "<td align='center'><a class='btn btn-success' href='planificar-reuniones.php?idreu=".$row["0"]."'>Modificar</a></td>";

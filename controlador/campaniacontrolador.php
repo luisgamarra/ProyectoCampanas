@@ -1,6 +1,6 @@
 <?php 
 
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 
 conectar();
@@ -67,7 +67,7 @@ $idcamp = $_REQUEST["idcamp"];
     document.location=('../vista/detallecampania.php')</script>";
 }
 
-/**
+
 function eliminar(){
 
 $idcamp = $_REQUEST["idcamp"];    
@@ -78,7 +78,7 @@ $idcamp = $_REQUEST["idcamp"];
 
     echo "<script>alert('Campania eliminada')
  document.location=('../vista/detallecampania.php')</script>";
-}**/
+}
 
 
    

@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 require_once ('../modelo/donacion.php');
 conectar();
@@ -41,7 +41,7 @@ $cod = $_SESSION["cod"];
 $codcamp = $_SESSION["campania"]=@$_POST["cbocamp"];
 
 $campania = new Campania();
-$campania->setId($cod);
+$campania->setuserid($cod);
 $r = $campania->campaniaporusuario();
 
 while($row=mysqli_fetch_array($r)){
@@ -129,8 +129,8 @@ echo "<td align='center'>
 }else {
   if ($_GET['iddon']==$row["0"]) {
     echo "<div class='form-group row'><td align='center'>
-          <input type='hidden' value='modificar' name='action'/>  
-          <input class='btn btn-warning' id='modificar' type='submit' value='Guardar' name='btnenviar'>
+          
+          <button type='submit' class='btn btn-warning' name='action' value='modificar'>Guardar</button>
           <a class='btn btn-info col-md-offset-1' href='lista-donaciones.php'>Cancelar</a></td></div>";
   }else {
     echo "<td align='center'><a class='btn btn-success' href='lista-donaciones.php?iddon=".$row["0"]."'>Modificar</a></td>";

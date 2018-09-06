@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-08-2018 a las 01:36:29
+-- Tiempo de generación: 06-09-2018 a las 03:45:29
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.8
 
@@ -46,14 +46,12 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`campaign_id`, `title`, `description`, `place`, `vacant`, `start_date`, `end_date`, `imagen`, `user_id`, `estado`) VALUES
-(1, 'friaje', 'breve descripcion', 'lima', 23, '2018-08-01', '2018-08-01', 'campana1.jpg', 1, 1),
+(1, 'friaje', 'Las estadisticas son de miedo. Segun el Ministerio de Salud (Minsa), a la fecha, 604 personas han fallecido por neumonia, producto de las bajas temperaturas. De estas muertes, mas de 400 corresponden a adultos mayores y 72 a ninios menores de cinco anios.\r\n\r\nPor ello, el Indeci recomendo a las poblaciones de las jurisdicciones azotadas por las heladas usar ropa abrigadora, evitar cambios bruscos de temperatura, asi como cumplir con el cronograma de vacunacion de los mas pequenios y guarecer en cobertizos a las crias de los animales.', 'lima', 23, '2018-08-01', '2018-08-01', 'campana1.jpg', 1, 1),
 (2, 'Asilos', 'breve descripcion', 'Lima', 20, '2018-08-29', '2018-09-15', 'campana2.jpg', 1, 1),
-(3, 'Hospital', 'breve descripcion', 'Lima', 20, '2018-08-15', '2018-09-15', 'campana3.jpg', 1, 1),
-(4, 'Orfanato', 'breve descripcion', 'Lima', 20, '2018-08-17', '2018-09-15', 'campana4.jpg', 1, 1),
+(3, 'Hospital', 'breve descripcion', 'Lima', 21, '2018-08-15', '2018-09-15', 'campana3.jpg', 1, 1),
+(4, 'Orfanato', 'breve descripcion', 'Lima', 19, '2018-08-17', '2018-09-15', 'campana4.jpg', 1, 1),
 (5, 'Inundaciones', 'breve descripcion', 'Tacna', 20, '2018-08-20', '2018-09-15', 'campana5.jpg', 1, 1),
-(6, 'Sismo', 'breve descripcion', 'Piura', 20, '2018-08-25', '2018-09-15', 'campana6.jpg', 1, 1),
-(7, 'ggg', 'tyryr', ' sfsdsfsf', 34, '2018-08-25', '2018-09-25', 'q.png', 1, 0),
-(8, 'hhh', 'hh', 'h', 56, '2018-08-26', '2018-08-30', 'q.png', 1, 1);
+(6, 'Sismo', 'breve descripcion', 'Piura', 22, '2018-08-25', '2018-09-15', 'campana6.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -64,29 +62,31 @@ INSERT INTO `campaigns` (`campaign_id`, `title`, `description`, `place`, `vacant
 CREATE TABLE `details_campaigns` (
   `detail_campaign_id` int(11) NOT NULL,
   `campaign_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `estado` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `details_campaigns`
 --
 
-INSERT INTO `details_campaigns` (`detail_campaign_id`, `campaign_id`, `user_id`) VALUES
-(1, 1, 2),
-(2, 1, 3),
-(3, 1, 4),
-(4, 1, 5),
-(5, 1, 6),
-(6, 2, 2),
-(7, 2, 3),
-(8, 2, 4),
-(9, 2, 5),
-(10, 2, 6),
-(11, 3, 2),
-(12, 3, 3),
-(13, 3, 4),
-(14, 3, 5),
-(15, 1, 6);
+INSERT INTO `details_campaigns` (`detail_campaign_id`, `campaign_id`, `user_id`, `estado`) VALUES
+(1, 1, 2, 1),
+(2, 1, 3, 1),
+(3, 1, 4, 1),
+(4, 1, 5, 1),
+(5, 1, 6, 1),
+(6, 2, 2, 1),
+(7, 2, 3, 1),
+(8, 2, 4, 1),
+(9, 2, 5, 1),
+(10, 2, 6, 1),
+(11, 3, 2, 1),
+(12, 3, 3, 1),
+(13, 3, 4, 1),
+(14, 3, 5, 0),
+(15, 1, 6, 1),
+(16, 4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE `donations` (
 --
 
 INSERT INTO `donations` (`donation_id`, `description`, `quantility`, `user_id`, `campaign_id`, `estado`) VALUES
-(1, 'polo', 10, 2, 1, 1),
+(1, 'polo', 11, 2, 1, 1),
 (2, 'chompas', 10, 3, 1, 1),
 (3, 'casacas', 10, 4, 1, 1),
 (4, 'pantalones', 10, 5, 1, 1),
@@ -124,7 +124,10 @@ INSERT INTO `donations` (`donation_id`, `description`, `quantility`, `user_id`, 
 (14, 'agua oxigen', 10, 5, 3, 1),
 (15, 'desinflaman', 10, 6, 3, 1),
 (16, 'gh', 1, 2, 3, 1),
-(18, 'rttttt', 79, 5, 3, 0);
+(18, 'rttttt', 79, 5, 3, 0),
+(19, 'yu', 89, 4, 3, 1),
+(20, 'comida', 67, 2, 1, 1),
+(21, 'hjhjhj', 88, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -146,17 +149,21 @@ CREATE TABLE `reunions` (
 --
 
 INSERT INTO `reunions` (`reunion_id`, `topic`, `dates`, `user_id`, `campaign_id`, `estado`) VALUES
-(1, 'falta donaciones', '2018-08-08', 1, 1, 1),
-(2, 'segunda reunion', '2018-08-08', 1, 1, 1),
-(3, 'tercera reunion', '2018-08-08', 1, 1, 1),
-(4, 'cuarta reunion', '2018-08-08', 1, 1, 1),
-(5, 'quinta reunion', '2018-08-08', 1, 1, 1),
+(1, 'falta donaciones', '2018-09-09', 1, 1, 1),
+(2, 'segunda reunion', '2018-09-11', 1, 1, 1),
+(3, 'tercera reunion', '2018-09-13', 1, 1, 1),
+(4, 'cuarta reunion', '2018-09-15', 1, 1, 1),
+(5, 'quinta reunion', '2018-09-18', 1, 1, 1),
 (6, 'falta donaciones c2', '2018-08-08', 1, 2, 1),
 (7, 'segunda reunion c2 ', '2018-08-08', 1, 2, 1),
 (8, 'tercera reunion c2', '2018-08-08', 1, 2, 1),
 (9, 'cuarta reunion c2', '2018-08-08', 1, 2, 1),
 (10, 'quinta reunion c2', '2018-08-08', 1, 2, 1),
-(11, 'falta donaciones', '2018-08-03', 1, 5, 0);
+(11, 'falta donaciones', '2018-08-03', 1, 5, 0),
+(12, 'falta ps', '2018-09-02', 1, 6, 0),
+(13, 'wadasd', '2018-09-02', 1, 6, 1),
+(14, 'falta condicinoes', '2018-09-02', 1, 5, 1),
+(15, 'falta', '2018-09-30', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -181,7 +188,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `cellphone`, `photo`, `type_id`, `estado`) VALUES
-(1, 'Luisg', 'Gamarra', 'luis.gam.94@gmail.com', '123456', 123456789, 'q.png', 1, 1),
+(1, 'Luisgg', 'Gamarra', 'luis.gam.94@gmail.com', '123456', 123456789, 'user.png', 1, 1),
 (2, 'Erick', 'Rojas', 'zeek@gmail.com', '111', 123456789, 'user.png', 2, 1),
 (3, 'Pedro', 'Morales', 'pedro@gmail.com', '111', 123456789, 'user.png', 2, 1),
 (4, 'Edwar', 'Aguilar', 'edwar@gmail.com', '111', 123456789, 'user.png', 2, 1),
@@ -191,9 +198,7 @@ INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `c
 (8, 'Eduardo', 'Huarco', 'eduardo@gmail.com', '111', 123456789, 'user.png', 2, 1),
 (9, 'Jeancarlo', 'Carnero', 'jeancarlo@gmail.com', '111', 123456789, 'user.png', 2, 1),
 (10, 'David', 'Criollo', 'david@gmail.com', '111', 123456789, 'user.png', 2, 1),
-(11, 'Juliana', 'Zevallos', 'juliana@gmail.com', '111', 123456789, 'user.png', 2, 1),
-(12, 'Luisg', 'gu', '12@ff445', '1234567', 123456789, 'user.png', 1, 1),
-(13, 'bnbn', 'bnbn', '12@ff22255', '1234567', 123456789, 'user.png', 1, 1);
+(11, 'Juliana', 'Zevallos', 'juliana@gmail.com', '111', 123456789, 'user.png', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -270,31 +275,31 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT de la tabla `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `details_campaigns`
 --
 ALTER TABLE `details_campaigns`
-  MODIFY `detail_campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `detail_campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `donation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `donation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `reunions`
 --
 ALTER TABLE `reunions`
-  MODIFY `reunion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `reunion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `user_types`

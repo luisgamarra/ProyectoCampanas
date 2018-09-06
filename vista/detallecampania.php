@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 conectar();
 session_start();
@@ -134,8 +134,8 @@ echo "<td align='center'><a class='btn btn-success' href='detallecampania.php?id
 }else {
   if ($_GET['idcamp']==$row["0"]) {
     echo "<td align='center'>
-          <input type='hidden' value='modificar' name='action'/>  
-          <input class='btn btn-warning' id='modificar' type='submit' value='Guardar' name='btnenviar'>
+          
+          <button type='submit' class='btn btn-warning' name='action' value='modificar'>Guardar</button>
           <a class='btn btn-info' href='detallecampania.php'>Cancelar</a></td></div>";
   }else {
     echo "<td align='center'><a class='btn btn-success' href='detallecampania.php?idcamp=".$row["0"]."'>Modificar</a></td>";

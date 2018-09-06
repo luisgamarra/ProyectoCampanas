@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 require_once ('../modelo/detallecampania.php');
 conectar();
@@ -42,7 +42,7 @@ $cod = $_SESSION["cod"];
 $codcamp =$_SESSION["camp"]=@$_POST["cbocamp"];
 
 $campania = new Campania();
-$campania->setId($cod);
+$campania->setUserid($cod);
 $r = $campania->campaniaporusuario();
 
 while($row=mysqli_fetch_array($r)){

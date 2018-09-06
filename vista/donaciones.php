@@ -1,5 +1,5 @@
 <?php
-require_once ('../modelo/conexion.php');
+require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 require_once ('../modelo/detallecampania.php');
 require_once ('../modelo/donacion.php');
@@ -49,7 +49,7 @@ session_start();
           $codvol=$_SESSION["vol"]=@$_POST["vol"];
 
           $campania = new campania();
-          $campania->setId($cod);
+          $campania->setUserid($cod);
           $r = $campania->campaniaporusuario();
           
           while($row=mysqli_fetch_array($r)){
@@ -114,8 +114,8 @@ session_start();
     <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">
-          <input type="hidden" value="create" name="action"/>                            
-          <button class="btn btn-primary" block="true" type="submit" value="create"> Guardar </button>
+                                 
+          <button class="btn btn-primary" block="true" type="submit" name="action" value="create"> Guardar </button>
           </div>
     </div>
 
