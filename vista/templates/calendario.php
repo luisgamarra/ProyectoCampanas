@@ -54,7 +54,8 @@
 
     <?php
       try {
-        require_once('../../modelo/conexion.php');
+        require_once('../../db/conexion.php');
+        conectar();
         $sql = "SELECT campaign_id, title, place, start_date, firstname, lastname ";
         $sql .= " FROM campaigns ";
         $sql .= " INNER JOIN users ";
