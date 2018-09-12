@@ -20,11 +20,11 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
    <div class="container-fluid">
@@ -56,12 +56,13 @@ session_start();
           <label class="col-md-4 control-label" for="camp" >Para Campaña : </label>
           <div class="col-md-4">
           <select class="form-control" name="camp" id="camp" required>
+            
          <option value="0" >-- Seleccione --</option>
 
          <?php    
 
           $cod = $_SESSION["cod"];
-          $codcamp=$_SESSION["cam"]=@$_POST["camp"];
+          $codcamp=$_POST["camp"];
 
           $campania = new Campania();
           $campania->setUserid($cod);
@@ -71,12 +72,14 @@ session_start();
           if($codcamp == $row[0]){
           echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
           }else{
-          echo "<option value='".$row[0]."' >".$row[1]."</option>";   
+          echo "<option value='".$row[0]."' >".$row[1]."</option>"; 
+
           }
           }
-          ?>      
+          ?>  
+
           </select>
-          <div class="help-block with-errors"></div>
+          
           </div>
         </div>     
           
@@ -95,7 +98,7 @@ session_start();
 
     <div class="table-responsive">
     <table class="table table-hover" border="2" >
-    <tr>
+    <tr bgcolor="#F3F00E">
     <th style="text-align:center;">Nº</th>
     <th style="text-align:center;">Asunto</th>
     <th style="text-align:center;">Fecha</th>
@@ -122,7 +125,7 @@ if(empty($_GET['idreu'])){
 
 while ($row = mysqli_fetch_array($r)) {
 
-echo "<tr><td align='center'>".$numeracion."</td>";
+echo "<tr bgcolor='white'><td align='center'>".$numeracion."</td>";
 
 //Asunto
 if(empty($_GET['idreu'])){
@@ -143,7 +146,7 @@ echo "<td align='center'>".$row["2"]."</td>";
 }else {
   if ($_GET['idreu']==$row["0"]) {
     echo "<td align='center'>
-          <input type='date' id='txtfecha' class='form-control' name='txtfecha' value='".$row["2"]."'>
+          <input type='date' id='txtfecha' class='form-control' name='txtfecha' value='".$row["4"]."'>
           </td>";
   }else {
     echo "<td align='center'>".$row["2"]."</td>";
@@ -171,7 +174,7 @@ if(empty($_GET['idreu'])){
 
 //Eliminar
 echo "<td align='center'>
-      <a class='btn btn-danger' href='../controlador/eliminareunion.php?idreu=".$row["0"]."'>Eliminar</a></td></tr>";
+      <a class='btn btn-danger' href='../controlador/reunioncontrolador.php?idreu=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
 
                 
     $numeracion++;

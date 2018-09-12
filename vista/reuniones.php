@@ -30,18 +30,15 @@ session_start();
 </head>
 
 <body>
-  <?php include("menutop.php"); ?>
+  <?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
 <?php
 
-    $tipo =@$_SESSION['tipo'];
-    if( $tipo == "1"){
-        include("menu-admin.php"); 
-    }else{
-        include("menu-voluntario.php"); 
-    }
+   
+        include("templates/menu-voluntario.php"); 
+  
 ?>
 
 <div id="page-content-wrapper">
@@ -61,7 +58,7 @@ session_start();
          <?php    
 
           $cod = $_SESSION["cod"];
-          $codcamp=$_SESSION["cam"]=@$_POST["camp"];
+          $codcamp=$_POST["camp"];
 
           $campania = new Detallecampania();
           $campania->setUserid($cod);

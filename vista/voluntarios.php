@@ -20,11 +20,11 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>    
+<?php include("templates/menu-admin.php"); ?>    
 
 <div id="page-content-wrapper">
     <div class="container-fluid">
@@ -39,7 +39,7 @@ session_start();
 <?php
 
 $cod = $_SESSION["cod"];
-$codcamp =$_SESSION["camp"]=@$_POST["cbocamp"];
+$codcamp =$_POST["cbocamp"];
 
 $campania = new Campania();
 $campania->setUserid($cod);
@@ -62,7 +62,7 @@ while($row=mysqli_fetch_array($r)){
     </br>
     <div class="table-responsive">
     <table class="table table-hover" border="2" >
-    <tr>
+    <tr bgcolor="#F3BC0E">
     <th style="text-align:center;">Nº</th>
     <th style="text-align:center;">Nombre</th>
     <th style="text-align:center;">Apellido</th>
@@ -81,14 +81,14 @@ while($row=mysqli_fetch_array($r)){
 
     while($row=mysqli_fetch_array($r)){
     
-    echo "<tr>
+    echo "<tr bgcolor='white'>
     <td align='center'>".$numeracion."</td>
     <td align='center'>".$row[0]."</td>
     <td align='center'>".$row[1]."</td>
     <td align='center'>".$row[2]."</td>
     <td align='center'>".$row[3]."</td>
     <td align='center'>
-      <a class='btn btn-danger' href='../controlador/salircampania.php?idcamp=$codcamp&&idde=".$row["5"]."'>Eliminar</a></td>    
+      <a class='btn btn-danger' href='../controlador/campaniacontrolador.php?idcamp=$codcamp&&idde=".$row["5"]."&&action=saliroeliminar'>Eliminar</a></td>    
     </tr>";
 
     $numeracion++;

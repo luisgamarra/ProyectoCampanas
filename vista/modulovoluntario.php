@@ -1,6 +1,7 @@
 <?php
 require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
+require_once ('../modelo/detallecampania.php');
 conectar();
 session_start();
 ?>
@@ -23,11 +24,11 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-voluntario.php"); ?>
+<?php include("templates/menu-voluntario.php"); ?>
 
 
 <div id="page-content-wrapper">
@@ -43,20 +44,23 @@ session_start();
 
 
 <?php
-                              
-$cod = $_SESSION["cod"];                 
+                             
+$cod = $_SESSION["cod"];                
                      
 
             $campania = new Campania();                
             $r = $campania->campanias();
 
             while ($row = mysqli_fetch_array($r)) {
+                         
 
                     echo "
                         <li>
-                          <div class='campana'>
-                          <a href='../controlador/sumarsecampania.php?idcamp=".$row["0"]."'><button class='btn btn-primary btn-block'>Sumarse</button></a> 
-                            <a class='campana-info' href='#campana".$row["0"]."'>
+                          <div class='campana'>";
+
+                    echo "<a href='../controlador/campaniacontrolador.php?idcamp=".$row["0"]."&&nomcamp=".$row["1"]."&&action=sumarse'><button class='btn btn-primary btn-block'>Sumarse</button></a>";
+
+                    echo       "<a class='campana-info' href='#campana".$row["0"]."'>
                             <img src='img/".$row["7"]."' alt='Campaña1'>
                             <p>".$row["1"]."</p>
                             </a>
@@ -72,40 +76,14 @@ $cod = $_SESSION["cod"];
                               <p> Fecha de inicio :".$row["5"]."</p>
                               <p> Fecha final :".$row["6"]."</p>     
                               <p> Vacantes : ".$row["4"]."</p>  
+                              
                               <br/>
                                     
                           </div>
 
                         </div>";
-               }
-            /**while ($row = mysqli_fetch_array($r)) {
-
-            echo "
-        
-            <div class='col-md-4 col-sm-6 col-xs-12 hero-feature' >
-            <div class='w3-container' >
-                <div class='w3-card-4' >
-                    <img src='img/".$row["7"]."' alt='Norway' width='100%'' height='200'>
-                    <div class='w3-container w3-center' >
-                        <br/>
-                        <p>".$row["1"]."</p>
-                        <p> Fecha de inicio : ".$row["5"]."</p>    
-                        <p> Fecha final : ".$row["6"]."</p>                             
-                        <p> Vacantes : ".$row["4"]."</p>                     
-                        <br/>
-
-                 <a href='../controlador/sumarsecampania.php?idcamp=".$row["0"]."'><button class='btn btn-primary btn-block'>Sumarse</button></a>         
-
-                    <br/>
-
-                    <a style='color:red' href='vercampania.php?idcamp=".$row["0"]."'>Ver campaña</a>    
-
-                    </div>
-                </div>
-            </div>
-            <br/>            
-            </div> ";
-              }**/
+                                      }
+           
 
 ?>  
         </ul>

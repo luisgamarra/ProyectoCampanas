@@ -15,12 +15,17 @@ session_start();
             case 'modificar' : 
                 modificar();
                 break;
-            case 'eliminar' :
+             }
+            
+        }else{
+        $action = $_REQUEST["action"];
+        switch ($action) {
+            case 'eliminar':
                 eliminar();
                 break;           
             
-        }
-    }
+        
+    }}
 
 
 function create(){
@@ -52,24 +57,22 @@ $idreu = $_REQUEST["idreu"];
     document.location=('../vista/planificar-reuniones.php')</script>";
 }
 
-/**function eliminar(){
+function eliminar(){
 
-session_start();
 
-$idcamp = $_REQUEST["idcamp"];
 
-    
+$idreu = $_REQUEST["idreu"];    
  
-    $camp = new Campania();    
-    $camp->setId($idcamp);
-    $eliminar = $camp->eliminar();
+    $reu = new Reunion();    
+    $reu->setId($idreu);
+    $eliminar = $reu->eliminar();
 
-    echo "<script>alert('Campania eliminada')
- document.location=('../vista/detallecampania.php')</script>";
+    echo "<script>alert('Reunion eliminada')
+ document.location=('../vista/planificar-reuniones.php')</script>";
 }
 
 
    
 
-**/
+
  ?>

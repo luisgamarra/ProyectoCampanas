@@ -19,11 +19,11 @@ session_start();
 
 <body background="img/utpnoche.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
 
 
 <div id="page-content-wrapper">

@@ -2,7 +2,16 @@
 
 require_once ('../db/conexion.php');
 require_once ('../modelo/user.php');
-require_once ('../libs/class.phpmailer.php');
+
+//require_once ('../libs/class.phpmailer.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once ('../libs/phpmailer/Exception.php');
+require_once ('../libs/phpmailer/PHPMailer.php');
+require_once ('../libs/phpmailer/SMTP.php');
+
+
 conectar();
 session_start();
 
@@ -19,10 +28,7 @@ session_start();
                 break;
             case 'login' :
                 login();
-                break;
-            case 'logout' :
-                logout();
-                break;
+                break;            
             case 'cambiarcontrasenia' :
                 cambiarcontrasenia();
                 break;
@@ -30,8 +36,17 @@ session_start();
                 recuperar();
                 break;    
             
-        }
-    }
+       }
+            
+        }else{
+        $action = $_REQUEST["action"];
+        switch ($action) {
+            case 'logout':
+                logout();
+                break;           
+            
+        
+    }}
 	
 
 function create(){
@@ -60,7 +75,14 @@ if($row){
 }
 
 
-function modificar(){    
+function modificar(){   
+
+$image = "";
+if($_FILES['txtphoto']['name'] == "") {
+    $image = $_POST["himage"];
+}else{
+    $image = $_FILES['txtphoto']['name'];
+}
 
     $cod=$_SESSION["cod"];
     
@@ -69,7 +91,7 @@ function modificar(){
     $us->setLastname($_POST["txtape"]);
     $us->setEmail($_POST["txtemail"]);
     $us->setCellphone($_POST["txtcel"]);
-    $us->setPhoto($_FILES['txtphoto']['name']);
+    $us->setPhoto($image);
     $us->setId($cod);
     $actualizar = $us->update();
 
@@ -81,7 +103,7 @@ $ruta = '../vista/img/' . $thumb_db;
 move_uploaded_file($im, $ruta);
 
     echo "<script>alert('Actualizado Correctamente')
-         document.location=('../vista/miperfil.php')</script>";
+        document.location=('../vista/miperfil.php')</script></script>";
 }
 
 
@@ -103,6 +125,7 @@ function login(){
             $_SESSION["cod"] = $log[0];
             $_SESSION["photo"] = $log[6];
             $_SESSION["usuario"]=$log[1]." ".$log[2];
+            $_SESSION["correo"] = $log[3];
         echo "<script>alert('Bienvenido Voluntario')
              document.location=('../vista/modulovoluntario.php')</script>";  
         }  
@@ -144,35 +167,45 @@ function recuperar(){
     
     if($row){
 
-$mail = new PHPMailer();
-//indico a la clase que use SMTP
-$mail->IsSMTP(); 
-//Debo de hacer autenticación SMTP
+ $mensaje="<html>
+<body style='background: #FFFFFF;font-family: Verdana; font-size: 14px;color:#1c1b1b;'>
+<div style=''>
+    <h2>Hola ".$row["firstname"]."</h2>
+    <p style='font-size:17px;'>Tu contrasenia para el ingreso al sistema es
+    ".$row["4"]."</p>
+  <br>
+</html>"
+;
+      
 
-$mail->SMTPAuth   = true; 
-$mail->SMTPSecure = "tls";  
-//indico el servidor de Hotmail para SMTP
-$mail->Host = "smtp.live.com"; 
-//indico el puerto que usa Hotmail
-$mail->Port       = 25;  
-//indico un usuario / clave de un usuario de Hotmail
-$mail->Username   = "luisg_al_1994@hotmail.com";
-$mail->Password   = "sialem2000"; 
-$mail->SetFrom('luisg_al_1994@hotmail.com', 'luisg_al_1994@hotmail.com'); // El segundo parametro es el nombre del mail o seudonimo
-$mail->Subject    = "RECUPERACION DE CONTRASENIA";  // Asunto
-$mail->MsgHTML("Te enviamos tu contrasenia: '".$row[4]."'");
-//indico destinatario
+$mail = new PHPMailer;
+$mail->CharSet = "UTF-8";
+$mail->isSMTP(); 
+$mail->SMTPDebug = 2; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
+$mail->Host = "smtp.gmail.com"; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
+$mail->Port = 587; // TLS only
+$mail->SMTPSecure = 'tls'; // ssl is deprecated
+$mail->SMTPAuth = true;
+$mail->Username = 'sistemacs2018@gmail.com'; // email
+$mail->Password = 'PassW0rd2018'; // password
+$mail->setFrom('sistemacs2018@gmail.com', 'Campañas System'); // From email and name
 $address = $_POST["txtemail"];
-$mail->AddAddress($address, $address); // Segundo parametro es el seudonimo
-if(!$mail->Send()) {
-echo "Mailer Error: " . $mail->ErrorInfo;
-} else {
-echo "Enviamos un correo";
+$mail->addAddress($address, $address); // to email and name
+$mail->Subject = 'Reenvio de contrasenia';
+$mail->msgHTML($mensaje); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
+$mail->AltBody = 'HTML messaging not supported'; // If html emails is not supported by the receiver, show this body
+// $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
+
+if(!$mail->send()){
+    echo "Mailer Error: " . $mail->ErrorInfo;
+}else{
+        echo "<script>alert('CORREO ENVIADO')
+        document.location=('../vista/login.php')</script>"; 
 }
 
 
-        echo "<script>alert('SE HA ENVIADO A SU CORREO')
-        document.location=('../vista/login.php')</script>";
+
+      
     }else{    
         echo "<script>alert('EL CORREO QUE HA INGRESADO NO EXISTE')
         document.location=('../vista/recuperarcontrasenia.php')</script>";       
@@ -180,4 +213,37 @@ echo "Enviamos un correo";
 }}
 
 
+function logout(){
+
+
+   session_destroy();
+
+header("location:../vista/login.php");
+}
+
+
  ?>
+
+ <!--$mail_para = $_POST["txtemail"];
+$subject   = "Reenvio de contraseña";
+
+$header .="MIME-Version: 1.0\n"; 
+$header .= "Content-type: text/html; charset=iso-8859-1\n"; 
+$header .="From: depart@domino.com.ar\n";
+
+$mensaje="<html>
+<body style='background: #FFFFFF;font-family: Verdana; font-size: 14px;color:#1c1b1b;'>
+<div style=''>
+    <h2>Hola ".$row["firstname"]."</h2>
+    <p style='font-size:17px;'>Tu contrasenia para el ingreso al sistema es
+    ".$row["4"]."</p>
+  <br>
+</html>";
+
+$meil = mail($mail_para, $subject, $mensage, $header);
+
+if ($meil) {
+ echo "Su mail se a enviado correctamente";
+} else {
+ echo "A ocurrido un error al intentar enviar su mail";
+}-->

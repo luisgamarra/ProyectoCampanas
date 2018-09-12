@@ -13,16 +13,16 @@ session_start();
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   
 </head>
 
 <body background="img/fondito.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
       <div class="container-fluid">                    

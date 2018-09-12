@@ -1,6 +1,6 @@
 <?php
 require_once ('../db/conexion.php');
-require_once ('../modelo/Detallecampania.php');
+require_once ('../modelo/detallecampania.php');
 conectar();
 session_start();
 ?>
@@ -23,11 +23,11 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-voluntario.php"); ?>
+<?php include("templates/menu-voluntario.php"); ?>
 
 <div id="page-content-wrapper">
     <div class="container-fluid">                  
@@ -52,7 +52,7 @@ session_start();
                     echo "
                         <li>
                           <div class='campana'>
-                          <a href='../controlador/salircampania.php?idcamp=".$row["5"]."&&idde=".$row["6"]."'><button class='btn btn-danger btn-block'>Salir</button></a>
+                          <a href='../controlador/campaniacontrolador.php?idcamp=".$row["5"]."&&idde=".$row["6"]."&&action=saliroeliminar'><button class='btn btn-danger btn-block'>Salir</button></a>
                             <a class='campana-info' href='#campana".$row["6"]."'>
                             <img src='img/".$row["4"]."' alt='Campaña1'>
                             <p>".$row["0"]."</p>
@@ -74,30 +74,7 @@ session_start();
                           </div>
 
                         </div>";
-               }
-            /**while ($row = mysqli_fetch_array($r)) {
-
-            echo "        
-                <div class='col-md-4 col-sm-6 col-xs-12 hero-feature' >
-                <div class='w3-container' >
-                <div class='w3-card-4' >
-                    <img src='img/".$row["4"]."' alt='Norway' width='100%'' height='200'>
-                    <div class='w3-container w3-center' >
-                        <br/>
-                        <p>".$row["0"]."</p>
-                        <p>".$row["2"]."</p>
-                        <p>".$row["3"]."</p>                      
-                        <br/>
-                 <a href='../controlador/salircampania.php?idcamp=".$row["5"]."&&idde=".$row["6"]."'><button class='btn btn-danger btn-block'>Salir</button></a>
-                 </br>
-
-                 <a style='color:red' href='vercampania.php?idcamp=".$row["5"]."'>Ver campaña</a>        
-                    </div>
-                </div>
-                </div>
-                <br/>               
-                </div> ";
-            }**/
+               }           
 
 ?>        
  </ul>

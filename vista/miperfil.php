@@ -19,7 +19,7 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
@@ -27,9 +27,9 @@ session_start();
 
     $tipo =@$_SESSION['tipo'];
     if( $tipo == "1"){
-        include("menu-admin.php"); 
+        include("templates/menu-admin.php"); 
     }else{
-        include("menu-voluntario.php"); 
+        include("templates/menu-voluntario.php"); 
     }
 ?>
 
@@ -56,13 +56,14 @@ session_start();
             <div class="col-md-4">
                <?php   echo "<center><img src='img/".$r["6"]."' alt='Norway' width='50%' height='50%'></center> ";                       
                  ?>               
-            </div>
+            </div>            
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="photo" >Foto : </label>
           <div class="col-md-4">          
-          <input value="<?=$r[6]?>" type="file" name="txtphoto" id="photo"/>
+          <input type="file" name="txtphoto" id="photo"/>
+          <input value="<?=$r[6]?>" type="hidden" name="himage" />
           </div>
         </div>
 

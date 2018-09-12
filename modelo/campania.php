@@ -135,7 +135,7 @@ class Campania
 
     public function campaniaporusuario(){
        
-        $query="SELECT * from campaigns where user_id='".$this->userid."' and estado = 1 " ;        
+        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where user_id='".$this->userid."' and estado = 1 " ;        
         $tabla=ejecutar($query);
         
 
@@ -143,20 +143,9 @@ class Campania
 
     }
 
-   /**  public function campaniaporid(){
-       
-        $query="SELECT * from campaigns where campaign_id='".$this->id."' and estado = 1 " ;        
-        $tabla=ejecutar($query);
-        $row = mysqli_fetch_array($tabla);
-
-        return $row;
-
-    }**/
-
-
-     public function campanias(){
+    public function campanias(){
         
-        $query="SELECT * from campaigns where estado = 1 " ;       
+        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen from campaigns where estado = 1 " ;       
         $tabla=ejecutar($query);        
        
         return $tabla;
@@ -165,6 +154,13 @@ class Campania
 
     public function restarvacante(){
         $query = "UPDATE campaigns SET vacant=vacant-1 where campaign_id='".$this->id."'";
+        $rv = ejecutar($query);
+
+        return $rv;
+    }
+
+    public function sumarvacante(){
+        $query = "UPDATE campaigns SET vacant=vacant+1 where campaign_id='".$this->id."'";
         $rv = ejecutar($query);
 
         return $rv;

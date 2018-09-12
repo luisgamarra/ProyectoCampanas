@@ -20,18 +20,18 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
  
 <div id="page-content-wrapper">
                 <div class="container-fluid">                 
      
                 <div class="table-responsive">        
                   <table class="table table-hover"  border="2" >
-                  <tr>
+                  <tr bgcolor="#ABBCB7  ">
                   <th style="text-align:center;">N°</th>
                   <th style="text-align:center;">Nombre</th>
                   <th style="text-align:center;">Lugar</th>
@@ -61,7 +61,7 @@ if(empty($_GET['idcamp'])){
 
 while ($row = mysqli_fetch_array($r)) {
 
-echo "<tr><td align='center'>".$numeracion."</td>";
+echo "<tr BGCOLOR='white'><td align='center'>".$numeracion."</td>";
 
 //Titulo
 if(empty($_GET['idcamp'])){
@@ -108,7 +108,7 @@ echo "<td align='center'>".$row["5"]."</td>";
 }else {
   if ($_GET['idcamp']==$row["0"]) {
     echo "<td align='center'>
-        <input type='date' class='form-control'  id='txtfecha1' name='txtfecha1' value='".$row["5"]."'>
+        <input type='date' class='form-control'  id='txtfecha1' name='txtfecha1' value='".$row["8"]."'>
         </td>";
   }else {
     echo "<td align='center'>".$row["5"]."</td>";
@@ -121,7 +121,7 @@ echo "<td align='center'>".$row["6"]."</td>";
 }else {
   if ($_GET['idcamp']==$row["0"]) {
     echo "<td align='center'>
-          <input type='date' class='form-control'  id='txtfecha2' name='txtfecha2' value='".$row["6"]."'>
+          <input type='date' class='form-control'  id='txtfecha2' name='txtfecha2' value='".$row["9"]."'>
           </td>";
   }else {
     echo "<td align='center'>".$row["6"]."</td>";
@@ -143,8 +143,9 @@ echo "<td align='center'><a class='btn btn-success' href='detallecampania.php?id
 }
 
 //Eliminar
-echo "<td align='center'>
-      <a class='btn btn-danger' href='../controlador/eliminarcampania.php?idcamp=".$row["0"]."'>Eliminar</a></td></tr>";
+
+echo "<td align='center'>      
+       <a class='btn btn-danger' href='../controlador/campaniacontrolador.php?action=eliminar&&idcamp=".$row["0"]."'>Eliminar</a></tr>";
            
 $numeracion++;
 
@@ -158,7 +159,8 @@ if(empty($_GET['idcamp'])){
                
 ?>               
                 
-                </table>                  
+                </table>   
+                <a href="reportecampania.php">Ver Reporte de campañas</a>               
               </div>
 
               </div>

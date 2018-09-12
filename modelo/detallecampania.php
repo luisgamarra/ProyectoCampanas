@@ -42,7 +42,7 @@ class Detallecampania
 
     public function campaniasporvoluntario(){
        
-        $query="SELECT c.title,c.place,c.start_date,c.end_date,c.imagen,c.campaign_id,d.detail_campaign_id,c.description from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 and d.estado = 1" ;        
+        $query="SELECT c.title,c.place,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),c.imagen,c.campaign_id,d.detail_campaign_id,c.description from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 and d.estado = 1" ;        
         $tabla=ejecutar($query);        
         
         return $tabla;
@@ -69,6 +69,13 @@ class Detallecampania
 
     public function buscarporcampyvol(){
         $query = "SELECT * from details_campaigns where campaign_id = '".$this->campaignid."' and user_id = '".$this->userid."'";
+        $tabla = ejecutar($query);
+
+        return $tabla;
+    }
+
+    public function elivolysalcamp(){
+        $query = "UPDATE details_campaigns set estado = 0 where detail_campaign_id = '".$this->id."'";
         $tabla = ejecutar($query);
 
         return $tabla;

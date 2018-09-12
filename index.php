@@ -41,7 +41,7 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right" >
-              <li><a href="vista/templates/reuniones.php"  style="color: #FFFFFF">Reuniones</a></li>
+              
                <li><a href="vista/templates/calendario.php" style="color: #FFFFFF">Calendario</a></li>
               
               <li><a href="vista/login.php" style="color: #FFFFFF">Ingresar</a></li>
@@ -99,7 +99,7 @@
                   <p><i class="fas fa-user" aria-hidden="true"></i> Yamil Quiñones</p>
                 </div>
 
-                <a href="vista/templates/reuniones.php" class="button float-right"> Ver todos</a>
+                
               </div>
             </div>
           </div>
@@ -107,31 +107,7 @@
   </section>
 
   <?php include_once ('vista/templates/campanas.php'); ?>
-<!--<section id="campanas" class="campanas contenedor seccion">
-    <h2>Nuestras campañas</h2>
-    <ul class="lista-campanas clearfix">
 
-//<?php 
-
-//$campania = new Campania();
-//$r = $campania->campanias();
-
-//while($row = mysqli_fetch_array($r)){
-
-//  echo "
-//  <li>
-//        <div class='campana'>
-//          <img src='vista/img/".$row[7]."'>
-//          <p>".$row[1]."</p>
-//        </div>
-//      </li>";
-//}
-
- //?>
-
-     
-    </ul>
-</section>-->
 <div class="contador parallax">
   <div class="contenedor">
       <ul class="resumen-campana clearfix">

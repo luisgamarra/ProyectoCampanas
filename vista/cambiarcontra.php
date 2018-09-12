@@ -17,7 +17,7 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
@@ -25,9 +25,9 @@ session_start();
         $tipo =@$_SESSION['tipo'];
 
         if( $tipo == "1"){
-        include("menu-admin.php");
+        include("templates/menu-admin.php");
         }else{
-        include("menu-voluntario.php"); 
+        include("templates/menu-voluntario.php"); 
         }
       ?>
 

@@ -23,11 +23,11 @@ session_start();
 
 <body background="img/fondito.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
     <div class="container-fluid">
@@ -76,31 +76,7 @@ session_start();
 
                         </div>";
                }
-     
-
-
-    /**while ($row = mysqli_fetch_array($r)) {
-
-    echo "        
-        <div class='col-md-4 col-sm-6 col-xs-12 hero-feature'>
-            <div class='w3-container'>
-                <div class='w3-card-4'>
-                    <img src='img/".$row["7"]."' alt='Norway' width='100%'' height='200'>
-                    <div class='w3-container w3-center' >
-                        <br/>
-                        <p>".$row["1"]."</p>
-                        <p> Fecha de inicio :".$row["5"]."</p>
-                        <p> Fecha final :".$row["6"]."</p>     
-                        <p> Vacantes : ".$row["4"]."</p>       
-                        <a style='color:red' href='vercampania.php?idcamp=".$row["0"]."'>Ver campaña</a>              
-                        <br/>
-                    </div>
-                </div>
-            </div>
-            <br/>                 
-        </div> ";
-              }**/
-?>                           
+  ?>                           
            
             </ul>
     </section>

@@ -20,11 +20,11 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
         <div class="container-fluid">
@@ -32,13 +32,13 @@ session_start();
 <form id="form1" name="form1" method="post" action="">
   <h4>Seleccione una campaña:</h4>
   <div class="col-md-2">
-   <select class="form-control" name="cbocamp" id="cbocam"p onChange="submit()" >
+   <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
     <option value="0" >Seleccione</option>     
 
 <?php
 
 $cod = $_SESSION["cod"];
-$codcamp = $_SESSION["campania"]=@$_POST["cbocamp"];
+$codcamp = $_POST["cbocamp"];
 
 $campania = new Campania();
 $campania->setuserid($cod);
@@ -62,7 +62,7 @@ while($row=mysqli_fetch_array($r)){
     <h4>Donaciones recibidas : </h4>
     <div class="table-responsive">
     <table class="table table-hover" border="2" >
-    <tr>
+    <tr bgcolor="#0EF381  ">
     <th style="text-align:center;">Nº</th>
     <th style="text-align:center;">Nombre</th>
     <th style="text-align:center;">Apellido</th>
@@ -88,7 +88,7 @@ if(empty($_GET['iddon'])){
 
 while($row=mysqli_fetch_array($r)){
     
-echo "<tr><td align='center'>".$numeracion."</td>";
+echo "<tr bgcolor='white'><td align='center'>".$numeracion."</td>";
 
 //Nombre voluntario
 echo "<td align='center'>".$row["1"]."</td>";
@@ -139,7 +139,7 @@ echo "<td align='center'>
 
 //Eliminar
 echo "<td align='center'>
-      <a class='btn btn-danger' href='../controlador/eliminardonacion.php?iddon=".$row["0"]."'>Eliminar</a></td></tr>";
+      <a class='btn btn-danger' href='../controlador/donacioncontrolador.php?iddon=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
 
     $numeracion++;
 

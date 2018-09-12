@@ -75,7 +75,7 @@
           <label class="col-md-4 control-label" for="Contrasena" >Contraseña</label>
           <div class="col-md-4">
           <input id="Contrasena" name="txtclave" type="password" placeholder="Contraseña" class="form-control input-md" data-minlength="6" required>
-          <span class="help-block">Mínimo de seis (6) digitos</span>
+          <div class="help-block">Mínimo de seis (6) digitos</div>
           </div>
         </div>
 
@@ -128,8 +128,8 @@
 <footer>        
 </footer>
            
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/jquery.js"></script>
+
 <script src="js/bootstrap.min.js"></script>
 <script src="js/validator.js"></script> 
 <script >

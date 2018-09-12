@@ -74,7 +74,7 @@ class Reunion{
     }
 
      public function actualizar(){
-        conectar();
+      
         $query="UPDATE reunions SET topic='".$this->topic."',dates='".$this->dates."' where reunion_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
         
@@ -83,7 +83,7 @@ class Reunion{
     }
 
     public function eliminar(){
-        conectar();
+     
         $query="UPDATE reunions SET estado = '0' where reunion_id='".$this->id."'";
         $eliminar=ejecutar($query) or die (mysqli_error());
         
@@ -92,8 +92,8 @@ class Reunion{
     }
 
     public function reunionporusuario(){
-        conectar();
-        $query="SELECT r.reunion_id,r.topic,r.dates,c.title from reunions r inner join campaigns c on r.campaign_id=c.campaign_id where r.user_id='".$this->userid."' and r.estado = 1 and c.estado = 1 " ;        
+       
+        $query="SELECT r.reunion_id,r.topic,DATE_FORMAT(r.dates, '%d-%m-%Y'),c.title,r.dates from reunions r inner join campaigns c on r.campaign_id=c.campaign_id where r.user_id='".$this->userid."' and r.estado = 1 and c.estado = 1 " ;        
         $tabla=ejecutar($query);        
         
         return $tabla;
@@ -101,8 +101,8 @@ class Reunion{
     }
 
     public function reunionporcampania(){
-        conectar();
-        $query="SELECT r.reunion_id,r.topic,r.dates,c.title,u.firstname,u.lastname from reunions r inner join campaigns c on r.campaign_id=c.campaign_id inner join users u on u.user_id=r.user_id where c.campaign_id='".$this->campaignid."' and r.estado = 1 and c.estado=1" ;        
+ 
+        $query="SELECT r.reunion_id,r.topic,DATE_FORMAT(r.dates, '%d-%m-%Y') as dates,c.title,u.firstname,u.lastname from reunions r inner join campaigns c on r.campaign_id=c.campaign_id inner join users u on u.user_id=r.user_id where c.campaign_id='".$this->campaignid."' and r.estado = 1 and c.estado=1" ;        
         $tabla=ejecutar($query);        
         
         return $tabla;

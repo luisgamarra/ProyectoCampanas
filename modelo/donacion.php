@@ -75,7 +75,7 @@ class Donacion{
 
      public function actualizar(){
         
-        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."' where donation_id='".$this->id."'";
+        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."' where donation_id='".$this->id."' and campaign_id='".$this->campaignid."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
         
         return $actualizar;

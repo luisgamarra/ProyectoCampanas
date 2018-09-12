@@ -39,7 +39,7 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right" >
-              <li><a href="reuniones.php"  style="color: #FFFFFF">Reuniones</a></li>
+              
                <li><a href="calendario.php" style="color: #FFFFFF">Calendario</a></li>
            
               <li><a href="../login.php" style="color: #FFFFFF">Ingresar</a></li>
@@ -54,7 +54,8 @@
 
     <?php
       try {
-        require_once('../../modelo/conexion.php');
+        require_once('../../db/conexion.php');
+        conectar();
         $sql = "SELECT campaign_id, title, place, start_date, firstname, lastname ";
         $sql .= " FROM campaigns ";
         $sql .= " INNER JOIN users ";

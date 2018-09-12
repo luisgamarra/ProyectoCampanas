@@ -16,12 +16,18 @@ session_start();
             case 'modificar' : 
                 modificar();
                 break;
-            case 'eliminar' :
+              }
+            
+        }else{
+        $action = $_REQUEST["action"];
+        switch ($action) {
+            case 'eliminar':
                 eliminar();
                 break;           
             
-        }
-    }
+        
+    }}
+    
 
 
 function create(){
@@ -45,11 +51,13 @@ $idvol = $_REQUEST["idvol"];
 function modificar(){
 
 $iddon = $_REQUEST["iddon"];    
+$idcamp = $_REQUEST["idcamp"];
  
     $don = new Donacion();
     $don->setDescription($_POST["txtdes"]);
     $don->setQuantility($_POST["txtcant"]);   
     $don->setId($iddon);
+    $don->setCampaignid($idcamp);
     $actualizar = $don->actualizar();
 
     echo "<script>alert('Actualizado Correctamente')
@@ -57,24 +65,20 @@ $iddon = $_REQUEST["iddon"];
 }
 
 
-/**function eliminar(){
+function eliminar(){
 
-session_start();
-
-$idcamp = $_REQUEST["idcamp"];
-
-    
+$iddon = $_REQUEST["iddon"];    
  
-    $camp = new Campania();    
-    $camp->setId($idcamp);
-    $eliminar = $camp->eliminar();
+    $don = new Donacion();    
+    $don->setId($iddon);
+    $eliminar = $don->eliminar();
 
-    echo "<script>alert('Campania eliminada')
- document.location=('../vista/detallecampania.php')</script>";
+    echo "<script>alert('Donacion eliminada')
+ document.location=('../vista/lista-donaciones.php')</script>";
 }
 
 
    
 
-**/
+
  ?>

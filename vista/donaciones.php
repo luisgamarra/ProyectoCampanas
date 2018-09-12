@@ -21,11 +21,11 @@ session_start();
 
 <body background="img/fondito1.jpg">
 
-<?php include("menutop.php"); ?>
+<?php include("templates/menutop.php"); ?>
 
 <div id="wrapper">
 
-<?php include("menu-admin.php"); ?>
+<?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
     <div class="container-fluid">
@@ -45,8 +45,8 @@ session_start();
          <?php    
 
           $cod = $_SESSION["cod"];
-          $codcamp =$_SESSION["camp"]=@$_POST["camp"];
-          $codvol=$_SESSION["vol"]=@$_POST["vol"];
+          $codcamp = $_POST["camp"];
+          $codvol=$_POST["vol"];
 
           $campania = new campania();
           $campania->setUserid($cod);

@@ -5,7 +5,7 @@
 
   <?php
     try {
-      require_once('modelo/conexion.php');
+      require_once('db/conexion.php');
       conectar();
       $sql = "SELECT campaign_id, title,description, place, start_date, imagen ";
       $sql .= " FROM campaigns ";
