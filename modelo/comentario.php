@@ -96,7 +96,7 @@ class Comentario
 
      public function listacomentarios(){
         
-        $query="SELECT c.comentario_id,c.description,DATE_FORMAT(c.fecha, '%d-%m-%Y'),u.firstname,u.lastname,u.photo,f.title from comentarios c inner join foro f on c.foro_id=f.foro_id inner join users u on c.user_id=u.user_id where f.foro_id = '".$this->foroid."' and c.estado = 1 " ;       
+        $query="SELECT c.comentario_id,c.description,DATE_FORMAT(c.fecha, '%d-%m-%Y'),u.firstname,u.lastname,u.photo,f.title,c.user_id from comentarios c inner join foro f on c.foro_id=f.foro_id inner join users u on c.user_id=u.user_id where f.foro_id = '".$this->foroid."' and c.estado = 1 order by c.comentario_id DESC" ;       
         $tabla=ejecutar($query);        
        
         return $tabla;

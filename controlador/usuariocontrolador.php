@@ -3,14 +3,19 @@
 require_once ('../db/conexion.php');
 require_once ('../modelo/user.php');
 
-//require_once ('../libs/class.phpmailer.php');
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 require_once ('../libs/phpmailer/Exception.php');
 require_once ('../libs/phpmailer/PHPMailer.php');
 require_once ('../libs/phpmailer/SMTP.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+//require $_SERVER['DOCUMENT_ROOT'] . '/libs/phpmailer/Exception.php';
+//require $_SERVER['DOCUMENT_ROOT'] . '/libs/phpmailer/PHPMailer.php';
+//require $_SERVER['DOCUMENT_ROOT'] . '/libs/phpmailer/SMTP.php';
+
+
+ini_set('max_execution_time', 300);
 
 conectar();
 session_start();
@@ -119,13 +124,15 @@ function login(){
                 $_SESSION["photo"] = $log[6];
                 $_SESSION["tipo"] = $log[7];
                 $_SESSION["usuario"]=$log[1]." ".$log[2];
-        echo "<script>alert('Bienvenido Administrador')
+                $_SESSION['verificado'] = true;
+        echo "<script>alert('Bienvenido Organizador')
               document.location=('../vista/panelcontrol.php')</script>";  
         }else{
             $_SESSION["cod"] = $log[0];
             $_SESSION["photo"] = $log[6];
             $_SESSION["usuario"]=$log[1]." ".$log[2];
             $_SESSION["correo"] = $log[3];
+            $_SESSION['verificado'] = true;
         echo "<script>alert('Bienvenido Voluntario')
              document.location=('../vista/modulovoluntario.php')</script>";  
         }  
@@ -170,8 +177,8 @@ function recuperar(){
  $mensaje="<html>
 <body style='background: #FFFFFF;font-family: Verdana; font-size: 14px;color:#1c1b1b;'>
 <div style=''>
-    <h2>Hola ".$row["firstname"]."</h2>
-    <p style='font-size:17px;'>Tu contrasenia para el ingreso al sistema es
+    <h2>Estimado usuario, ".$row["firstname"]." ".$row["lastname"]."</h2>
+    <p style='font-size:17px;'>Su clave es: 
     ".$row["4"]."</p>
   <br>
 </html>"
@@ -181,7 +188,7 @@ function recuperar(){
 $mail = new PHPMailer;
 $mail->CharSet = "UTF-8";
 $mail->isSMTP(); 
-$mail->SMTPDebug = 2; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
+//$mail->SMTPDebug = 2; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
 $mail->Host = "smtp.gmail.com"; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
 $mail->Port = 587; // TLS only
 $mail->SMTPSecure = 'tls'; // ssl is deprecated
@@ -199,7 +206,7 @@ $mail->AltBody = 'HTML messaging not supported'; // If html emails is not suppor
 if(!$mail->send()){
     echo "Mailer Error: " . $mail->ErrorInfo;
 }else{
-        echo "<script>alert('CORREO ENVIADO')
+        echo "<script>alert('LA CLAVES SE HA ENVIADO A SU CORREO')
         document.location=('../vista/login.php')</script>"; 
 }
 
@@ -223,27 +230,3 @@ header("location:../vista/login.php");
 
 
  ?>
-
- <!--$mail_para = $_POST["txtemail"];
-$subject   = "Reenvio de contraseña";
-
-$header .="MIME-Version: 1.0\n"; 
-$header .= "Content-type: text/html; charset=iso-8859-1\n"; 
-$header .="From: depart@domino.com.ar\n";
-
-$mensaje="<html>
-<body style='background: #FFFFFF;font-family: Verdana; font-size: 14px;color:#1c1b1b;'>
-<div style=''>
-    <h2>Hola ".$row["firstname"]."</h2>
-    <p style='font-size:17px;'>Tu contrasenia para el ingreso al sistema es
-    ".$row["4"]."</p>
-  <br>
-</html>";
-
-$meil = mail($mail_para, $subject, $mensage, $header);
-
-if ($meil) {
- echo "Su mail se a enviado correctamente";
-} else {
- echo "A ocurrido un error al intentar enviar su mail";
-}-->

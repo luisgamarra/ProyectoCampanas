@@ -93,7 +93,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="celular" >Celular</label>
           <div class="col-md-4">
-          <input id="celular" name="txtcel" type="text"  onkeypress='return validaNumericos(event)' placeholder="Celular" class="form-control input-md" data-minlength="9" data-error="Introduce tu celular" required>
+          <input id="celular" name="txtcel" type="text"  onkeypress='return validaNumericos(event)' placeholder="Celular" class="form-control input-md" data-error="Introduce tu celular" required>
           <div class="help-block with-errors"></div>
           </div>
         </div>
@@ -129,7 +129,6 @@
 </footer>
            
 <script src="js/jquery.js"></script>
-
 <script src="js/bootstrap.min.js"></script>
 <script src="js/validator.js"></script> 
 <script >

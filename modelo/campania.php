@@ -12,9 +12,10 @@ class Campania
     private $enddate;
     private $image;
     private $userid;
+    private $categoriaid;
    
     
- function __construct($id=0,$title="",$description="",$place="",$vacant="",$startdate="",$enddate="",$image="",$userid=""){
+ function __construct($id=0,$title="",$description="",$place="",$vacant="",$startdate="",$enddate="",$image="",$userid="",$categoriaid=""){
  $this->id = $id;
  $this->title = $title;
  $this->description = $description;
@@ -23,7 +24,8 @@ class Campania
  $this->startdate = $startdate;
  $this->enddate = $enddate;
  $this->image = $image;
- $this->userid = $userid; 
+ $this->userid = $userid;
+ $this->categoriaid = $categoriaid;  
  }
     
     public function setId($id){
@@ -97,18 +99,27 @@ class Campania
     	return $this->userid;
     }
 
+      public function setCategoriaid($categoriaid){
+        $this->categoriaid = $categoriaid;
+    }
+
+    public function getCategoriaid($categoriaid){
+        return $this->categoriaid;
+    }
+
     public function Guardar(){
         
-        $query="INSERT INTO campaigns (campaign_id,title,description,place,vacant,start_date,end_date,imagen,user_id,estado)
+        $query="INSERT INTO campaigns (campaign_id,title,description,place,vacant,start_date,end_date,imagen,user_id,categoria_id,estado)
                 VALUES(0,
-                       '".$this->title."',
-                       '".$this->place."',
+                       '".$this->title."',                       
                        '".$this->description."',
+                       '".$this->place."',
                        '".$this->vacant."',
                        '".$this->startdate."',
                        '".$this->enddate."',
                        '".$this->image."',
-                       '".$this->userid."',1);";
+                       '".$this->userid."',
+                       '".$this->categoriaid."',1);";
         $guardar=ejecutar($query) or die (mysqli_error());
         //$this->db()->error;
         return $guardar;
@@ -117,7 +128,7 @@ class Campania
 
      public function actualizar(){
        
-        $query="UPDATE campaigns SET title='".$this->title."', place='".$this->place."',vacant='".$this->vacant."',start_date='".$this->startdate."',end_date='".$this->enddate."' where campaign_id='".$this->id."'";
+        $query="UPDATE campaigns SET title='".$this->title."',description='".$this->description."' ,place='".$this->place."',vacant='".$this->vacant."',start_date='".$this->startdate."',end_date='".$this->enddate."',imagen='".$this->image."',categoria_id='".$this->categoriaid."' where campaign_id='".$this->id."'";
         $actualizar=ejecutar($query) or die (mysqli_error());
         
         return $actualizar;
@@ -135,7 +146,7 @@ class Campania
 
     public function campaniaporusuario(){
        
-        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where user_id='".$this->userid."' and estado = 1 " ;        
+        $query="SELECT c.campaign_id,c.title,c.description,c.place,c.vacant,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),c.imagen,c.start_date,c.end_date,ca.descripcion,ca.categoria_id from campaigns c inner join categorias ca on c.categoria_id=ca.categoria_id where c.user_id='".$this->userid."' and c.estado = 1 order by campaign_id" ;        
         $tabla=ejecutar($query);
         
 
@@ -166,6 +177,29 @@ class Campania
         return $rv;
     }
 
+    public function getCampaniabyCod(){
+        $query="SELECT c.campaign_id,c.title,c.description,c.place,c.vacant,c.start_date,c.end_date,c.imagen,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),ca.descripcion,ca.categoria_id from campaigns c inner join categorias ca on c.categoria_id=ca.categoria_id where c.campaign_id = '".$this->id."' " ;       
+        $tabla=ejecutar($query); 
+        $row = mysqli_fetch_array($tabla);       
+       
+        return $row;
+    }
+
+    public function buscarcampania($palabra){
+        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where user_id='".$this->userid."' and estado = 1 and title like
+     '%".$palabra."%'  " ; 
+        $tabla = ejecutar($query);
+
+        return $tabla;
+    }
+
+     public function buscar($palabra){
+        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where estado = 1 and title like
+     '%".$palabra."%'  " ; 
+        $tabla = ejecutar($query);
+
+        return $tabla;
+    }
      
    
 }

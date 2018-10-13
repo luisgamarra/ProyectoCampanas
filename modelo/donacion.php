@@ -75,7 +75,7 @@ class Donacion{
 
      public function actualizar(){
         
-        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."' where donation_id='".$this->id."' and campaign_id='".$this->campaignid."'";
+        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."',user_id='".$this->userid."',campaign_id='".$this->campaignid."' where donation_id='".$this->id."' ";
         $actualizar=ejecutar($query) or die (mysqli_error());
         
         return $actualizar;
@@ -91,7 +91,7 @@ class Donacion{
 
     }
 
-   public function donacionesporvoluntario(){
+   public function donacionesporcampania(){
         
         $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.estado=1";    
         $tabla=ejecutar($query);
@@ -100,6 +100,29 @@ class Donacion{
 
     }
 
+    public function donacionporvoluntario(){
+
+        $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.user_id ='".$this->userid."' and d.estado=1";    
+        $tabla=ejecutar($query);
+        
+        return $tabla;
+    }
+
+    public function getDonacionbycod(){
+
+        $query="SELECT d.donation_id,d.user_id,d.campaign_id,c.title,u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id inner join campaigns c on d.campaign_id=c.campaign_id where d.donation_id = '".$this->id."' and d.estado=1";    
+        $tabla=ejecutar($query);
+        $row = mysqli_fetch_array($tabla);
+        return $row;
+    }
+
+    public function donxvol(){
+            $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility,c.title from donations d inner join users u on d.user_id=u.user_id inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id = '".$this->userid."' and d.estado=1 order by d.donation_id DESC";    
+        $tabla=ejecutar($query);
+        
+        return $tabla;
+
+    }
  
    
 }

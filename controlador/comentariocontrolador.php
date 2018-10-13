@@ -33,7 +33,8 @@ session_start();
 function create(){
 
     $fi = $_POST["fi"];
-    $ft = $_POST["ft"];
+  
+
 
     $comentario=new Comentario();
     $comentario->setDescription($_POST["txtdes"]);    
@@ -47,7 +48,7 @@ function create(){
         $sumar->sumaresp();
 
         echo "<script>alert('tu comentario se añadio')
-    document.location=('../vista/participarforo.php?foroid=$fi&&ft=$ft')</script>";    
+    document.location=('../vista/participarforo.php?foroid=$fi')</script>";    
     }
 
     
@@ -55,36 +56,41 @@ function create(){
 }
     
 
-/**function modificar(){
+function modificar(){
 
-$idcamp = $_REQUEST["idcamp"];    
+$idcome = $_POST["comid"];
+$idforo = $_REQUEST["foroid"];    
  
-    $camp = new Campania();
-    $camp->setTitle($_POST["txtitle"]);
-    $camp->setPlace($_POST["txtplace"]);
-    $camp->setVacant($_POST["txtvacant"]);
-    $camp->setStartdate($_POST["txtfecha1"]);
-    $camp->setEnddate($_POST["txtfecha2"]);    
-    $camp->setId($idcamp);
-    $actualizar = $camp->actualizar();
+    $comentario = new Comentario();
+    $comentario->setDescription($_POST["txtcomen"]);     
+    $comentario->setId($idcome);
+    $actualizar = $comentario->actualizar();
 
     echo "<script>alert('Actualizado Correctamente')
-    document.location=('../vista/detallecampania.php')</script>";
+    document.location=('../vista/participarforo.php?foroid=$idforo')</script>"; 
 }
 
 
 function eliminar(){
 
-$idcamp = $_REQUEST["idcamp"];    
+$idcome = $_REQUEST["idcome"];
+$idforo = $_REQUEST["foroid"];     
  
-    $camp = new Campania();    
-    $camp->setId($idcamp);
-    $eliminar = $camp->eliminar();
+    $come = new Comentario();    
+    $come->setId($idcome);
+    $eliminar = $come->eliminar();
 
-    echo "<script>alert('Campania eliminada')
- document.location=('../vista/detallecampania.php')</script>";
+    if($eliminar){
+        $restar = new Foro();
+        $restar->setId($idforo);
+        $restar->restaresp();
+
+    
+    echo "<script>alert('comentario eliminado')
+document.location=('../vista/participarforo.php?foroid=$idforo')</script>";
 }
-**/
+
+} 
 
    
 

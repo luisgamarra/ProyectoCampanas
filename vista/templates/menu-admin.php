@@ -11,7 +11,7 @@
        <ul class="sub-menu collapse" id="campanias">
           <li><a href="listacampania.php">Listado de campañas</a></li>
           <li><a href="registrocampania.php">Registrar campaña</a></li>
-          <li><a href="detallecampania.php">Detalle de campañas</a></li>
+          <li><a href="detallecampania.php">Detalle de campañas</a></li>         
        </ul>
 
        <li data-toggle="collapse" data-target="#voluntario" class="collapsed">
@@ -25,15 +25,24 @@
          <a href="#"><i class=""></i> Gestionar reuniones <span class="caret"></span></a>
        </li>
        <ul class="sub-menu collapse" id="reunion">          
-          <li><a href="planificar-reuniones.php">Planificar reuniones</a></li>                
+          <li><a href="planificar-reuniones.php">Registrar reunion</a></li>
+          <li><a href="lista-reuniones.php">Listado de reuniones</a></li>                 
        </ul>
 
        <li data-toggle="collapse" data-target="#donacion" class="collapsed">
          <a href="#"><i class=""></i> Gestionar donaciones <span class="caret"></span></a>
        </li>
        <ul class="sub-menu collapse" id="donacion">
-          <li><a href="donaciones.php">Registrar donaciones</a></li>
-          <li><a href="lista-donaciones.php">Lista de donaciones</a></li>                
+          <li><a href="registrodonacion.php">Registrar donaciones</a></li>
+          <li><a href="lista-donaciones.php">Listado de donaciones</a></li>                
+       </ul>
+
+       <li data-toggle="collapse" data-target="#ubicacion" class="collapsed">
+         <a href="#"><i class=""></i> Gestionar ubicaciones <span class="caret"></span></a>
+       </li>
+       <ul class="sub-menu collapse" id="ubicacion">
+          <li><a href="registrolocalizacion.php">Registrar Ubicacion</a></li>
+          <li><a href="lista-ubicaciones.php">Listado de ubicaciones</a></li>                
        </ul>
 
        <li data-toggle="collapse" data-target="#usuario" class="collapsed">

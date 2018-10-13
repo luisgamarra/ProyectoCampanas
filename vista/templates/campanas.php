@@ -18,10 +18,12 @@
     }
   ?>
 
+<center><div class="holder">
+      </div></center>
 
     <section id="campanas" class="campanas contenedor seccion">
 
-          <ul class="lista-campanas clearfix">
+          <ul class="lista-campanas clearfix" id="itemContainer">
                 <?php while ($campanas = $resultado -> fetch_assoc() ) {?>
                         <li>
                           <div class="campana">

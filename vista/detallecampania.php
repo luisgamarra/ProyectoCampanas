@@ -3,6 +3,7 @@ require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
 conectar();
 session_start();
+include('templates/validar.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,8 @@ session_start();
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="css/datatables.css" rel="stylesheet">
+    
 </head>
 
 <body background="img/fondito1.jpg">
@@ -30,17 +32,23 @@ session_start();
                 <div class="container-fluid">                 
      
                 <div class="table-responsive">        
-                  <table class="table table-hover"  border="2" >
+                  <table class="table table-hover" id="tablita" border="2" >
+                    <thead>
                   <tr bgcolor="#ABBCB7  ">
                   <th style="text-align:center;">N°</th>
                   <th style="text-align:center;">Nombre</th>
+                  <th style="text-align:center;">Descripciòn</th>
                   <th style="text-align:center;">Lugar</th>
                   <th style="text-align:center;">Vacantes</th>
                   <th style="text-align:center;">Fecha Inicial</th>
-                  <th style="text-align:center;">Fecha Final</th>               
+                  <th style="text-align:center;">Fecha Final</th> 
+                  <th style="text-align:center;">Imagen</th>
+                  <th style="text-align:center;">Categoria</th>                
                   <th style="text-align:center;">Editar</th>
                   <th style="text-align:center;">Eliminar</th>
                   </tr>
+                </thead>
+
 
 <?php               
           
@@ -52,115 +60,73 @@ session_start();
                 
           $numeracion=1;
 
-if(empty($_GET['idcamp'])){
 
-}else {
-    echo "<form action='../controlador/campaniacontrolador.php?idcamp=".$_GET['idcamp']."' method='post'>";
-}
 
 
 while ($row = mysqli_fetch_array($r)) {
 
 echo "<tr BGCOLOR='white'><td align='center'>".$numeracion."</td>";
 
+
 //Titulo
-if(empty($_GET['idcamp'])){
+
 echo "<td align='center'>".$row["1"]."</td>";
-}else {
-  if ($_GET['idcamp']==$row["0"]) {
-    echo "<td align='center'>          
-          <input align='right' type='text' class='form-control' id='txtitle' name='txtitle' value='".$row["1"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["1"]."</td>";
-  }
-}
+
+
+//Descripcion
+$des = substr($row["2"],0,50);  
+
+
+echo "<td align='center' style= 'font-size:12px;'>".$des."</td>";
+
 
 //Lugar
-if(empty($_GET['idcamp'])){
+
 echo "<td align='center'>".$row["3"]."</td>";
-}else {
-  if ($_GET['idcamp']==$row["0"]) {
-    echo "<td align='center'>
-          <input type='text' class='form-control' id='txtplace' name='txtplace' value='".$row["3"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["3"]."</td>";
-  }
-}
+
 
 //Vacantes
-if(empty($_GET['idcamp'])){
+
 echo "<td align='center'>".$row["4"]."</td>";
-}else {
-  if ($_GET['idcamp']==$row["0"]) {
-    echo "<td align='center'>
-          <input type='text' class='form-control' id='txtvacant' name='txtvacant' value='".$row["4"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["4"]."</td>";
-  }
-}
+
+
 
 //Fecha inicial
-if(empty($_GET['idcamp'])){
+
 echo "<td align='center'>".$row["5"]."</td>";
-}else {
-  if ($_GET['idcamp']==$row["0"]) {
-    echo "<td align='center'>
-        <input type='date' class='form-control'  id='txtfecha1' name='txtfecha1' value='".$row["8"]."'>
-        </td>";
-  }else {
-    echo "<td align='center'>".$row["5"]."</td>";
-  }
-}
 
 //Fecha Final
-if(empty($_GET['idcamp'])){
+
 echo "<td align='center'>".$row["6"]."</td>";
-}else {
-  if ($_GET['idcamp']==$row["0"]) {
-    echo "<td align='center'>
-          <input type='date' class='form-control'  id='txtfecha2' name='txtfecha2' value='".$row["9"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["6"]."</td>";
-  }
-}
+
+
+//imagen
+
+  echo "<td align='center'><img src='img/".$row["7"]."' width='75px'  ></td>";
+
+  //categoria
+echo "<td align='center'>".$row["10"]."</td>";
 
 //Modificar
-if(empty($_GET['idcamp'])){
-echo "<td align='center'><a class='btn btn-success' href='detallecampania.php?idcamp=".$row["0"]."'>Modificar</a></td>";
-}else {
-  if ($_GET['idcamp']==$row["0"]) {
-    echo "<td align='center'>
-          
-          <button type='submit' class='btn btn-warning' name='action' value='modificar'>Guardar</button>
-          <a class='btn btn-info' href='detallecampania.php'>Cancelar</a></td></div>";
-  }else {
-    echo "<td align='center'><a class='btn btn-success' href='detallecampania.php?idcamp=".$row["0"]."'>Modificar</a></td>";
-  }
-}
+
+echo "<td align='center'><a class='btn btn-success' href='modificar-campania.php?idcamp=".$row["0"]."'>Modificar</a></td>";
+
 
 //Eliminar
 
 echo "<td align='center'>      
-       <a class='btn btn-danger' href='../controlador/campaniacontrolador.php?action=eliminar&&idcamp=".$row["0"]."'>Eliminar</a></tr>";
+       <a class='btn btn-danger' onclick='return Confirmation()' href='../controlador/campaniacontrolador.php?action=eliminar&&idcamp=".$row["0"]."'>Eliminar</a></td</tr>";
            
 $numeracion++;
 
 }
 
-if(empty($_GET['idcamp'])){
 
-}else {
-  echo "</form>";
-}
                
 ?>               
                 
                 </table>   
-                <a href="reportecampania.php">Ver Reporte de campañas</a>               
+               <!-- <a href="reportecampania.php">Ver Reporte de campañas</a>-->               
               </div>
 
               </div>
@@ -175,12 +141,46 @@ if(empty($_GET['idcamp'])){
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
+<script src="https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"></script>
+<script src="js/datatables.js"></script>
+
 <script>
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });
 </script> 
+
+<script>
+  
+  $(document).ready(function() {
+    $('#tablita').DataTable( {
+
+      
+        lengthMenu: [[5,10,20,-1],["5","10","20","Todos"]],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+
+        }
+
+
+      })
+} );
+
+</script>
+
+<script type="text/javascript">
+function Confirmation() {
+ 
+  if (confirm('Esta seguro de eliminar el registro?')==true) {
+      
+      return true;
+  }else{
+      //alert('Cancelo la eliminacion');
+      return false;
+  }
+}
+</script>
 
 </body>
 

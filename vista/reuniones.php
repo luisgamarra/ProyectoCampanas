@@ -4,6 +4,7 @@ require_once ('../modelo/detallecampania.php');
 require_once ('../modelo/reunion.php');
 conectar();
 session_start();
+include('templates/validar.php');
 ?>
 
 <!doctype html>
@@ -19,13 +20,15 @@ session_start();
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="css/normalize.css"> 
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/simple-sidebar.css">
   <link rel="stylesheet" href="css/colorbox.css">
+  <link rel="stylesheet" href="css/jPages.css">
+  <link rel="stylesheet" href="css/animate.css">
   
 </head>
 
@@ -50,27 +53,34 @@ session_start();
     <form id="form1" name="form1" method="post" action="">
 
     <div class="form-group">
-          <label class="col-md-4 control-label" for="camp" >Campaña : </label>
+          <label class="col-md-4 control-label" for="camp" >Seleccione un mes : </label>
           <div class="col-md-4">
           <select class="form-control" name="camp" id="camp" OnChange="submit()">
-         <option value="0" >-- Seleccione --</option>
+         
 
          <?php    
+
+         $meses = array('-- Seleccione --','enero','febrero','marzo','abril','mayo','junio','julio',
+               'agosto','septiembre','octubre','noviembre','diciembre');
 
           $cod = $_SESSION["cod"];
           $codcamp=$_POST["camp"];
 
           $campania = new Detallecampania();
           $campania->setUserid($cod);
-          $rc = $campania->campaniasporvoluntario();  
+          $rc = $campania->campaniasporvoluntario(); 
+
+          for ($i=0; $i<sizeof($meses); $i++){
+            if($codcamp == $i){
+          echo "<option value='$i' selected>".$meses[$i]."</option>";
+           } else{
+            echo "<option value='$i' >".$meses[$i]."</option>"; 
+           }
+
+
+         }
           
-          while($row=mysqli_fetch_array($rc)){
-          if($codcamp == $row[5]){
-          echo "<option value='".$row[5]."' selected>".$row[0]."</option>";
-          }else{
-          echo "<option value='".$row[5]."' >".$row[0]."</option>";   
-          }
-          }
+          
           ?>      
           </select>
           
@@ -82,61 +92,50 @@ session_start();
 
     <?php
             $reunion = new Reunion();
-            $reunion->setCampaignid($codcamp);
-            $r = $reunion->reunionporcampania();           
+            
+            $r = $reunion->getReunionbyMonthandVol($cod,$codcamp);           
                                 
 ?>
 
- <div class="calendario">
+ <div class="calendario" id="itemContainer">
       <?php
-      $calendario = array();
-        while ($reuniones = $r->fetch_assoc()) {
-            // captura la fecha de cada evento
-            $fecha = $reuniones['dates'];
-
-
-            $reunion = array(
-            'Tema' => $reuniones['topic'],
-            'Campaña' => $reuniones['title'],
-            'Fecha' => $reuniones['dates'],
-            /*'Hora' => $reuniones['time'],*/
-            'Encargado' => $reuniones['firstname'] . " " . $reuniones['lastname'],
-            );
-
-            $calendario[$fecha][] = $reunion;
-          ?>
-  <?php } ?>
-
-
-  <?php
-  //imprimir todos los eventos
-    foreach ($calendario as $dia => $lista_campanas) { ?>
-
-    <h3>
-        <i class="fas fa-calendar-alt" aria-hidden="true"> </i>
-        <?php
-        setlocale(LC_TIME, 'spanish');
-        echo utf8_encode(strftime("%A, %d de %B del %Y", strtotime($dia))) ;
-        ?>
-    </h3>
-    <?php foreach ($lista_campanas as $reunion) { ?>
       
-      <div class="dia">
+if($codcamp != 0) {
+        while ($row = mysqli_fetch_array($r)) {
+            // captura la fecha de cada evento
+           
+           echo "
 
-        <p class="titulo"> <?php echo $reunion['Tema']; ?>  </p>
-        <p class="hora">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <?php echo $reunion['Fecha']; ?>
+            <div class='dia'>
+            <h4>
+            <i class='fas fa-calendar-alt' aria-hidden='true'> </i>";
+             setlocale(LC_TIME, 'spanish');
+            echo utf8_encode(strftime("%A, %d de %B del %Y", strtotime($row[2]))) ;
+
+           echo "
+           </h4>
+
+        <p class='titulo'> ".$row[1]."  </p>
+        <p class='hora'>
+            <i class='fas fa-clock' aria-hidden='true'></i>
+            ".$row[3]."
         </p>
-        <p><i class="fas fa-map-marker-alt"></i>  <?php echo $reunion['Campaña']; ?></p>
+        <p><i class='fas fa-map-marker-alt'></i>  ".$row[0]."</p>
         <p>
-          <i class="fas fa-user" aria-hidden="true"></i>
-          <?php echo $reunion['Encargado']; ?>
+          <i class='fas fa-user' aria-hidden='true'></i>
+          ".$row[5]." ".$row[6]."
         </p>
 
       </div>
-    <?php }//for each campañas ?>
-  <?php }  //For each días ?>
+
+           ";
+
+          }}
+          ?>
+
+
+
+ 
 
 
     </div>
@@ -152,6 +151,8 @@ session_start();
     
   </section>
 
+
+<center><div class="holder"></div></center>
 </div>
 </div>
 </div>
@@ -166,6 +167,7 @@ session_start();
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jPages.js"></script>
 
 <script>
     $("#menu-toggle").click(function(e) {
@@ -173,6 +175,23 @@ session_start();
     $("#wrapper").toggleClass("toggled");
         });
 </script>
+
+<script>
+  
+$(function(){
+    $("div.holder").jPages({
+      containerID  : "itemContainer",
+      perPage      : 6,
+      startPage    : 1,
+      startRange   : 3,
+      midRange     : 1,
+      endRange     : 1,
+      animation   : "bounceInUp"
+    });
+  });
+
+</script>
+
 
 </body>
 

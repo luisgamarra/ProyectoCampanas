@@ -30,6 +30,6 @@ $titles = array('Nº'=>'<b>Nª</b>', 'nombre'=>'Nombre</b>','lugar'=>'<b>Lugar</
 $pdf->ezTable($data,$titles,'');
 
 $pdf->ezText("\n\n<b>Fecha:</b> ".date("d/m/Y"), 12);
-$pdf->ezText("\n<b>Hora:</b> ".date("H:i:s")."\n\n", 12);
+
 $pdf->ezStream();
 ?>

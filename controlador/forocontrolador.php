@@ -42,36 +42,32 @@ function create(){
 }
     
 
-/**function modificar(){
+function modificar(){
 
-$idcamp = $_REQUEST["idcamp"];    
+$idf = $_POST["foroid"];    
  
-    $camp = new Campania();
-    $camp->setTitle($_POST["txtitle"]);
-    $camp->setPlace($_POST["txtplace"]);
-    $camp->setVacant($_POST["txtvacant"]);
-    $camp->setStartdate($_POST["txtfecha1"]);
-    $camp->setEnddate($_POST["txtfecha2"]);    
-    $camp->setId($idcamp);
-    $actualizar = $camp->actualizar();
+    $foro = new Foro();
+    $foro->setTitle($_POST["txtforo"]);
+    $foro->setId($idf) ;
+    $actualizar = $foro->actualizar();
 
     echo "<script>alert('Actualizado Correctamente')
-    document.location=('../vista/detallecampania.php')</script>";
+    document.location=('../vista/listaforo.php')</script>";
 }
 
 
 function eliminar(){
 
-$idcamp = $_REQUEST["idcamp"];    
+$idf = $_REQUEST["idf"];    
  
-    $camp = new Campania();    
-    $camp->setId($idcamp);
-    $eliminar = $camp->eliminar();
+    $foro = new Foro();    
+    $foro->setId($idf);
+    $eliminar = $foro->eliminar();
 
-    echo "<script>alert('Campania eliminada')
- document.location=('../vista/detallecampania.php')</script>";
+    echo "<script>alert('Foro eliminado')
+ document.location=('../vista/listaforo.php')</script>";
 }
-**/
+
 
    
 

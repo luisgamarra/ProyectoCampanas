@@ -4,6 +4,7 @@ require_once ('../modelo/campania.php');
 require_once ('../modelo/detallecampania.php');
 conectar();
 session_start();
+include('templates/validar.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,9 @@ session_start();
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    
+     <link rel="stylesheet" href="css/jPages.css">
+
 </head>
 
 <body background="img/fondito1.jpg">
@@ -56,20 +60,16 @@ while($row=mysqli_fetch_array($r)){
 ?>
     </select>
    </div>
-
+</form>
     </br></br></br>
     <h4>Voluntarios inscritos : </h4>
     </br>
-    <div class="table-responsive">
-    <table class="table table-hover" border="2" >
-    <tr bgcolor="#F3BC0E">
-    <th style="text-align:center;">Nº</th>
-    <th style="text-align:center;">Nombre</th>
-    <th style="text-align:center;">Apellido</th>
-    <th style="text-align:center;">Email</th>
-    <th style="text-align:center;">Celular</th>
-    <th style="text-align:center;">Eliminar</th>
-    </tr>    
+    
+    <div  id="content" class="defaults">
+
+      
+
+      <div class="holder"></div>
 
 <?php
 
@@ -79,6 +79,22 @@ while($row=mysqli_fetch_array($r)){
     $voluntario->setCampaignid($codcamp);
     $r = $voluntario->voluntariosporcampania();
 
+    if($codcamp != 0){
+    echo "<div class='table-responsive' >
+    <table class='table table-hover' border='2' >
+    <thead >
+    <tr bgcolor='F3BC0E'>
+    <th style='text-align:center;'>Nº</th>
+    <th style='text-align:center;'>Nombre</th>
+    <th style='text-align:center;'>Apellido</th>
+    <th style='text-align:center;'>Email</th>
+    <th style='text-align:center;'>Celular</th>
+    <th style='text-align:center;'>Eliminar</th>
+    </tr><thead>    ";
+    }
+?>
+<tbody id='volu'>
+<?php 
     while($row=mysqli_fetch_array($r)){
     
     echo "<tr bgcolor='white'>
@@ -88,17 +104,20 @@ while($row=mysqli_fetch_array($r)){
     <td align='center'>".$row[2]."</td>
     <td align='center'>".$row[3]."</td>
     <td align='center'>
-      <a class='btn btn-danger' href='../controlador/campaniacontrolador.php?idcamp=$codcamp&&idde=".$row["5"]."&&action=saliroeliminar'>Eliminar</a></td>    
+      <a class='btn btn-danger' onclick='return Confirmation()' href='../controlador/campaniacontrolador.php?idcamp=$codcamp&&idde=".$row["5"]."&&action=saliroeliminar'>Eliminar</a></td>    
     </tr>";
 
     $numeracion++;
     }
 
 ?>
-
+</tbody>
     </table>
+</div> <!--! end of #content -->
+  </div> <!--! end of #container -->
 
-</form>
+
+
   
     </div>
 </div>
@@ -110,11 +129,42 @@ while($row=mysqli_fetch_array($r)){
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
+
+
+<script src="js/jPages.js"></script>
+
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
     $("#wrapper").toggleClass("toggled");
         });
+</script>
+
+
+<script>
+  $(function(){
+    $("div.holder").jPages({
+      containerID : "volu",
+      previous : "←",
+      next : "→",
+      perPage : 4,
+      delay : 20
+    });
+  });
+  </script>
+
+
+<script type="text/javascript">
+function Confirmation() {
+ 
+  if (confirm('Esta seguro de eliminar el registro?')==true) {
+      
+      return true;
+  }else{
+      //alert('Cancelo la eliminacion');
+      return false;
+  }
+}
 </script>
 
 </body>

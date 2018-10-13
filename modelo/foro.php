@@ -84,8 +84,8 @@ class Foro
 
      public function listaforos(){
         
-        $query="SELECT f.foro_id,f.title,DATE_FORMAT(f.fecha, '%d-%m-%Y'),u.firstname,u.lastname,u.photo,f.respuestas from foro f inner join users u on f.user_id=u.user_id where f.estado = 1 " ;       
-        $tabla=ejecutar($query);        
+        $query="SELECT f.foro_id,f.title,DATE_FORMAT(f.fecha, '%d-%m-%Y'),u.firstname,u.lastname,u.photo,f.respuestas,f.user_id from foro f inner join users u on f.user_id=u.user_id where f.estado = 1 " ;       
+        $tabla=ejecutar($query) or die (mysqli_error());        
        
         return $tabla;
 
@@ -94,8 +94,23 @@ class Foro
     public function sumaresp(){
         $query = "UPDATE foro set respuestas = respuestas + 1 where foro_id = '".$this->id."'";
         $sum = ejecutar($query) or die (mysqli_error());
-
         return $sum;
+
+    }
+
+
+    public function restaresp(){
+         $query = "UPDATE foro set respuestas = respuestas - 1 where foro_id = '".$this->id."'";
+        $res = ejecutar($query) or die (mysqli_error());
+        return $res;
+    }
+
+    public function foroporid(){
+            $query="SELECT foro_id,title from foro where foro_id = '".$this->id."' and estado = 1 " ;       
+        $tabla=ejecutar($query) or die (mysqli_error());   
+        $row = mysqli_fetch_array($tabla);     
+       
+        return $row;
 
     }
 

@@ -80,5 +80,15 @@ class Detallecampania
 
         return $tabla;
     }
+
+    public function GETcampaniasporvoluntario($palabra){
+       
+        $query="SELECT c.title,c.place,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),c.imagen,c.campaign_id,d.detail_campaign_id,c.description from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 and d.estado = 1 and c.title like
+     '%".$palabra."%'  " ;         
+        $tabla=ejecutar($query);        
+        
+        return $tabla;
+
+    }
 }
  ?>

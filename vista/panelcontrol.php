@@ -1,7 +1,9 @@
 <?php
 require_once('../db/conexion.php');
-conectar();
 session_start();
+include('templates/validar.php');
+conectar();
+
 
 ?>
 
@@ -33,9 +35,12 @@ session_start();
 <div class="col-md-4" align="center">
 <?php 
 
+$cod = $_SESSION["cod"];
+
+
 echo "<img src='img/campanias.jpg' class='img-thumbnail' width='78%'  >";
 
-$sql1 = "SELECT COUNT(campaign_id) from campaigns";
+$sql1 = "SELECT COUNT(campaign_id) from campaigns where estado = 1 and user_id=$cod";
 $resp1 = ejecutar($sql1);
 $r1 = mysqli_fetch_array($resp1);
 
@@ -51,7 +56,7 @@ echo "<h1 style='color: #FFFFFF'> $r1[0] campañas</h1>";
 
 echo "<img src='img/voluntarios.jpg' class='img-thumbnail' width='78%'>";
 
-$sql = "SELECT COUNT(user_id) from users where type_id=2";
+$sql = "SELECT COUNT(d.user_id) from campaigns c inner join details_campaigns d on c.campaign_id=d.campaign_id and d.estado=1 and c.user_id=$cod";
 $resp = ejecutar($sql);
 $r = mysqli_fetch_array($resp);
 
@@ -64,7 +69,7 @@ echo "<h1 style='color: #FFFFFF'>$r[0] voluntarios</h1>";
 <?php 
 
 echo "<img src='img/donaciones.jpg' class='img-thumbnail' >";
-$sql2 = "SELECT COUNT(donation_id) from donations";
+$sql2 = "SELECT COUNT(c.user_id),c.title,d.description from donations d INNER JOIN campaigns c on d.campaign_id=c.campaign_id where c.user_id=$cod and d.estado = 1 and c.estado=1";
 $resp2 = ejecutar($sql2);
 $r2 = mysqli_fetch_array($resp2);
 

@@ -52,7 +52,7 @@
         <div class="form-group"> 
           <div class="col-md-4"></div>
           <div class="col-md-4">                             
-          <input type="email" name="txtemail" placeholder="Correo Electrónico" class="form-control input-md" data-error="correo invalido ej:luis@gmail.com" required>
+          <input type="email" name="txtemail" placeholder="Correo Electrónico" class="form-control input-md" data-error="correo invalido ej:yamil@gmail.com" required>
           <div class="help-block with-errors"></div>
           </div>
         </div>
@@ -62,7 +62,7 @@
           <div class="col-md-4">                                   
           <input type="password" name="txtpass" placeholder="Contraseña" class="form-control input-md" id="password" data-error="falta contraseña" required>
           <div class="help-block with-errors"></div>
-          <a href="recuperarcontrasenia.php">recuperar contraseña</a>
+          <a href="recuperarcontrasenia.php">¿Olvidaste tu contraseña?</a>
           </div>
           </br>
         </div>

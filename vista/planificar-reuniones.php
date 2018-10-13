@@ -4,6 +4,7 @@ require_once ('../modelo/campania.php');
 require_once ('../modelo/reunion.php');
 conectar();
 session_start();
+include('templates/validar.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,13 @@ session_start();
     <title>Sistema de Campañas Sociales</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">    
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+      
+
+
+
 </head>
 
 <body background="img/fondito1.jpg">
@@ -39,17 +46,25 @@ session_start();
         <div class="form-group" >
           <label class="col-md-4 control-label" for="asunto" >Asunto : </label>
           <div class="col-md-4" >
-          <input id="asunto" name="txtasunto" type="text" placeholder="Asunto" class="form-control input-md" required>
-          <div class="help-block with-errors"></div>
+          <input id="asunto" name="txtasunto" type="text" placeholder="Asunto" class="form-control input-md" required>          
           </div>
+          <div class="help-block with-errors"></div>
         </div>        
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha" >Fecha : </label>
           <div class="col-md-4">
-          <input id="fecha" name="txtfecha" type="date" placeholder="Fecha" class="form-control input-md"  required>
-          <div class="help-block with-errors"></div>
+          <input id="fecha" name="txtfecha" type="text" placeholder="Fecha" class="form-control input-md" required >          
           </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="hora" >Hora : </label>
+          <div class="col-md-4">
+        <input  type="text" id="time" name="txthora" class="form-control input-md"  required>
+          </div>
+          <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group">
@@ -57,7 +72,7 @@ session_start();
           <div class="col-md-4">
           <select class="form-control" name="camp" id="camp" required>
             
-         <option value="0" >-- Seleccione --</option>
+         <option value="" >-- Seleccione --</option>
 
          <?php    
 
@@ -81,6 +96,7 @@ session_start();
           </select>
           
           </div>
+          <div class="help-block with-errors"></div>
         </div>     
           
         <!-- Button -->
@@ -89,108 +105,16 @@ session_start();
           <div class="col-md-4">
                                     
           <button class="btn btn-primary" block="true" type="submit" name="action" value="create"> Guardar </button>
+          <a class="btn btn-primary" href="calendario.php">Ver calendario</a>
+          <a class='btn btn-info' href='panelcontrol.php'>Cancelar</a>
           </div>
         </div>
 
   </form>    
 
-  </br>
+  
 
-    <div class="table-responsive">
-    <table class="table table-hover" border="2" >
-    <tr bgcolor="#F3F00E">
-    <th style="text-align:center;">Nº</th>
-    <th style="text-align:center;">Asunto</th>
-    <th style="text-align:center;">Fecha</th>
-    <th style="text-align:center;">Campaña</th>
-    <th style="text-align:center;">Modificar</th>
-    <th style="text-align:center;">Eliminar</th>        
-    </tr>    
-
-<?php
-
-$numeracion = 1;
-
-$cod = $_SESSION["cod"];
-           
-$reunion = new Reunion();
-$reunion->setUserid($cod);
-$r = $reunion->reunionporusuario();
-           
-if(empty($_GET['idreu'])){
-
-}else {
-    echo "<form action='../controlador/reunioncontrolador.php?idreu=".$_GET['idreu']."' method='post'>";
-}
-
-while ($row = mysqli_fetch_array($r)) {
-
-echo "<tr bgcolor='white'><td align='center'>".$numeracion."</td>";
-
-//Asunto
-if(empty($_GET['idreu'])){
-    echo "<td align='center'>".$row["1"]."</td>";
-}else {
-  if ($_GET['idreu']==$row["0"]) {
-    echo "<td align='center'>
-          <input type='text' id='txtasunto' class='form-control' name='txtasunto' value='".$row["1"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["1"]."</td>";
-  }
-}
-
-//Fecha
-if(empty($_GET['idreu'])){
-echo "<td align='center'>".$row["2"]."</td>";
-}else {
-  if ($_GET['idreu']==$row["0"]) {
-    echo "<td align='center'>
-          <input type='date' id='txtfecha' class='form-control' name='txtfecha' value='".$row["4"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["2"]."</td>";
-  }
-}
-
-//Campania
-echo "<td align='center'>".$row["3"]."</td>";
-
-//Modificar
-if(empty($_GET['idreu'])){
-    echo "<td align='center'>
-          <a class='btn btn-success' href='planificar-reuniones.php?idreu=".$row["0"]."'>Modificar</a></td>";
-}else {
-  if ($_GET['idreu']==$row["0"]) {
-    echo "<div class='form-group row'><td align='center'>
-           
-          <input class='btn btn-warning' id='modificar' type='submit' name='action' value='modificar' name='btnenviar'>
-          <a class='btn btn-info col-md-offset-1' href='planificar-reuniones.php'>Cancelar</a></td></div>";
-  }else {
-    echo "<td align='center'><a class='btn btn-success' href='planificar-reuniones.php?idreu=".$row["0"]."'>Modificar</a></td>";
-  }
-
-}
-
-//Eliminar
-echo "<td align='center'>
-      <a class='btn btn-danger' href='../controlador/reunioncontrolador.php?idreu=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
-
-                
-    $numeracion++;
-
-}
-
-if(empty($_GET['idreu'])){
-
-}else {
-    echo "</form>";    
-}
-
-?>             
-
-       </table>                                  
-       </div>
+</div>
            
 </div>
        
@@ -202,6 +126,11 @@ if(empty($_GET['idreu'])){
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/validator.js"></script> 
+<script src="js/jquery.timepicker.js"></script>
+
+<script src="js/jquery-ui.js"></script>
+
+
 
 
 <script>
@@ -209,7 +138,25 @@ if(empty($_GET['idreu'])){
       e.preventDefault();
   $("#wrapper").toggleClass("toggled");
         });
+
+ $('#time').timepicker();
 </script> 
+
+
+<script>
+  
+ var dateToday = new Date(); 
+
+$("#fecha").datepicker({  
+monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],  
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+    dateFormat: 'dd/mm/yy',     
+     minDate: dateToday 
+    
+});
+</script>
+
+
 
 </body>
 

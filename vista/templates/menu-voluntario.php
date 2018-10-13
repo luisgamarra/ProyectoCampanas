@@ -11,15 +11,31 @@
         <ul class="sub-menu collapse" id="campanias">
            <li><a href="modulovoluntario.php">Todas las Campañas</a></li> 
            <li><a href="miscampanas.php">Mis campañas</a></li>            
-           <li><a href="reuniones.php">reuniones</a></li>         
+           <li><a href="reuniones.php">reuniones</a></li>     
+           <li><a href="ubicaciones.php">Ubicaciones</a></li>    
         </ul>
+
+        <li data-toggle="collapse" data-target="#donaciones" class="collapsed">
+          <a href="#"><i class=""></i> Donaciones <span class="caret"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="donaciones">  
+          <li><a href="misdonaciones.php">Mis donaciones</a></li>         
+          <li><a href="donarpaypal.php">Donar con paypal</a></li>         
+        </ul> 
 
          <li data-toggle="collapse" data-target="#foro" class="collapsed">
           <a href="#"><i class=""></i> Foro <span class="caret"></span></a>
         </li>
-        <ul class="sub-menu collapse" id="foro">
-          <li><a href="registroforo.php">Crear foro</a></li>
-          <li><a href="listaforo.php">Todos los foros</a></li>         
+        <ul class="sub-menu collapse" id="foro">          
+          <li><a href="listaforo.php">Participar</a></li>         
+        </ul> 
+
+         <li data-toggle="collapse" data-target="#testimonios" class="collapsed">
+          <a href="#"><i class=""></i> Testimonios <span class="caret"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="testimonios">  
+          <li><a href="lista-testimonio.php">Agregar Testimonio</a></li>         
+                
         </ul> 
 
         <li data-toggle="collapse" data-target="#usuario" class="collapsed">

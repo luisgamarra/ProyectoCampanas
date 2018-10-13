@@ -40,15 +40,19 @@ session_start();
 
 function create(){
 
+$fecha1 = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha1"])));
+$fecha2 = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha2"])));
+
     $camp=new Campania();
     $camp->setTitle($_POST["txtitulo"]);
     $camp->setDescription($_POST["txtdes"]);
     $camp->setPlace($_POST["txtlugar"]);
     $camp->setVacant($_POST["txtvacante"]);
-    $camp->setStartdate($_POST["txtfecha1"]);
-    $camp->setEnddate($_POST["txtfecha2"]);
+    $camp->setStartdate($fecha1);
+    $camp->setEnddate($fecha2);
     $camp->setImage($_FILES['txtimagen']['name']);
     $camp->setUserid($_SESSION["cod"]);
+    $camp->setCategoriaid($_POST["cat"]);
     $guardar=$camp->guardar();
 
 $im = $_FILES['txtimagen']['tmp_name'];
@@ -59,23 +63,44 @@ $ruta = '../vista/img/' . $thumb_db;
 move_uploaded_file($im, $ruta);
 
     echo "<script>alert('Registraste una nueva campania')
-    document.location=('../vista/listaCampania.php')</script>";    
+    document.location=('../vista/listacampania.php')</script>";    
     
 }
     
 
 function modificar(){
 
-$idcamp = $_REQUEST["idcamp"];    
- 
+$idcamp = $_POST["idcamp"]; 
+
+$fecha1 = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha1"])));
+$fecha2 = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha2"])));
+
+$image = "";
+if($_FILES['txtim']['name'] == "") {
+    $image = $_POST["himage"];
+}else{
+    $image = $_FILES['txtim']['name'];
+}   
+
+
     $camp = new Campania();
-    $camp->setTitle($_POST["txtitle"]);
-    $camp->setPlace($_POST["txtplace"]);
-    $camp->setVacant($_POST["txtvacant"]);
-    $camp->setStartdate($_POST["txtfecha1"]);
-    $camp->setEnddate($_POST["txtfecha2"]);    
+    $camp->setTitle($_POST["txtitulo"]);
+    $camp->setDescription($_POST["txtdes"]);
+    $camp->setPlace($_POST["txtlugar"]);
+    $camp->setVacant($_POST["txtvacante"]);
+    $camp->setStartdate($fecha1);
+    $camp->setEnddate($fecha2);
+    $camp->setImage($image);
+    $camp->setCategoriaid($_POST["cat"]);     
     $camp->setId($idcamp);
     $actualizar = $camp->actualizar();
+
+    $im = $_FILES['txtim']['tmp_name'];
+$thumb_db = $_FILES['txtim']['name'];
+
+$ruta = '../vista/img/' . $thumb_db;
+
+move_uploaded_file($im, $ruta);
 
     echo "<script>alert('Actualizado Correctamente')
     document.location=('../vista/detallecampania.php')</script>";
@@ -107,12 +132,16 @@ $vol->setUserid($id);
 $r = $vol->buscarporcampyvol();
 $row = mysqli_fetch_array($r);
 
-if(mysqli_num_rows($r) == 0){
+$camp = new Campania();
+$camp->setId($idcamp);
+$fila = $camp->getCampaniabyCod();
+
+if(mysqli_num_rows($r) == 0 && $fila[4] != 0){
 
     $vol2 = new Detallecampania();
     $vol2->setCampaignid($idcamp);
     $vol2->setUserid($id);
-    $r2 = $vol->unirsecampania();
+    $r2 = $vol2->unirsecampania();
     
     if($r2){
 
@@ -120,12 +149,12 @@ if(mysqli_num_rows($r) == 0){
         $rc->setId($idcamp);
         $rc->restarvacante();
         
-        include ('correo.php');
+        include ('../vista/templates/correo.php');
 
         
     }
 
-}elseif(mysqli_num_rows($r) == 1 && $row['estado'] == 0){
+}elseif(mysqli_num_rows($r) == 1 && $row['estado'] == 0 && $fila[4] != 0){
 
 
     $sql0 = " update details_campaigns set estado = 1 where campaign_id = $idcamp and user_id = $id ";
@@ -135,8 +164,11 @@ if(mysqli_num_rows($r) == 0){
         $rc->setId($idcamp);
         $rc->restarvacante();
     
-    include ('correo.php');
+    include ('../vista/templates/correo.php');
 
+}elseif ($fila[4] == 0) {
+    echo "<script>alert('No hay vacantes suficientes')
+        document.location=('../vista/modulovoluntario.php')</script>";
 
 }else{
         echo "<script>alert('ya esta unido a campaña')

@@ -30,33 +30,69 @@ session_start();
 
 function create(){
 
+$fecha = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha"])));
+
+$cod = $_SESSION["cod"];    
+
+$re = new Reunion();
+$re->setDates($fecha);
+$re->setHours($_POST["txthora"]);
+$re->setUserid($cod);
+$fila = $re->getReunionbyFechayHora();
+    
+if($fila==0){  
+
     $reu=new Reunion();
     $reu->setTopic($_POST["txtasunto"]);
-    $reu->setDates($_POST["txtfecha"]);     
+    $reu->setDates($fecha);
+    $reu->setHours($_POST["txthora"]);       
     $reu->setUserid($_SESSION["cod"]);
     $reu->setCampaignid($_POST["camp"]);
     $guardar=$reu->guardar();
 
     echo "<script>alert('Registraste reunion')
-    document.location=('../vista/planificar-reuniones.php')</script>";    
+    document.location=('../vista/lista-reuniones.php')</script>";    
     
+   }else{
+         echo "<script>alert('La FECHA Y HORA YA ESTAN REGISTRADAS ANTERIORMENTE')
+    document.location=('../vista/planificar-reuniones.php')</script>";   
+
+   } 
 }
     
 
 function modificar(){
 
-$idreu = $_REQUEST["idreu"];    
+$idreu = $_POST["txtcod"];    
+
+    $fecha = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha"])));
+
+$cod = $_SESSION["cod"];    
+
+$re = new Reunion();
+$re->setDates($fecha);
+$re->setHours($_POST["txthora"]);
+$re->setUserid($cod);
+$fila = $re->getReunionbyFechayHora();
+    
+if($fila==0){  
  
     $reu = new Reunion();
     $reu->setTopic($_POST["txtasunto"]);
-    $reu->setDates($_POST["txtfecha"]);       
-    $reu->setId($idreu);
+    $reu->setDates($fecha);
+    $reu->setHours($_POST["txthora"]);
+    $reu->setCampaignid($_POST["camp"]);       
+    $reu->setId($_POST["txtcod"]);
     $actualizar = $reu->actualizar();
 
     echo "<script>alert('Actualizado Correctamente')
-    document.location=('../vista/planificar-reuniones.php')</script>";
-}
+    document.location=('../vista/lista-reuniones.php')</script>";
+}else{
+         echo "<script>alert('La FECHA Y HORA YA ESTAN REGISTRADAS ANTERIORMENTE')
+    document.location=('../vista/modificar-reunion.php?idreu=$idreu')</script>";   
 
+   } 
+}
 function eliminar(){
 
 
@@ -68,7 +104,7 @@ $idreu = $_REQUEST["idreu"];
     $eliminar = $reu->eliminar();
 
     echo "<script>alert('Reunion eliminada')
- document.location=('../vista/planificar-reuniones.php')</script>";
+ document.location=('../vista/lista-reuniones.php')</script>";
 }
 
 

@@ -1,9 +1,11 @@
 <?php
 require_once ('../db/conexion.php');
 require_once ('../modelo/campania.php');
+require_once ('../modelo/detallecampania.php');
 require_once ('../modelo/donacion.php');
 conectar();
 session_start();
+include('templates/validar.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,8 @@ session_start();
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
+         <link rel="stylesheet" href="css/jPages.css">
+
 </head>
 
 <body background="img/fondito1.jpg">
@@ -33,12 +37,13 @@ session_start();
   <h4>Seleccione una campaña:</h4>
   <div class="col-md-2">
    <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
-    <option value="0" >Seleccione</option>     
+    <option value="0" >-- Seleccione --</option>     
 
 <?php
 
 $cod = $_SESSION["cod"];
 $codcamp = $_POST["cbocamp"];
+ $codvol=$_POST["vol"];
 
 $campania = new Campania();
 $campania->setuserid($cod);
@@ -55,22 +60,38 @@ while($row=mysqli_fetch_array($r)){
 ?>
     </select>
    </div>
+
+<br/><br/>
+  <h4>Seleccione un voluntario:</h4>
+  <div class="col-md-2">
+         <select class="form-control" name="vol" id="vol" OnChange="submit()">
+         <option value="0" >--Seleccione--</option>
+
+         <?php
+
+         $voluntario = new detallecampania();
+         $voluntario->setCampaignid($codcamp);
+         $r = $voluntario->voluntariosporcampania();             
+
+         while($row=mysqli_fetch_array($r)){
+         if($codvol==$row[4]){
+          echo "<option value='".$row[4]."' selected>".$row[1]."</option>";
+          }else{
+          echo "<option value='".$row[4]."' >".$row[1]."</option>";   
+          }
+          }
+          ?>      
+          </select>
+          </div>
+        
 </form>
 
 
     </br></br></br>        
     <h4>Donaciones recibidas : </h4>
-    <div class="table-responsive">
-    <table class="table table-hover" border="2" >
-    <tr bgcolor="#0EF381  ">
-    <th style="text-align:center;">Nº</th>
-    <th style="text-align:center;">Nombre</th>
-    <th style="text-align:center;">Apellido</th>
-    <th style="text-align:center;">Descripcion</th>
-    <th style="text-align:center;">Cantidad</th>
-    <th style="text-align:center;">Modificar</th>
-    <th style="text-align:center;">Eliminar</th>
-    </tr>    
+
+<div class='holder'></div>
+    
 
 <?php
 
@@ -78,81 +99,87 @@ $numeracion = 1;
 
 $donacion = new Donacion();
 $donacion->setCampaignid($codcamp);
-$r = $donacion->donacionesporvoluntario();
+$r1 = $donacion->donacionesporcampania();
 
-if(empty($_GET['iddon'])){
+$donxvol = new Donacion();
+$donxvol->setCampaignid($codcamp);
+$donxvol->setuserid($codvol);
+$r2 = $donxvol->donacionporvoluntario();
 
-}else {
-    echo "<form action='../controlador/donacioncontrolador.php?iddon=".$_GET['iddon']."' method='post'>  ";
-}
+if($codcamp != 0 and $codvol == 0){
 
-while($row=mysqli_fetch_array($r)){
+  echo "<div class='table-responsive'>
+    <table class='table table-hover' border='2' >
+    <tr bgcolor='#0EF381'>
+    <th style='text-align:center;'>Nº</th>
+    <th style='text-align:center;'>Nombre</th>
+    <th style='text-align:center;'>Apellido</th>
+    <th style='text-align:center;'>Descripcion</th>
+    <th style='text-align:center;'>Cantidad</th>
+    <th style='text-align:center;'>Modificar</th>
+    <th style='text-align:center;'>Eliminar</th>
+    </tr>    ";
+
+echo "<tbody id='don'>";
+
+while($row=mysqli_fetch_array($r1)){
+
+  
     
-echo "<tr bgcolor='white'><td align='center'>".$numeracion."</td>";
-
-//Nombre voluntario
-echo "<td align='center'>".$row["1"]."</td>";
-
-//Apellido voluntario   
-echo "<td align='center'>".$row["2"]."</td>";
-
-//Nombre del producto
-if(empty($_GET['iddon'])){
-echo "<td align='center'>".$row["3"]."</td>";
-}else {
-  if ($_GET['iddon']==$row["0"]) {
-    echo "<td align='center'>
-          <input type='text' class='form-control' id='txtdes' name='txtdes' value='".$row["3"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["3"]."</td>";
-  }
-}
-
-//Cantidad
-if(empty($_GET['iddon'])){
-echo "<td align='center'>".$row["4"]."</td>";
-}else {
-  if ($_GET['iddon']==$row["0"]) {
-    echo "<td align='center'>     
-          <input type='number' class='form-control'  id='txtcant' name='txtcant' value='".$row["4"]."'>
-          </td>";
-  }else {
-    echo "<td align='center'>".$row["4"]."</td>";
-  }
-}
-
-//Modificar
-if(empty($_GET['iddon'])){
-echo "<td align='center'>
-      <a class='btn btn-success' href='lista-donaciones.php?iddon=".$row["0"]."'>Modificar</a></td>";
-}else {
-  if ($_GET['iddon']==$row["0"]) {
-    echo "<div class='form-group row'><td align='center'>
-          
-          <button type='submit' class='btn btn-warning' name='action' value='modificar'>Guardar</button>
-          <a class='btn btn-info col-md-offset-1' href='lista-donaciones.php'>Cancelar</a></td></div>";
-  }else {
-    echo "<td align='center'><a class='btn btn-success' href='lista-donaciones.php?iddon=".$row["0"]."'>Modificar</a></td>";
-  }
-}
-
-//Eliminar
-echo "<td align='center'>
+    echo "<tr bgcolor='white'>
+    <td align='center'>".$numeracion."</td>
+    <td align='center'>".$row[1]."</td>
+    <td align='center'>".$row[2]."</td>
+    <td align='center'>".$row[3]."</td>
+    <td align='center'>".$row[4]."</td>
+    <td align='center'>
+      <a class='btn btn-success' href='modificar-donacion.php?iddon=".$row["0"]."'>Modificar</a></td>
+   <td align='center'>
       <a class='btn btn-danger' href='../controlador/donacioncontrolador.php?iddon=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
 
     $numeracion++;
+    }
+echo "</tbody></table";
 
-            }
+ } elseif ($codcamp != 0 and $codvol != 0) {
 
-if(empty($_GET['iddon'])){
 
-}else {
-echo "</form>";
-}
+
+  echo "<div class='table-responsive'>
+    <table class='table table-hover' border='2' >
+    <tr bgcolor='#0EF381'>
+    <th style='text-align:center;'>Nº</th>
+    <th style='text-align:center;'>Nombre</th>
+    <th style='text-align:center;'>Apellido</th>
+    <th style='text-align:center;'>Descripcion</th>
+    <th style='text-align:center;'>Cantidad</th>
+    <th style='text-align:center;'>Modificar</th>
+    <th style='text-align:center;'>Eliminar</th>
+    </tr>    ";
+   echo "<tbody id='don'>";
+   while($row=mysqli_fetch_array($r2)){
+    
+    echo "<tr bgcolor='white'>
+    <td align='center'>".$numeracion."</td>
+    <td align='center'>".$row[1]."</td>
+    <td align='center'>".$row[2]."</td>
+    <td align='center'>".$row[3]."</td>
+    <td align='center'>".$row[4]."</td>
+    <td align='center'>
+      <a class='btn btn-success' href='modificar-donacion.php?iddon=".$row["0"]."'>Modificar</a></td>
+   <td align='center'>
+      <a class='btn btn-danger' onclick='return Confirmation()' href='../controlador/donacioncontrolador.php?iddon=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
+
+    $numeracion++;
+    }
+    echo "</tbody></table";
+
+ }
+
+
 
 ?>
-        </table>
+
 
 </div>
            
@@ -166,6 +193,8 @@ echo "</form>";
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jPages.js"></script>
+
 
 <script>
     $("#menu-toggle").click(function(e) {
@@ -173,6 +202,32 @@ echo "</form>";
     $("#wrapper").toggleClass("toggled");
         });
 </script> 
+
+
+<script>
+  $(function(){
+    $("div.holder").jPages({
+      containerID : "don",
+      previous : "←",
+      next : "→",
+      perPage : 4,
+      delay : 20
+    });
+  });
+  </script>
+
+   <script type="text/javascript">
+function Confirmation() {
+ 
+  if (confirm('Esta seguro de eliminar el registro?')==true) {
+      
+      return true;
+  }else{
+      //alert('Cancelo la eliminacion');
+      return false;
+  }
+}
+</script>
 
 </body>
 
