@@ -106,21 +106,21 @@ class Punto{
 
    	$r = array();
 
-   	$query = "select * from points";
+   	$query = "select p.point_id,p.direccion,p.cx,p.cy,c.title from points p inner join campaigns c on p.campaign_id=c.campaign_id  where p.estado = 1 and p.user_id='".$this->userid."'";
    	$tabla = ejecutar($query) or die (mysqli_error());
 
    	while($fila = mysqli_fetch_assoc($tabla))
         {
             $r[] = $fila;
         }
-        return$r;
+        return $r;
    
 
    }
 
    public function puntosporcampania(){
 
-    $query = "SELECT direccion from points where campaign_id='".$this->campaignid."'";
+    $query = "SELECT direccion,estado from points where campaign_id='".$this->campaignid."' and estado = 1";
     $tabla = ejecutar($query) or die (mysqli_error());
    
 
@@ -130,7 +130,7 @@ class Punto{
 
    public function listarpuntosbyusercod(){
 
-    $query = "select p.point_id,p.direccion,p.cx,p.cy,c.title from points p inner join campaigns c on p.campaign_id=c.campaign_id where p.user_id='".$this->userid."' and p.estado = 1";
+    $query = "select p.point_id,p.direccion,p.cx,p.cy,c.title,c.campaign_id from points p inner join campaigns c on p.campaign_id=c.campaign_id where p.user_id='".$this->userid."' and p.estado = 1";
     $tabla = ejecutar($query) or die (mysqli_error());
     return $tabla;
 

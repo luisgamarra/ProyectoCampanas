@@ -1,5 +1,6 @@
 <?php
 require_once ('../db/conexion.php');
+require_once ('../modelo/punto.php');
 require_once ('../modelo/campania.php');
 session_start();
 include('templates/validar.php');
@@ -16,12 +17,9 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    
-
-    
-
-    
-    
+    <link href="css/notificacion.css" rel="stylesheet" >        
+   
+       
 </head>
 
 <body background="img/fondito.jpg">
@@ -33,12 +31,11 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-      <div class="container-fluid">                    
+<div class="container-fluid">                  
           
-
-                <div class="header"> 
-                  <h1 class="page-header"> Registro de localizacion para las donaciones </h1>           
-                </div>    
+<div class="panel panel-primary"> 
+<div class="panel-heading"><h3 style="text-align:center;">Registra tus puntos de donacion</h3></div>  
+</div>    
            
             <div id="mapa" style="width:100%;height: 400px;"></div>    
  
@@ -63,15 +60,45 @@ include('templates/validar.php');
 
             $campania = new Campania();
             $campania->setUserid($cod);
-            $rc = $campania->campaniaporusuario();  
+            $r1 = $campania->campaniaporusuario(); 
+
+            $array1 = array();
+            while($fila1 = $r1->fetch_assoc()){
+            $a =  array(
+            'codigo' => $fila1['campaign_id'],
+            'titulo' => $fila1['title']);            
+            $array1[] = $a;
+            } 
+
+            $puntos = new Punto();
+            $puntos->setUserid($cod);
+            $r2 = $puntos->listarpuntosbyusercod();
+
+            $array2 = array();
+            while($fila2 = $r2->fetch_assoc()){
+            $b =  array(
+            'codigo' => $fila2['campaign_id'],
+            'titulo' => $fila2['title']);            
+            $array2[] = $b;
+            } 
+
+            foreach ($array1 as $value1) {
+             $encontrado=false;
+            foreach ($array2 as $value2) {
+              if ($value1 == $value2){
+               $encontrado=true;                                     
+                  }
+             }
+              if ($encontrado == false){
+                  if($codcamp == $value1["codigo"]){
+                  echo "<option value='".$value1["codigo"]."' selected>".$value1["titulo"]."</option>";
+                  }else{
+                  echo "<option value='".$value1["codigo"]."' >".$value1["titulo"]."</option>"; 
+                  }
+             }
+            }
           
-            while($row=mysqli_fetch_array($rc)){
-            if($codcamp == $row[0]){
-            echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
-            }else{
-            echo "<option value='".$row[0]."' >".$row[1]."</option>"; 
-            }
-            }
+            
             ?>  
 
             </select>          
@@ -131,7 +158,7 @@ include('templates/validar.php');
 </script>
  
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBrRlyB1wnSlrXwpv3sQlarYU-hD3ysayc"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrRlyB1wnSlrXwpv3sQlarYU-hD3ysayc"></script>
     <!--<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js" ></script> -->
 <script>
     //VARIABLES GENERALES
@@ -224,7 +251,13 @@ listar();
                                 cx:item.cx,
                                 cy:item.cy
                             });
-                           
+
+                            var objHTML = {
+                            content: item.title
+                            }
+
+                             var gIW = new google.maps.InfoWindow(objHTML);
+                             gIW.open(mapa,marca);
                             
                             //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
                             //marcadores_bd.push(marca);
@@ -298,6 +331,11 @@ $("#buscar").on("click", function() {
 
 
       </script>
+
+      <?php 
+include('templates/notificacion.php');
+ ?>
+
 
 </body>
 

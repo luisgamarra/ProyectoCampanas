@@ -13,7 +13,9 @@ include('templates/validar.php');
     <title>Sistema de Campañas Sociales</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">   
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/notificacion.css" rel="stylesheet" >        
+   
 </head>
 
 <body background="img/fondito1.jpg">
@@ -35,9 +37,9 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
         <div class="container-fluid">                   
 
-            <div class="header"> 
-                <h1 class="page-header"> Cambiar contraseña </h1>         
-            </div>
+<div class="panel panel-primary"> 
+<div class="panel-heading"><h3 style="text-align:center;">Cambiar contraseña</h3></div>  
+</div>   
             
   <form class="form-horizontal" action="../controlador/usuariocontrolador.php" data-toggle="validator" method="post">        
                         
@@ -98,6 +100,12 @@ include('templates/validar.php');
     $("#wrapper").toggleClass("toggled");
         });
 </script>
+
+
+      <?php 
+include('templates/notificacion.php');
+ ?>
+
 
 </body>
 

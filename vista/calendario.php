@@ -17,20 +17,16 @@ $resultados = $reunion->reunionporusuario();
   ?>
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset='utf-8' />
+<head>
+	<meta charset='utf-8' />
 			
-			<link href='css/fullcalendar.css' rel='stylesheet' />
-			<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href='css/fullcalendar.css' rel='stylesheet' />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-  
-
-			
-			
-			
-		
-	</head>
-	<body>
+    <link href="css/notificacion.css" rel="stylesheet" >				
+					
+</head>
+<body>
 
 <?php include("templates/menutop.php"); ?>
 
@@ -54,9 +50,8 @@ $resultados = $reunion->reunionporusuario();
 </footer>
            
 <script src='js/moment.min.js'></script>
-			<script src='js/jquery.min.js'></script>
-			
-			<script src='js/fullcalendar.js'></script>
+<script src='js/jquery.min.js'></script>			
+<script src='js/fullcalendar.js'></script>
 <script src="js/bootstrap.min.js"></script>
 <script src='js/locale-all.js'></script>
 
@@ -71,6 +66,7 @@ $resultados = $reunion->reunionporusuario();
         });
 
 </script> 
+
 
 <script>
 			$(document).ready(function() {
@@ -109,5 +105,9 @@ $resultados = $reunion->reunionporusuario();
 			});
 		</script>
 
-	</body>
+<?php 
+include('templates/notificacion.php');
+ ?>
+
+</body>
 </html>

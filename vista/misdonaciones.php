@@ -17,7 +17,7 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/datatables.css" rel="stylesheet">
-    
+    <link href="css/notificacion.css" rel="stylesheet">     
     
 </head>
 
@@ -32,15 +32,11 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
     <div class="container-fluid">
 
-       <div class="header"> 
-                  <h1 class="page-header"> Donaciones hechas </h1>           
-        </div>    
-       
-            
-         
-    
+<div class="panel panel-success"> 
+<div class="panel-heading"><h1 style="text-align:center;"><b>Mis donaciones</b></div>     
+</br>           
     <div class="table-responsive">
-    <table class="table table-hover" id="tablita" border="2" >
+    <table class="table table-hover" id="tablita" border="0" >
     <thead>   
     <tr bgcolor="#0EF381  ">
     <th style="text-align:center;">Nº</th>
@@ -62,23 +58,29 @@ include('templates/validar.php');
     $r = $don->donxvol();
 
     while($row=mysqli_fetch_array($r)){
+
+        if($row[3] == 'Paypal'){
+            $resul = "S/.".$row[4]."";
+        }else{
+            $resul = $row[4];
+        }
     
     echo "<tr bgcolor='white'>
     <td align='center'>".$numeracion."</td>
     <td align='center'>".$row[1]."</td>
     <td align='center'>".$row[2]."</td>
-    <td align='center'>".$row[3]."</td>
-    <td align='center'>".$row[4]."</td>
+    <td align='center'>".$row[3]."</td>    
+    <td align='center'>".$resul."</td>
     <td align='center'>".$row[5]."</td>
     </tr>";
 
     $numeracion++;
     }
 
-?>
-
- </table>   
-            
+    ?>
+    </table>   
+    </div> 
+    </div>      
             <?php
 
             if(isset($_GET['exito']) and isset($_GET['paymentId'])){
@@ -94,7 +96,7 @@ include('templates/validar.php');
                 }
             
              ?>
-        </div>
+     
        
 
     </div>
@@ -138,7 +140,10 @@ include('templates/validar.php');
 
 </script>
 
-
+<?php 
+include('templates/notificacion.php');
+ ?>
+ 
 </body>
 
 </html>

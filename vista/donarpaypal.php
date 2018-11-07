@@ -16,7 +16,7 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    
+    <link href="css/notificacion.css" rel="stylesheet"> 
     
 </head>
 
@@ -31,9 +31,9 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
     <div class="container-fluid">
 
-       <div class="header"> 
-                  <h1 class="page-header"> Haz tu donacion por Paypal </h1>           
-        </div>    
+<div class="panel panel-success"> 
+<div class="panel-heading"><h1 style="text-align:center;"><b>Haz tu aporte economico via Paypal</b></div>     
+</br>    
        
             
           <form class="form-horizontal" action="../controlador/donacioncontrolador.php" method="post" data-toggle='validator'>
@@ -42,7 +42,7 @@ include('templates/validar.php');
           <label class="col-md-4 control-label" for="camp" >Campaña : </label>
           <div class="col-md-4">
           <select class="form-control" name="camp" id="camp" required >
-         <option value="" >-- Seleccione --</option>
+          <option value="" >-- Seleccione --</option>
 
          <?php    
 
@@ -89,8 +89,10 @@ include('templates/validar.php');
         
           </form>
        
+</div>
 
-    </div>
+
+</div>
 </div>
 
 </div>   
@@ -147,6 +149,11 @@ function filter(__val__){
     
 }
 </script>
+
+
+<?php 
+include('templates/notificacion.php');
+ ?>
 </body>
 
 </html>

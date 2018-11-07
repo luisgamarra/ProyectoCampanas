@@ -61,11 +61,14 @@ class Comentario
 
 
     public function guardar(){
+date_default_timezone_set("America/Lima");
+$a=date('Y/m/d');
+
         
         $query="INSERT INTO comentarios (comentario_id,description,fecha,user_id,foro_id,estado)
                 VALUES(0,
                        '".$this->description."',
-                       CURDATE(),  
+                       '$a',  
                        '".$this->userid."',                     
                        '".$this->foroid."',1);";
         $guardar=ejecutar($query) or die (mysqli_error());

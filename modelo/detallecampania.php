@@ -42,7 +42,7 @@ class Detallecampania
 
     public function campaniasporvoluntario(){
        
-        $query="SELECT c.title,c.place,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),c.imagen,c.campaign_id,d.detail_campaign_id,c.description from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 and d.estado = 1" ;        
+        $query="SELECT c.title,c.place,DATE_FORMAT(c.start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(c.end_date, '%d-%m-%Y') as final,c.imagen,c.campaign_id,d.detail_campaign_id,c.description,c.vacant from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id ='".$this->userid."' and c.estado = 1 and d.estado = 1" ;        
         $tabla=ejecutar($query);        
         
         return $tabla;

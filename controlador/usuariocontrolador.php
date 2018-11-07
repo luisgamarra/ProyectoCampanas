@@ -206,7 +206,7 @@ $mail->AltBody = 'HTML messaging not supported'; // If html emails is not suppor
 if(!$mail->send()){
     echo "Mailer Error: " . $mail->ErrorInfo;
 }else{
-        echo "<script>alert('LA CLAVES SE HA ENVIADO A SU CORREO')
+        echo "<script>alert('TU CONTRASEÑA SE HA ENVIADO A SU CORREO')
         document.location=('../vista/login.php')</script>"; 
 }
 

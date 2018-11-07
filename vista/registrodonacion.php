@@ -17,7 +17,9 @@ include('templates/validar.php');
     <title>Sistema de Campañas Sociales</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">  
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/notificacion.css" rel="stylesheet" >       
+  
 </head>
 
 <body background="img/fondito1.jpg">
@@ -31,12 +33,9 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
     <div class="container-fluid">
                     
-        <div class="header"> 
-             <h1 class="page-header"> Donaciones </h1>  
-        </div>  
-
- 
-       
+      <div class="panel panel-primary"> 
+      <div class="panel-heading"><h3 style="text-align:center;">Registra tus donaciones recibidas</h3></div>  
+      </div>          
 
 <form class="form-horizontal" action="" method="post">
 
@@ -103,7 +102,34 @@ echo "<form class='form-horizontal' action='../controlador/donacioncontrolador.p
           </div>
           <div class="help-block with-errors"></div>
 
-      </div>   
+      </div>
+
+  <div class="form-group">
+         <label class="col-md-4 control-label" for="cate" id="v">Categoria : </label>
+         <div class="col-md-4">
+         <select class="form-control" name="cate" id="cate" required=>
+         <option value="" >--Seleccione--</option>
+
+         <?php
+
+         $cate=$_POST["cate"];
+
+         $sql = "SELECT * from categoria_donacion";
+         $r = ejecutar($sql);        
+
+         while($row=mysqli_fetch_array($r)){
+         if($cate==$row[0]){
+          echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
+          }else{
+          echo "<option value='".$row[0]."' >".$row[1]."</option>";   
+          }
+          }
+          ?>      
+          </select>
+          </div>
+          <div class="help-block with-errors"></div>
+
+      </div>          
 
     <div class="form-group">
           <label class="col-md-4 control-label" for="Descripcion" >Descripcion : </label>
@@ -126,7 +152,7 @@ echo "<form class='form-horizontal' action='../controlador/donacioncontrolador.p
           <div class="col-md-4">
                                  
           <button id="boton" class="btn btn-primary" block="true" type="submit" name="action" value="create"> Guardar </button>
-          <a class='btn btn-info col-md-offset-1' href='panelcontrol.php'>Cancelar</a>
+          <a class='btn btn-info' href='panelcontrol.php'>Cancelar</a>
           </div>
     </div>
 

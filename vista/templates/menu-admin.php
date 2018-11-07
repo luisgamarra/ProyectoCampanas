@@ -11,7 +11,8 @@
        <ul class="sub-menu collapse" id="campanias">
           <li><a href="listacampania.php">Listado de campañas</a></li>
           <li><a href="registrocampania.php">Registrar campaña</a></li>
-          <li><a href="detallecampania.php">Detalle de campañas</a></li>         
+          <li><a href="detallecampania.php">Detalle de campañas</a></li>
+          <li><a href="categoriacampania.php">Categorias</a></li>           
        </ul>
 
        <li data-toggle="collapse" data-target="#voluntario" class="collapsed">
@@ -43,7 +44,12 @@
        <ul class="sub-menu collapse" id="ubicacion">
           <li><a href="registrolocalizacion.php">Registrar Ubicacion</a></li>
           <li><a href="lista-ubicaciones.php">Listado de ubicaciones</a></li>                
-       </ul>
+       </ul>   
+
+          <li>
+         <a href="generar-reporte.php"> Generar Reportes </a>
+       </li>     
+                 
 
        <li data-toggle="collapse" data-target="#usuario" class="collapsed">
          <a href="#"><i class=""></i> Configuracion de usuario <span class="caret"></span></a>

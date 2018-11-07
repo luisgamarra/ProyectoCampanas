@@ -16,9 +16,10 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-        <link href="css/datatables.css" rel="stylesheet">
-         <link rel="stylesheet" href="css/remodal.css">
-  <link rel="stylesheet" href="css/remodal-default-theme.css">
+    <link href="css/datatables.css" rel="stylesheet">
+    <link href="css/remodal.css" rel="stylesheet">
+    <link href="css/remodal-default-theme.css" rel="stylesheet" >
+    <link href="css/notificacion.css" rel="stylesheet"> 
 
 
     
@@ -36,19 +37,22 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
     <div class="container-fluid">
 
+<div class="panel panel-success"> 
+<div class="panel-heading"><h1 style="text-align:center;"><b>Foro</b></div>     
+</br>
 
-         <form class="form-horizontal" action="../controlador/forocontrolador.php" method="post" data-toggle="validator" >           
+  <form class="form-horizontal" action="../controlador/forocontrolador.php" method="post" data-toggle="validator" >           
          
         <!-- Text input-->
         <div class="form-group" >
           <label class="col-md-4 control-label" for="title" >Titulo : </label>
-          <div class="col-md-5" >
+          <div class="col-md-4" >
           <input id="title" name="txtitulo" type="text" placeholder="Titulo" class="form-control input-md" required>
           </div>
           <div class="help-block with-errors"></div>
         </div>      
 
-               <!-- Button -->
+        <!-- Button -->
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">
@@ -58,7 +62,7 @@ include('templates/validar.php');
         </div>
       
   </form>              
-             
+  </div>            
            
 
       
@@ -183,6 +187,11 @@ function Confirmation() {
   }
 }
 </script>
+
+
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

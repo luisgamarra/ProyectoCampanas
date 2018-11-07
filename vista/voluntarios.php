@@ -16,10 +16,9 @@ include('templates/validar.php');
     <title>Sistema de Campañas Sociales</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-    
-     <link rel="stylesheet" href="css/jPages.css">
-
+    <link href="css/simple-sidebar.css" rel="stylesheet">    
+    <link href="css/jPages.css" rel="stylesheet" >
+    <link href="css/notificacion.css" rel="stylesheet">    
 </head>
 
 <body background="img/fondito1.jpg">
@@ -32,46 +31,51 @@ include('templates/validar.php');
 
 <div id="page-content-wrapper">
     <div class="container-fluid">
-                    
 
-<form id="form1" name="form1" method="post" action="">
-  <h4>Seleccione una campaña:</h4>
-  <div class="col-md-2">
-   <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
-    <option value="0" >-- Seleccione --</option>     
+<div class="panel panel-primary"> 
+<div class="panel-heading" style="text-align:center;"><h2>Registros de voluntarios</h2></div>                    
 
-<?php
+<form class="form-horizontal" id="form1" name="form1" method="post" action="">
+  <div class="form-group">
+    </br>
+    <label class="col-md-5 control-label" for="camp" >Elige Campaña : </label>
+    <div class="col-md-2">          
+    <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
+    <option value="0" >-- Seleccione --</option>    
 
-$cod = $_SESSION["cod"];
-$codcamp =$_POST["cbocamp"];
+    <?php
 
-$campania = new Campania();
-$campania->setUserid($cod);
-$r = $campania->campaniaporusuario();
+    $cod = $_SESSION["cod"];
+    $codcamp =$_POST["cbocamp"];
 
-while($row=mysqli_fetch_array($r)){
+    $campania = new Campania();
+    $campania->setUserid($cod);
+    $r = $campania->campaniaporusuario();
+
+    while($row=mysqli_fetch_array($r)){
     if($codcamp==$row[0]){
     echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
+    $nombre = $row[1];
     }else{
     echo "<option value='".$row[0]."' >".$row[1]."</option>";   
     }
-}
+    }
 
-?>
+    ?>
     </select>
-   </div>
+    </div>
+
+   <center><a href="ficheroexcelvoluntario.php?idcamp=<?php echo $codcamp?>&nomcamp=<?php echo $nombre ?>" class="btn btn-success">Exportar Excel</a></center> 
+  </div>
 </form>
-    </br></br></br>
-    <h4>Voluntarios inscritos : </h4>
-    </br>
+
+<center><h4>Voluntarios inscritos : </h4></center>    
     
-    <div  id="content" class="defaults">
+<div id="content" class="defaults">      
 
-      
+<center><div class="holder"></div></center>
 
-      <div class="holder"></div>
-
-<?php
+    <?php
 
     $numeracion = 1;
 
@@ -81,7 +85,7 @@ while($row=mysqli_fetch_array($r)){
 
     if($codcamp != 0){
     echo "<div class='table-responsive' >
-    <table class='table table-hover' border='2' >
+    <table class='table table-hover' border='0' >
     <thead >
     <tr bgcolor='F3BC0E'>
     <th style='text-align:center;'>Nº</th>
@@ -90,11 +94,13 @@ while($row=mysqli_fetch_array($r)){
     <th style='text-align:center;'>Email</th>
     <th style='text-align:center;'>Celular</th>
     <th style='text-align:center;'>Eliminar</th>
-    </tr><thead>    ";
+    </tr><thead>";
     }
-?>
-<tbody id='volu'>
-<?php 
+    ?>
+
+    <tbody id='volu'>
+
+    <?php 
     while($row=mysqli_fetch_array($r)){
     
     echo "<tr bgcolor='white'>
@@ -109,17 +115,15 @@ while($row=mysqli_fetch_array($r)){
 
     $numeracion++;
     }
-
-?>
-</tbody>
+    ?>
+    </tbody>
     </table>
+
 </div> <!--! end of #content -->
-  </div> <!--! end of #container -->
 
+</div>
 
-
-  
-    </div>
+</div>
 </div>
 </div>  
            
@@ -166,6 +170,10 @@ function Confirmation() {
   }
 }
 </script>
+
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

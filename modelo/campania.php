@@ -146,7 +146,7 @@ class Campania
 
     public function campaniaporusuario(){
        
-        $query="SELECT c.campaign_id,c.title,c.description,c.place,c.vacant,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),c.imagen,c.start_date,c.end_date,ca.descripcion,ca.categoria_id from campaigns c inner join categorias ca on c.categoria_id=ca.categoria_id where c.user_id='".$this->userid."' and c.estado = 1 order by campaign_id" ;        
+        $query="SELECT c.campaign_id,c.title,c.description,c.place,c.vacant,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),c.imagen,c.start_date,c.end_date,ca.descripcion,ca.categoria_id from campaigns c inner join categorias ca on c.categoria_id=ca.categoria_id where c.user_id='".$this->userid."' and c.estado = 1 order by c.start_date DESC" ;        
         $tabla=ejecutar($query);
         
 
@@ -156,7 +156,7 @@ class Campania
 
     public function campanias(){
         
-        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen from campaigns where estado = 1 " ;       
+        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen from campaigns where estado = 1 order by start_date DESC" ;       
         $tabla=ejecutar($query);        
        
         return $tabla;
@@ -194,13 +194,20 @@ class Campania
     }
 
      public function buscar($palabra){
-        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where estado = 1 and title like
+        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen,start_date,end_date from campaigns where estado = 1 and title like
      '%".$palabra."%'  " ; 
         $tabla = ejecutar($query);
 
         return $tabla;
     }
      
+    public function getCampania(){
+        $query="SELECT campaign_id,title,user_id from campaigns where campaign_id = '".$this->id."' " ;       
+        $tabla=ejecutar($query); 
+        $row = mysqli_fetch_array($tabla);       
+       
+        return $row;
+    } 
    
 }
 

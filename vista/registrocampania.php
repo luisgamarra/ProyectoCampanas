@@ -16,13 +16,9 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/jquery-ui.css" rel="stylesheet">
-     <link rel="stylesheet" href="css/remodal.css">
-  <link rel="stylesheet" href="css/remodal-default-theme.css">
-
-
-
-
-   
+    <link href="css/notificacion.css"rel="stylesheet">     
+    <link href="css/remodal.css" rel="stylesheet">
+    <link href="css/remodal-default-theme.css" rel="stylesheet">   
 </head>
 
 <body background="img/fondito.jpg">
@@ -34,12 +30,11 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-      <div class="container-fluid">                    
+      <div class="container-fluid">                 
           
-
-                <div class="header"> 
-                  <h1 class="page-header"> Registrar Campaña </h1>           
-                </div>    
+      <div class="panel panel-primary"> 
+      <div class="panel-heading"><h3 style="text-align:center;">Crea una campaña</h3></div>  
+      </div>  
            
   <form class="form-horizontal" action="../controlador/campaniacontrolador.php" method="post" data-toggle="validator" enctype="multipart/form-data"> 
 
@@ -160,6 +155,7 @@ include('templates/validar.php');
   <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
   <div>
     <h2 id="modal1Title">Agregar Categoria</h2>
+  </br>
     <p id="modal1Desc">
       <form class="form-horizontal" action="../controlador/categoriacontrolador.php" method="post" data-toggle="validator">
         <div class="form-group" >
@@ -171,16 +167,18 @@ include('templates/validar.php');
         </div>
 
         <div class="form-group">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">                                
+          <div class="col-md-2"></div>
+          <div class="col-md-8">       
+                                      
             
-  <button class="btn btn-primary" type="submit" name="action" value="agregar">Guardar</button>
+  <button class="remodal-confirm" type="submit" name="action" value="agregar">Guardar</button>
+  <button data-remodal-action="cancel" class="remodal-cancel" >Cancel</button>
           </div>
         </div>
       </form>
     </p>
   </div>
-  <button data-remodal-action="cancel" class="remodal-cancel" >Cancel</button>
+
 </div>
 
                       
@@ -254,6 +252,9 @@ function validaNumericos(event) {
     }}
 </script>
 
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 
 </body>

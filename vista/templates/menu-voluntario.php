@@ -9,7 +9,8 @@
             <a href="#"><i class=""></i> Campañas sociales <span class="caret"></span></a>
         </li>
         <ul class="sub-menu collapse" id="campanias">
-           <li><a href="modulovoluntario.php">Todas las Campañas</a></li> 
+           <li><a href="modulovoluntario.php">Sumate!!</a></li>
+           <li><a href="categoriacampania.php">Categorias</a></li>          
            <li><a href="miscampanas.php">Mis campañas</a></li>            
            <li><a href="reuniones.php">reuniones</a></li>     
            <li><a href="ubicaciones.php">Ubicaciones</a></li>    

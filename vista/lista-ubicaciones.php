@@ -17,8 +17,8 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/datatables.css" rel="stylesheet">
-    
-    
+    <link href="css/notificacion.css" rel="stylesheet" >     
+     
 </head>
 
 <body background="img/fondito.jpg">
@@ -30,19 +30,13 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-    <div class="container-fluid">
+<div class="container-fluid">
 
-       <div class="header"> 
-                  <h1 class="page-header"> Ubicaciones Registradas </h1>           
-        </div>    
-       
-            
-         <div class="formulario">
-
-           </br></br></br>        
-    
+<div class="panel panel-primary"> 
+<div class="panel-heading" style="text-align:center;"><h2>Registros de puntos de donacion</h2></div>          
+</br>        
     <div class="table-responsive">
-    <table class="table table-hover" id="tablita" border="2" >
+    <table class="table table-hover" id="tablita" border="0" >
     <thead>   
     <tr bgcolor="#0EF381  ">
     <th style="text-align:center;">Nº</th>
@@ -79,17 +73,17 @@ include('templates/validar.php');
 
     $numeracion++;
     }
+    ?>
 
-?>
-
- </table>   
+    </table>   
             
         
 
         </div>
+    </div>
        
 
-    </div>
+</div>
 </div>
 
 </div>   
@@ -142,6 +136,10 @@ function Confirmation() {
   }
 }
 </script>
+
+      <?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

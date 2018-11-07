@@ -16,7 +16,13 @@ session_start();
                 break;
             case 'modificar' : 
                 modificar();
-                break;                   
+                break; 
+            case 'like' : 
+                like();
+                break;
+            case 'dislike' : 
+                dislike();
+                break;                        
             
         }
     }else{
@@ -92,7 +98,71 @@ document.location=('../vista/participarforo.php?foroid=$idforo')</script>";
 
 } 
 
-   
+function like(){
+    $post_id = $_POST['post_id'];
+    $cod = $_SESSION["cod"];
+try {
+    $qry = "select * from like_unlike where comentario_id = $post_id and user_id=$cod";
+    $res = ejecutar($qry);
+    if(mysqli_num_rows($res) == 0) {
+               
+        $insertquery = "INSERT INTO like_unlike(id,type,user_id,comentario_id) values(null,1,".$cod.",".$post_id.")";
+        $result = ejecutar($insertquery);
+        }else {
+        $updatequery = "UPDATE like_unlike SET type=1 where user_id=" . $cod . " and comentario_id=" . $post_id;
+        $result = ejecutar($updatequery);
+    }
+
+    if($result) {
+
+$SQL1 = "SELECT COUNT(*) FROM like_unlike where type = 1 and comentario_id = $post_id";
+$fila1 = ejecutar($SQL1);
+$filita1 = mysqli_fetch_array($fila1);
+
+$SQL2 = "SELECT COUNT(*) FROM like_unlike where type = 0 and comentario_id = $post_id";
+$fila2 = ejecutar($SQL2);
+$filita2 = mysqli_fetch_array($fila2);
+
+                    echo $filita1[0].'|'.$filita2[0];
+                }
+
+            } catch (Exception $e) {
+            echo "Error : " .$e->getMessage();
+        }
+}   
+
+function dislike(){
+    $post_id = $_POST['post_id'];
+    $cod = $_SESSION["cod"];
+try {
+    $qry = "select * from like_unlike where comentario_id = $post_id and user_id=$cod";
+    $res = ejecutar($qry);
+    if(mysqli_num_rows($res) == 0) {
+               
+        $insertquery = "INSERT INTO like_unlike(id,type,user_id,comentario_id) values(null,0,".$cod.",".$post_id.")";
+        $result = ejecutar($insertquery);
+        }else {
+        $updatequery = "UPDATE like_unlike SET type=0 where user_id=" . $cod . " and comentario_id=" . $post_id;
+        $result = ejecutar($updatequery);
+    }
+
+    if($result) {
+
+$SQL1 = "SELECT COUNT(*) FROM like_unlike where type = 1 and comentario_id = $post_id";
+$fila1 = ejecutar($SQL1);
+$filita1 = mysqli_fetch_array($fila1);
+
+$SQL2 = "SELECT COUNT(*) FROM like_unlike where type = 0 and comentario_id = $post_id";
+$fila2 = ejecutar($SQL2);
+$filita2 = mysqli_fetch_array($fila2);
+
+                    echo $filita1[0].'|'.$filita2[0];
+                }
+
+            } catch (Exception $e) {
+            echo "Error : " .$e->getMessage();
+        }
+}   
 
 
  ?>

@@ -17,8 +17,8 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/notificacion.css"rel="stylesheet">     
 
-   
 </head>
 
 <body background="img/fondito.jpg">
@@ -30,27 +30,23 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-      <div class="container-fluid">                    
+<div class="container-fluid">                  
           
-
-                <div class="header"> 
-                  <h1 class="page-header"> Modificar Campaña </h1>           
-                </div>    
+<div class="panel panel-info"> 
+<div class="panel-heading"><h3 style="text-align:center;">Modifica el registro de campaña</h3></div>  
+</div>    
            
                 <?php 
-
                 $codcamp=$_REQUEST["idcamp"];
 
-                    $camp=new Campania();
-                    $camp->setId($codcamp);
-                    $r = $camp->getCampaniabyCod();
-
-
+                $camp=new Campania();
+                $camp->setId($codcamp);
+                $r = $camp->getCampaniabyCod();
 
                  ?>
 
 
-  <form class="form-horizontal" action="../controlador/campaniacontrolador.php" method="post" enctype="multipart/form-data">           
+  <form class="form-horizontal" action="../controlador/campaniacontrolador.php" method="post" enctype="multipart/form-data" data-toggle="validator">           
          
                    <input value="<?=$r[0]?>" type="hidden" name="idcamp" />
 
@@ -88,10 +84,9 @@ include('templates/validar.php');
         <div class="form-group" >
           <label class="col-md-4 control-label" for="title" >Titulo : </label>
           <div class="col-md-5" >
-          <input value="<?=$r[1]?>" id="title" name="txtitulo" type="text" class="form-control input-md" >
-          <input value="<?=$r[1]?>" type="hidden" id="ht" />
+          <input value="<?=$r[1]?>" id="title" name="txtitulo" type="text" class="form-control input-md" required>
           </div>
-          
+          <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group" >
@@ -100,43 +95,35 @@ include('templates/validar.php');
          <textarea id="des" name="txtdes" class="form-control input-md" rows="6" ><?=$r[2]?></textarea> 
           <input value=" <?=$r[2]?>" type="hidden" id="hd" />         
           </div>
-          
+          <div class="help-block with-errors"></div>
         </div>
 
         <!-- Text input-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="lugar" >Lugar : </label>
           <div class="col-md-5">
-          <input value="<?=$r[3]?>" id="lugar" name="txtlugar" type="text" class="form-control input-md" >
-          <input value="<?=$r[3]?>" type="hidden" id="hl" />
+          <input value="<?=$r[3]?>" id="lugar" name="txtlugar" type="text" class="form-control input-md" required>
           </div>
-          
+          <div class="help-block with-errors"></div>
         </div>
           
            <!-- Text input-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="vacante" >Vacantes : </label>
           <div class="col-md-2">
-          <input value="<?=$r[4]?>" id="vacante" name="txtvacante" type="text" class="form-control input-md" onkeypress='return validaNumericos(event)' onkeyup="es_vacio()">
-          <input value="<?=$r[4]?>" type="hidden" id="hv" />
+          <input value="<?=$r[4]?>" id="vacante" name="txtvacante" type="text" class="form-control input-md" onkeypress='return validaNumericos(event)' required>
           </div>
-         
+         <div class="help-block with-errors"></div>
         </div>
 
-         <!--<?php 
-
-        //$f1 = date('d/m/Y', strtotime(str_replace('/', '-', $r[8])));
-        //echo $f1;
-         ?>-->
 
         
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha1" >Fecha de inicio : </label>
           <div class="col-md-4">
-        <input value="<?=$r[8]?>" id="fecha1" name="txtfecha1" type="text" class="form-control input-md" readonly >
-        <input value="<?=$r[8]?>" type="hidden" id="hf1" />
+        <input value="<?=$r[8]?>" id="fecha1" name="txtfecha1" type="text" class="form-control input-md" required>
           </div>
-          
+          <div class="help-block with-errors"></div>
         </div>
 
        
@@ -144,19 +131,18 @@ include('templates/validar.php');
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha2" >Fecha final : </label>
           <div class="col-md-4">
-          <input value="<?=$r[9]?>" id="fecha2" name="txtfecha2" type="text" class="form-control input-md" readonly >
-          <input value="<?=$r[9]?>" type="hidden" id="hf2" />
+          <input value="<?=$r[9]?>" id="fecha2" name="txtfecha2" type="text" class="form-control input-md" required>
           </div>
-          
+          <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="imagen" >Imagen : </label>
           <div class="col-md-4">          
-          <input type="file" onchange="validarFile(this);" name="txtim" id="image"/>
+          <input type="file" onchange="validarFile(this);" name="txtim" id="image" />
           <input value="<?=$r[7]?>" type="hidden" name="himage" />
           </div>
-          
+          <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group">
@@ -173,7 +159,7 @@ include('templates/validar.php');
           <div class="col-md-4">
                                  
         <button id="cambiar" class="btn btn-success" block="true" type="submit" name="action" value="modificar"> Guardar </button>
-          <a class='btn btn-info col-md-offset-1' href='detallecampania.php'>Cancelar</a>
+          <a class='btn btn-info' href='detallecampania.php'>Cancelar</a>
           </div>
         </div>
       
@@ -190,7 +176,7 @@ include('templates/validar.php');
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script src="js/validator.js"></script> 
 <script src="js/jquery-ui.js"></script>
 
 

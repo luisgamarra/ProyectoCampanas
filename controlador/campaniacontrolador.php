@@ -171,7 +171,7 @@ if(mysqli_num_rows($r) == 0 && $fila[4] != 0){
         document.location=('../vista/modulovoluntario.php')</script>";
 
 }else{
-        echo "<script>alert('ya esta unido a campaña')
+        echo "<script>alert('YA ESTAS SUMADO A ESTA CAMPAÑA')
         document.location=('../vista/modulovoluntario.php')</script>";
 }
 

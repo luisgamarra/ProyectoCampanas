@@ -17,11 +17,9 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link href="css/jquery.timepicker.css" rel="stylesheet" >
     <link href="css/jquery-ui.css" rel="stylesheet">
-      
-
-
+    <link href="css/notificacion.css" rel="stylesheet" >     
 
 </head>
 
@@ -36,9 +34,9 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
    <div class="container-fluid">
                     
-      <div class="header"> 
-         <h1 class="page-header"> Reuniones </h1>           
-      </div>   
+     <div class="panel panel-primary"> 
+      <div class="panel-heading"><h3 style="text-align:center;">Crea reuniones para tus campañas</h3></div>  
+      </div>    
     
   <form class="form-horizontal" action="../controlador/reunioncontrolador.php" data-toggle="validator" method="post">      
                             
@@ -156,7 +154,9 @@ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Ag
 });
 </script>
 
-
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

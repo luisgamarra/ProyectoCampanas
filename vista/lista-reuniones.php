@@ -17,7 +17,8 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-         <link rel="stylesheet" href="css/jPages.css">
+    <link href="css/jPages.css" rel="stylesheet" >
+    <link href="css/notificacion.css" rel="stylesheet" >       
 
 </head>
 
@@ -31,46 +32,49 @@ include('templates/validar.php');
 
 <div id="page-content-wrapper">
     <div class="container-fluid">
-                    
+ 
+<div class="panel panel-primary"> 
+<div class="panel-heading" style="text-align:center;"><h2>Registros de reuniones</h2></div>
 
-<form id="form1" name="form1" method="post" action="">
-  <h4>Seleccione una campaña:</h4>
-  <div class="col-md-2">
+<form class="form-horizontal" id="form1" name="form1" method="post" action="">
+  <div class="form-group">
+    </br>
+   <label class="col-md-5 control-label" for="camp" >Elige Campaña : </label>
+   <div class="col-md-2">
    <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
-    <option value="0" >-- Seleccione --</option>     
+   <option value="0" >-- Seleccione --</option>     
 
-<?php
+   <?php
 
-$cod = $_SESSION["cod"];
-$codcamp =$_POST["cbocamp"];
+    $cod = $_SESSION["cod"];
+    $codcamp =$_POST["cbocamp"];
 
-$campania = new Campania();
-$campania->setUserid($cod);
-$r = $campania->campaniaporusuario();
+    $campania = new Campania();
+    $campania->setUserid($cod);
+    $r = $campania->campaniaporusuario();
 
-while($row=mysqli_fetch_array($r)){
+    while($row=mysqli_fetch_array($r)){
     if($codcamp==$row[0]){
     echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
     }else{
     echo "<option value='".$row[0]."' >".$row[1]."</option>";   
     }
-}
-
-?>
+    }
+    ?>
     </select>
    </div>
+   </div>
+   </form>
+    
+    <center><h4>Reuniones : </h4></center>    
 
-    </br></br></br>
-    <h4>Reuniones : </h4>
-    </br>
-
-     <div class="holder"></div>
+    <center><div class="holder"></div></center>
 
     <?php  
     if( $codcamp != 0){
-echo "
+    echo "
     <div class='table-responsive'>
-    <table class='table table-hover' border='2' >
+    <table class='table table-hover' border='0' >
     <tr bgcolor='#F3F00E'>
     <th style='text-align:center;''>Nº</th>
     <th style='text-align:center;'>Asunto</th>
@@ -79,11 +83,9 @@ echo "
     <th style='text-align:center;'>Campaña</th>
     <th style='text-align:center;'>Modificar</th>
     <th style='text-align:center;'>Eliminar</th>        
-    </tr>    
-";}
+    </tr>";}
 
-echo "<tbody id='reu'>";
-
+    echo "<tbody id='reu'>";
 
     $numeracion = 1;
 
@@ -107,13 +109,13 @@ echo "<tbody id='reu'>";
     $numeracion++;
     }
 
-?>
-</tbody>
+    ?>
+    </tbody>
     </table>
 
-</form>
+</div>
   
-    </div>
+</div>
 </div>
 </div>  
            
@@ -157,6 +159,9 @@ function Confirmation() {
 }
 </script>
 
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

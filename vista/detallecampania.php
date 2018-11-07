@@ -17,7 +17,7 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/datatables.css" rel="stylesheet">
-    
+    <link href="css/notificacion.css"rel="stylesheet">     
 </head>
 
 <body background="img/fondito1.jpg">
@@ -29,10 +29,18 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
  
 <div id="page-content-wrapper">
-                <div class="container-fluid">                 
-     
-                <div class="table-responsive">        
-                  <table class="table table-hover" id="tablita" border="2" >
+                <div class="container-fluid"> 
+
+ 
+
+     <div class="panel panel-primary">
+ 
+  <div class="panel-heading" style="text-align:center;"><h2>Registros de Campañas</h2></div>
+  </br>
+  <center><a href="ficheroexcelcampanias.php" class="btn btn-success">Exportar Excel</a></center>
+  </br> </br> 
+  <div class="table-responsive">        
+                  <table class="table table-hover" id="tablita" border="0" >
                     <thead>
                   <tr bgcolor="#ABBCB7  ">
                   <th style="text-align:center;">N°</th>
@@ -67,53 +75,35 @@ while ($row = mysqli_fetch_array($r)) {
 
 echo "<tr BGCOLOR='white'><td align='center'>".$numeracion."</td>";
 
-
 //Titulo
-
 echo "<td align='center'>".$row["1"]."</td>";
-
 
 //Descripcion
 $des = substr($row["2"],0,50);  
-
-
 echo "<td align='center' style= 'font-size:12px;'>".$des."</td>";
 
-
 //Lugar
-
 echo "<td align='center'>".$row["3"]."</td>";
 
-
 //Vacantes
-
 echo "<td align='center'>".$row["4"]."</td>";
 
-
-
 //Fecha inicial
-
 echo "<td align='center'>".$row["5"]."</td>";
 
 //Fecha Final
-
 echo "<td align='center'>".$row["6"]."</td>";
 
-
 //imagen
+echo "<td align='center'><img src='img/".$row["7"]."' width='75px'  ></td>";
 
-  echo "<td align='center'><img src='img/".$row["7"]."' width='75px'  ></td>";
-
-  //categoria
+//categoria
 echo "<td align='center'>".$row["10"]."</td>";
 
 //Modificar
-
 echo "<td align='center'><a class='btn btn-success' href='modificar-campania.php?idcamp=".$row["0"]."'>Modificar</a></td>";
 
-
 //Eliminar
-
 echo "<td align='center'>      
        <a class='btn btn-danger' onclick='return Confirmation()' href='../controlador/campaniacontrolador.php?action=eliminar&&idcamp=".$row["0"]."'>Eliminar</a></td</tr>";
            
@@ -126,9 +116,12 @@ $numeracion++;
 ?>               
                 
                 </table>   
-               <!-- <a href="reportecampania.php">Ver Reporte de campañas</a>-->               
+                         
               </div>
 
+                   
+     
+               
               </div>
        
 </div>
@@ -181,6 +174,12 @@ function Confirmation() {
   }
 }
 </script>
+
+
+
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

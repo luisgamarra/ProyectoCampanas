@@ -15,7 +15,9 @@ include('templates/validar.php');
     <title>Sistema de Campañas Sociales</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">   
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/notificacion.css" rel="stylesheet" >        
+   
 </head>
 
 <body background="img/fondito1.jpg">
@@ -37,11 +39,11 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
     <div class="container-fluid">
                     
-      <div class="header"> 
-             <h1 class="page-header"> Mi perfil  </h1>           
-      </div>          
+<div class="panel panel-primary"> 
+<div class="panel-heading"><h3 style="text-align:center;">Mi Perfil</h3></div>  
+</div>         
 
-<form class="form-horizontal" action="../controlador/usuariocontrolador.php" method="post" enctype="multipart/form-data">
+<form class="form-horizontal" action="../controlador/usuariocontrolador.php" method="post" enctype="multipart/form-data" data-toggle="validator">
 
   <?php
 
@@ -71,36 +73,33 @@ include('templates/validar.php');
        <div class="form-group">
           <label class="col-md-4 control-label" for="Nombre" >Nombre : </label>
           <div class="col-md-4">
-          <input value="<?=$r[1]?>" id="Nombre" name="txtnom" type="text" class="form-control input-md" onkeyup="es_vacio()" >
-          <input value="<?=$r[1]?>" type="hidden" id="hn" />
+          <input value="<?=$r[1]?>" id="Nombre" name="txtnom" type="text" class="form-control input-md" required>         
           </div>
+          <div class="help-block with-errors"></div>
        </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="Apellido" >Apellido : </label>
           <div class="col-md-4">
-          <input value="<?=$r[2]?>" id="Apellido" name="txtape" type="text" class="form-control input-md" onkeyup="es_vacio()">
-          <input value="<?=$r[2]?>" type="hidden" id="ha" />
-
+          <input value="<?=$r[2]?>" id="Apellido" name="txtape" type="text" class="form-control input-md" required>         
           </div>
+          <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="Email" >Email : </label>
           <div class="col-md-4">
-          <input value="<?=$r[3]?>" id="Email" name="txtemail" type="text" class="form-control input-md " onkeyup="es_vacio()">
-          <input value="<?=$r[3]?>" type="hidden" id="he" />
-
+          <input value="<?=$r[3]?>" id="Email" name="txtemail" type="text" class="form-control input-md " required>         
           </div>
+          <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="celular" >Celular : </label>
           <div class="col-md-4">                 
-          <input value="<?=$r[5]?>" id="Celular" name="txtcel" type="text"  class="form-control input-md " onkeypress='return validaNumericos(event)' onkeyup="es_vacio()">
-          <input value="<?=$r[5]?>" type="hidden" id="hc" />
-
+          <input value="<?=$r[5]?>" id="Celular" name="txtcel" type="text"  class="form-control input-md " onkeypress='return validaNumericos(event)' required>         
           </div>
+          <div class="help-block with-errors"></div>
         </div>       
 
 
@@ -138,57 +137,13 @@ include('templates/validar.php');
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/validator.js"></script> 
 
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
     $("#wrapper").toggleClass("toggled");
         });
-</script>
-
-<script>
-
-  es_vacio();
-
- $( function() {
-    $("#photo").change( function() {
-        if ($(this).val() === "1") {
-            $("#cambiar").prop("disabled", true);
-        } else {
-            $("#cambiar").prop("disabled", false);
-        }
-    });
-});
-  
- 
-  function es_vacio(){
-
-  //var f = $("#photo")[0].files.length;
-    
-  var n = document.getElementById("Nombre").value;
-  var hn = document.getElementById("hn").value;
-
-  var a = document.getElementById("Apellido").value;
-  var ha = document.getElementById("ha").value;
-
-  var e = document.getElementById("Email").value;
-  var he = document.getElementById("he").value;
-
-  var c = document.getElementById("Celular").value;
-  var hc = document.getElementById("hc").value;
-
- 
-  if( n != hn || a != ha || e != he || c != hc){
-           document.getElementById('cambiar').disabled=false;
-
-  }
-  else{
-           document.getElementById('cambiar').disabled=true;
-
-  }
-}
- 
-
 </script>
 
 <script >
@@ -216,6 +171,10 @@ function validaNumericos(event) {
         return; // Si la extension es no válida ya no chequeo lo de abajo.
     }}
 </script>
+
+      <?php 
+include('templates/notificacion.php');
+ ?>
 
 
 

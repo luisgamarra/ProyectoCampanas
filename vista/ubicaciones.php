@@ -17,7 +17,7 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    
+    <link href="css/notificacion.css" rel="stylesheet">     
     
 </head>
 
@@ -30,23 +30,20 @@ include('templates/validar.php');
 <?php include("templates/menu-voluntario.php"); ?>
 
 <div id="page-content-wrapper">
-      <div class="container-fluid">                    
+      <div class="container-fluid">                   
           
+<div class="panel panel-success"> 
+<div class="panel-heading"><h1 style="text-align:center;"><b>Encuentra el punto de donaciòn</b></div>  
 
-                <div class="header"> 
-                  <h1 class="page-header"> Busca los puntos de donaciones: </h1>           
-                </div>    
+          
            
-            
-
-
-  <form id="formulario" class="form-horizontal" action="" method="post"  >           
-       <div class="buscador">
+<form id="formulario" class="form-horizontal" action="" method="post">           
+</br>
  <div class="form-group">
           <label class="col-md-4 control-label" for="camp" >Campaña : </label>
           <div class="col-md-4">
           <select class="form-control" name="camp" id="camp" OnChange="submit()">
-         <option value="0" >-- Seleccione --</option>
+          <option value="0" >-- Seleccione --</option>
 
          <?php    
 
@@ -65,43 +62,40 @@ include('templates/validar.php');
           }
           }
           ?>      
-          </select>
-          
-  </div>
+          </select>          
+          </div>
 </div>
 
-        <?php 
+          <?php 
 
           $puntos = new Punto();
           $puntos->setCampaignid($codcamp);
           $r = $puntos->puntosporcampania();
           $row = mysqli_fetch_array($r);
 
-
-         ?>
+          ?>
 
   <div class="form-group">
           <label class="col-md-4 control-label" for="direccion" >Direccion : </label>
           <div class="col-md-4">
           <input value="<?=$row[0]?>" id="direccion" name="txtdir" type="text" class="form-control input-md " readonly >
           </div>
-       </div>
+  </div>
 
-        <div class="form-group">
+  <div class="form-group">
           <div class="col-md-4"></div>
-          <div class="col-md-4">
-                                 
+          <div class="col-md-4">                                 
           <button id="buscar" class="btn btn-primary" block="true" type="button" > Buscar </button>
           </div>
-    </div>
+  </div>
+     
+  </form>
+  </div>
 
-      </div>
-  </form> 
-
-  <div id="mapita" class="mapa" style="width:95%;height: 500px;"></div>             
+<div id="mapita" class="mapa" style="width:95%;height: 500px;"></div>             
                       
                       
-      </div>
+</div>
 </div>
 
 </div>            
@@ -112,7 +106,7 @@ include('templates/validar.php');
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/validator.js"></script> 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBrRlyB1wnSlrXwpv3sQlarYU-hD3ysayc"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrRlyB1wnSlrXwpv3sQlarYU-hD3ysayc"></script>
 
 <script>
         $("#menu-toggle").click(function(e) {
@@ -235,7 +229,10 @@ $(document).ready(function() {
 });
 </script>
  
-
+<?php 
+include('templates/notificacion.php');
+ ?>
+ 
 </body>
 
 </html>

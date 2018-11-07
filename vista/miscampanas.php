@@ -15,13 +15,14 @@ include('templates/validar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema de Campañas Sociales</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/simple-sidebar.css" >
     <link rel="stylesheet" href="css/normalize.css"> 
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/colorbox.css">
-     <link rel="stylesheet" href="css/jPages.css">
-      <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jPages.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/notificacion.css"> 
    
 </head>
 
@@ -36,19 +37,19 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
     <div class="container-fluid">                  
       
-        <div class="header"> 
-            <h1 class="page-header">Mis campañas </h1>     
-        </div>
+ <div class="panel panel-success"> 
+  <div class="panel-heading"><h1 style="text-align:center;"><b>Campañas Sumadas</b></div>  
+  </div>
 
         <form class="form-horizontal" name="form1" method="post" action="" data-toggle="validator">
          <div class="col-md-4"></div>        
          <div class="col-md-4">
           <div class="input-group">
            <span class="input-group-btn">
-            <h1>BUSCAR USUARIO</h1>
+            
             <button class="btn btn-info" type="submit" name="submit" value="Buscar">Buscar</button>
             </span>
-            <input type="text" name="busca" id="busca" class="form-control" required>
+            <input type="text" name="busca" id="busca" class="form-control" placeholder="Ingresa el nombre de campaña" required>
           </div>
         </div>
         <div class="col-md-4"></div>
@@ -99,7 +100,8 @@ if(empty($_POST["busca"])){
                               <img src='img/".$row["4"]."' alt='Campaña1'>
                               <p>".$row["7"]."</p>
                               <p> Fecha de inicio :".$row["2"]."</p>
-                              <p> Fecha final :".$row["3"]."</p>     
+                              <p> Fecha final :".$row["3"]."</p>
+                              <p> Vacantes : ".$row["8"]."</p>     
                               
                               <br/>
                                     
@@ -130,7 +132,7 @@ if(empty($_POST["busca"])){
                               <p>".$row2["7"]."</p>
                               <p> Fecha de inicio :".$row2["2"]."</p>
                               <p> Fecha final :".$row2["3"]."</p>     
-                              
+                              <p> Vacantes : ".$row["8"]."</p>
                               <br/>
                                     
                           </div>
@@ -144,7 +146,7 @@ if(empty($_POST["busca"])){
 
     <center><div class="holder"></div></center>
 
-            
+  
 </div>
        
 </div>
@@ -183,6 +185,9 @@ $(function(){
 
 </script>
 
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

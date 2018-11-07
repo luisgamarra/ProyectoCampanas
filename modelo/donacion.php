@@ -9,14 +9,16 @@ class Donacion{
     private $quantility; 
     private $userid;
     private $campaignid; 
+    private $catdon;
    
     
- function __construct($id=0,$description="",$quantility="",$userid="",$campaignid=""){
+ function __construct($id=0,$description="",$quantility="",$userid="",$campaignid="",$catdon=""){
  $this->id = $id; 
  $this->description = $description;
  $this->quantility = $quantility; 
  $this->userid = $userid; 
  $this->campaignid = $campaignid;
+ $this->catdon = $catdon;
  }
     
     public function setId($id){
@@ -59,14 +61,26 @@ class Donacion{
         return $this->campaignid;
     }
 
+    public function setCatdon($catdon){
+        $this->catdon = $catdon;
+    }
+
+    public function getCatdon($catdon){
+        return $this->catdon;
+    }
+
     public function Guardar(){
-       
-        $query="INSERT INTO donations (donation_id,description,quantility,user_id,campaign_id,estado)
+       date_default_timezone_set("America/Lima");
+        $a=date('Y/m/d');
+
+        $query="INSERT INTO donations (donation_id,description,quantility,user_id,campaign_id,catdon_id,fecha,estado)
                 VALUES(0,                       
                        '".$this->description."',
                        '".$this->quantility."',
                        '".$this->userid."',
-                       '".$this->campaignid."',1);";
+                       '".$this->campaignid."',
+                       '".$this->catdon."',
+                       '$a',1);";
         $guardar=ejecutar($query) or die (mysqli_error());
         
         return $guardar;
@@ -75,7 +89,7 @@ class Donacion{
 
      public function actualizar(){
         
-        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."',user_id='".$this->userid."',campaign_id='".$this->campaignid."' where donation_id='".$this->id."' ";
+        $query="UPDATE donations SET description='".$this->description."',quantility='".$this->quantility."',user_id='".$this->userid."',campaign_id='".$this->campaignid."',catdon_id='".$this->catdon."' where donation_id='".$this->id."' ";
         $actualizar=ejecutar($query) or die (mysqli_error());
         
         return $actualizar;
@@ -110,7 +124,7 @@ class Donacion{
 
     public function getDonacionbycod(){
 
-        $query="SELECT d.donation_id,d.user_id,d.campaign_id,c.title,u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id inner join campaigns c on d.campaign_id=c.campaign_id where d.donation_id = '".$this->id."' and d.estado=1";    
+        $query="SELECT d.donation_id,d.user_id,d.campaign_id,c.title,u.firstname,u.lastname,d.description,d.quantility,ca.catdon_id,ca.descripcion from donations d inner join users u on d.user_id=u.user_id inner join campaigns c on d.campaign_id=c.campaign_id inner join categoria_donacion ca on d.catdon_id=ca.catdon_id where d.donation_id = '".$this->id."' and d.estado=1";    
         $tabla=ejecutar($query);
         $row = mysqli_fetch_array($tabla);
         return $row;

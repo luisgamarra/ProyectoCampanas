@@ -18,7 +18,8 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-         <link rel="stylesheet" href="css/jPages.css">
+    <link href="css/jPages.css" rel="stylesheet" >
+    <link href="css/notificacion.css" rel="stylesheet" > 
 
 </head>
 
@@ -31,67 +32,72 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-        <div class="container-fluid">
+<div class="container-fluid">
+
+<div class="panel panel-primary"> 
+<div class="panel-heading" style="text-align:center;"><h2>Registros de donaciones</h2></div>
                     
-<form id="form1" name="form1" method="post" action="">
-  <h4>Seleccione una campaña:</h4>
+<form class="form-horizontal" id="form1" name="form1" method="post" action="">
+  <div class="form-group">
+  </br>
+  <label class="col-md-5 control-label" for="camp" >Elige campaña : </label>
   <div class="col-md-2">
-   <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
-    <option value="0" >-- Seleccione --</option>     
+  <select class="form-control" name="cbocamp" id="cbocamp" onChange="submit()" >
+  <option value="0" >-- Seleccione --</option>     
 
-<?php
+  <?php
 
-$cod = $_SESSION["cod"];
-$codcamp = $_POST["cbocamp"];
- $codvol=$_POST["vol"];
+  $cod = $_SESSION["cod"];
+  $codcamp = $_POST["cbocamp"];
+  $codvol=$_POST["vol"];
 
-$campania = new Campania();
-$campania->setuserid($cod);
-$r = $campania->campaniaporusuario();
+  $campania = new Campania();
+  $campania->setuserid($cod);
+  $r = $campania->campaniaporusuario();
 
-while($row=mysqli_fetch_array($r)){
-    if($codcamp==$row[0]){
-    echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
-    }else{
-    echo "<option value='".$row[0]."' >".$row[1]."</option>";   
-    }
-}
+  while($row=mysqli_fetch_array($r)){
+  if($codcamp==$row[0]){
+  echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
+  }else{
+  echo "<option value='".$row[0]."' >".$row[1]."</option>";   
+  }
+  }
+  ?>
 
-?>
-    </select>
-   </div>
-
-<br/><br/>
-  <h4>Seleccione un voluntario:</h4>
+  </select>
+  </div>
+  </div>
+  
+  <div class="form-group">  
+  <label class="col-md-5 control-label" for="vol" >Elige voluntario : </label>
   <div class="col-md-2">
-         <select class="form-control" name="vol" id="vol" OnChange="submit()">
-         <option value="0" >--Seleccione--</option>
+  <select class="form-control" name="vol" id="vol" OnChange="submit()">
+  <option value="0" >--Seleccione--</option>
 
-         <?php
+  <?php
 
-         $voluntario = new detallecampania();
-         $voluntario->setCampaignid($codcamp);
-         $r = $voluntario->voluntariosporcampania();             
+  $voluntario = new detallecampania();
+  $voluntario->setCampaignid($codcamp);
+  $r = $voluntario->voluntariosporcampania();             
 
-         while($row=mysqli_fetch_array($r)){
-         if($codvol==$row[4]){
-          echo "<option value='".$row[4]."' selected>".$row[1]."</option>";
-          }else{
-          echo "<option value='".$row[4]."' >".$row[1]."</option>";   
-          }
-          }
-          ?>      
-          </select>
-          </div>
-        
-</form>
+  while($row=mysqli_fetch_array($r)){
+  if($codvol==$row[4]){
+  echo "<option value='".$row[4]."' selected>".$row[1]."</option>";
+  }else{
+  echo "<option value='".$row[4]."' >".$row[1]."</option>";   
+  }
+  }
+  ?>      
+  </select>
+  </div>
+  </div>        
+</form> 
+  
+<center><a href="ficheroexceldonaciones.php?idcamp=<?php echo $codcamp?>&idvol=<?php echo $codvol ?>" class="btn btn-success">Exportar Excel</a></center>     
+  
+<center><h4>Donaciones recibidas : </h4></center>
 
-
-    </br></br></br>        
-    <h4>Donaciones recibidas : </h4>
-
-<div class='holder'></div>
-    
+<center><div class='holder'></div></center>    
 
 <?php
 
@@ -109,7 +115,7 @@ $r2 = $donxvol->donacionporvoluntario();
 if($codcamp != 0 and $codvol == 0){
 
   echo "<div class='table-responsive'>
-    <table class='table table-hover' border='2' >
+    <table class='table table-hover' border='0' >
     <tr bgcolor='#0EF381'>
     <th style='text-align:center;'>Nº</th>
     <th style='text-align:center;'>Nombre</th>
@@ -118,13 +124,11 @@ if($codcamp != 0 and $codvol == 0){
     <th style='text-align:center;'>Cantidad</th>
     <th style='text-align:center;'>Modificar</th>
     <th style='text-align:center;'>Eliminar</th>
-    </tr>    ";
+    </tr>";
 
-echo "<tbody id='don'>";
+    echo "<tbody id='don'>";
 
-while($row=mysqli_fetch_array($r1)){
-
-  
+    while($row=mysqli_fetch_array($r1)){  
     
     echo "<tr bgcolor='white'>
     <td align='center'>".$numeracion."</td>
@@ -135,18 +139,17 @@ while($row=mysqli_fetch_array($r1)){
     <td align='center'>
       <a class='btn btn-success' href='modificar-donacion.php?iddon=".$row["0"]."'>Modificar</a></td>
    <td align='center'>
-      <a class='btn btn-danger' href='../controlador/donacioncontrolador.php?iddon=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
+      <a class='btn btn-danger' onclick='return Confirmation()' href='../controlador/donacioncontrolador.php?iddon=".$row["0"]."&&action=eliminar'>Eliminar</a></td></tr>";
 
     $numeracion++;
     }
-echo "</tbody></table";
 
- } elseif ($codcamp != 0 and $codvol != 0) {
+    echo "</tbody></table";
 
-
+ }elseif($codcamp != 0 and $codvol != 0) {
 
   echo "<div class='table-responsive'>
-    <table class='table table-hover' border='2' >
+    <table class='table table-hover' border='0' >
     <tr bgcolor='#0EF381'>
     <th style='text-align:center;'>Nº</th>
     <th style='text-align:center;'>Nombre</th>
@@ -155,8 +158,10 @@ echo "</tbody></table";
     <th style='text-align:center;'>Cantidad</th>
     <th style='text-align:center;'>Modificar</th>
     <th style='text-align:center;'>Eliminar</th>
-    </tr>    ";
+    </tr>";
+
    echo "<tbody id='don'>";
+
    while($row=mysqli_fetch_array($r2)){
     
     echo "<tr bgcolor='white'>
@@ -172,29 +177,29 @@ echo "</tbody></table";
 
     $numeracion++;
     }
+
     echo "</tbody></table";
 
  }
-
-
-
 ?>
 
+</div>           
+</div>    
 
 </div>
-           
-</div>
-       
-</div>
-
 </div>  
         
+
+
 <footer></footer>
            
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jPages.js"></script>
 
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 <script>
     $("#menu-toggle").click(function(e) {

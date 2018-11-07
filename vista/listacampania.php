@@ -14,16 +14,14 @@ include('templates/validar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema de Campañas Sociales</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/simple-sidebar.css">
     <link rel="stylesheet" href="css/normalize.css"> 
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/colorbox.css">
     <link rel="stylesheet" href="css/jPages.css">
     <link rel="stylesheet" href="css/animate.css">
-
-
-    
+    <link rel="stylesheet" href="css/notificacion.css" >      
 </head>
 
 <body background="img/fondito.jpg">
@@ -35,24 +33,25 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-    <div class="container-fluid">
-             
+    <div class="container-fluid">           
 
-            <div class="header"> 
-                <h1 class="page-header"> Campañas Sociales </h1>            
-            </div>
+           
+  <div class="panel panel-primary"> 
+  <div class="panel-heading"><h1 style="text-align:center;"><b>Campañas Sociales</b></div>  
+  </div>
 
+               
 
-           <form class="form-horizontal" name="form1" method="post" action="" data-toggle="validator">
+  <form class="form-horizontal" name="form1" method="post" action="" data-toggle="validator">
 
      <div class="col-md-4"></div>        
-    <div class="col-md-4">
-    <div class="input-group">
+     <div class="col-md-4">
+     <div class="input-group">
       <span class="input-group-btn">
         
         <button class="btn btn-info" type="submit" name="submit" value="Buscar">Buscar</button>
       </span>
-      <input type="text" name="busca" id="busca" class="form-control" required>
+      <input type="text" name="busca" id="busca" class="form-control" placeholder="Ingresa un nombre de campaña" required>
     </div>
               <div class="help-block with-errors"></div>
 
@@ -164,12 +163,11 @@ if(empty($_POST["busca"])){
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/validator.js"></script> 
-
+<script src="js/validator.js"></script>
 <script src="js/jquery.colorbox-min.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/jPages.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/jPages.js"></script>
 
 <script>
     $("#menu-toggle").click(function(e) {
@@ -193,6 +191,10 @@ $(function(){
   });
 
 </script>
+
+<?php 
+include('templates/notificacion.php');
+ ?>
 
 </body>
 

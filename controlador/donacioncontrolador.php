@@ -1,6 +1,8 @@
 <?php 
 
 require_once ('../db/conexion.php');
+require_once ('../modelo/notificacion.php'); // para enviar notificacion
+require_once ('../modelo/campania.php'); // para buscar por campaña
 require_once ('../modelo/donacion.php');
 
 conectar();
@@ -45,7 +47,6 @@ use PayPal\Api\Transaction;
 function create(){
 
 $idcam = $_REQUEST["idcam"];
-//$idvol = $_REQUEST["idvol"];
 
 if($idcam != "" ){
 
@@ -54,6 +55,7 @@ if($idcam != "" ){
     $don->setQuantility($_POST["txtcant"]);   
     $don->setUserid($_POST["vol"]);
     $don->setCampaignid($idcam);
+    $don->setCatdon($_POST["cate"]);
     $guardar=$don->guardar();
 
 
@@ -76,6 +78,7 @@ $idcamp = $_REQUEST["idcamp"];
     $don->setQuantility($_POST["txtcant"]);   
     $don->setUserid($idvol);
     $don->setCampaignid($idcamp);
+    $don->setCatdon($_POST["cate"]);
     $don->setId($_POST["txtcod"]);
     $actualizar = $don->actualizar();
 
@@ -98,9 +101,6 @@ $iddon = $_REQUEST["iddon"];
 
 function paypal()
 {
-
-
-
 
 require '../vista/config.php';
 
@@ -167,21 +167,42 @@ if($aprobado){
 
 $cod = $_SESSION["cod"];
 $camp = $_POST["camp"];
-
-
-$soles = "S/.";
-$soles .= $_POST['txtcant'];
+//$soles = "S/.";
+$soles = $_POST['txtcant'];
 
     $don=new Donacion();    
     $don->setDescription($producto);
     $don->setQuantility($soles);   
     $don->setUserid($cod);
     $don->setCampaignid($camp);
+    $don->setCatdon(5);
     $guardar=$don->guardar();
 
     header("Location: {$aprobado}");
 }
 
+if($aprobado){
+
+  $camp = new Campania();
+  $camp->setId($_POST["camp"]);
+  $fila = $camp->getCampania();
+
+  $nomcamp = $fila[1];
+  $usercampania = $fila[2];
+
+
+  $cod = $_SESSION["cod"];
+  $nom = $_SESSION["usuario"];
+  $des = " $nom ha hecho una donacion de S/. $soles para la campaña $nomcamp";
+
+
+
+  $noti = new Notificacion();
+  $noti->setDescription($des);
+  $noti->setUserid($cod);
+  $noti->setPara($usercampania);
+  $noti->insertar(); 
+}
 
 
 }

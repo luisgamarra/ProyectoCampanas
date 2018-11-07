@@ -17,8 +17,7 @@
     }
   ?>
 
-<center><div class="holder1">
-      </div></center>
+<center><div class="holder1"></div></center>
       <div class="customBtns">
       <span class="arrowPrev"></span>
       <span class="arrowNext"></span>

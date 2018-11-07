@@ -9,8 +9,8 @@
       conectar();
       $sql = "SELECT campaign_id, title,description, place, start_date, imagen ";
       $sql .= " FROM campaigns ";
-      $sql .= " WHERE estado='1' ";
-      $sql .= " ORDER BY start_date ";
+      $sql .= " WHERE estado='1' and start_date>=CURDATE()";
+      $sql .= " ORDER BY start_date DESC ";
 
       $resultado = ejecutar($sql);
     } catch (\Exception $e) {

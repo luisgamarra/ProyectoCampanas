@@ -17,7 +17,9 @@ include('templates/validar.php');
     <title>Sistema de Campañas Sociales</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">    
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/notificacion.css"rel="stylesheet">     
+    
 </head>
 
 <body background="img/fondito1.jpg">
@@ -31,9 +33,9 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
    <div class="container-fluid">
                     
-      <div class="header"> 
-         <h1 class="page-header">Modificar donacion </h1>           
-      </div>   
+<div class="panel panel-info"> 
+<div class="panel-heading"><h3 style="text-align:center;">Modifica el registro de donacion</h3></div>  
+</div>   
 
       <?php 
 
@@ -125,6 +127,34 @@ include('templates/validar.php');
                    <input type="hidden" name="txtcod" value="<?=$rd[0]?>">
 
     <div class="form-group">
+         <label class="col-md-4 control-label" for="cate" id="v">Categoria : </label>
+         <div class="col-md-4">
+         <select class="form-control" name="cate" id="cate" required=>
+         <option value="<?=$rd[8]?>" ><?=$rd[9]?></option>
+
+         <?php
+
+         $cate=$_POST["cate"];
+
+         $sql = "SELECT * from categoria_donacion";
+         $r = ejecutar($sql);        
+
+         while($row=mysqli_fetch_array($r)){
+         if($cate==$row[0]){
+          echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
+          }if ($row[0] != $rd[8]){
+          echo "<option value='".$row[0]."' >".$row[1]."</option>"; 
+
+          }
+          }
+          ?>      
+          </select>
+          </div>
+          <div class="help-block with-errors"></div>
+
+      </div>                         
+
+    <div class="form-group">
           <label class="col-md-4 control-label" for="Descripcion" >Descripcion : </label>
           <div class="col-md-4">
           <input id="des" name="txtdes" type="text" placeholder="Descripcion" class="form-control input-md"  value="<?=$rd[6]?>" required>
@@ -145,7 +175,7 @@ include('templates/validar.php');
           <div class="col-md-4">
                                  
         <button id="boton" class="btn btn-success" block="true" type="submit" name="action" value="modificar"> Actualizar </button>
-        <a class='btn btn-info col-md-offset-1' href='lista-donaciones.php'>Cancelar</a>
+        <a class='btn btn-info' href='lista-donaciones.php'>Cancelar</a>
           </div>
     </div>
 

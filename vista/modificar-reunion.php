@@ -18,7 +18,8 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
-        <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/notificacion.css"rel="stylesheet">     
 
     
 </head>
@@ -34,9 +35,9 @@ include('templates/validar.php');
 <div id="page-content-wrapper">
    <div class="container-fluid">
                     
-      <div class="header"> 
-         <h1 class="page-header">Modificar reunion </h1>           
-      </div>   
+<div class="panel panel-info"> 
+<div class="panel-heading"><h3 style="text-align:center;">Modifica el registro de reunion</h3></div>  
+</div>    
 
       <?php 
 
@@ -112,7 +113,7 @@ include('templates/validar.php');
           <div class="col-md-4">
                                     
           <button class="btn btn-success" block="true" type="submit" name="action" value="modificar"> Actualizar </button>
-          <a class='btn btn-info col-md-offset-1' href='lista-reuniones.php'>Cancelar</a>
+          <a class='btn btn-info' href='lista-reuniones.php'>Cancelar</a>
           </div>
         </div>
 
