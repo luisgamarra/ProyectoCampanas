@@ -60,7 +60,7 @@ include('templates/validar.php');
 
             $campania = new Campania();
             $campania->setUserid($cod);
-            $r1 = $campania->campaniaporusuario(); 
+            $r1 = $campania->campaniaporusuariomfechafinal(); 
 
             $array1 = array();
             while($fila1 = $r1->fetch_assoc()){

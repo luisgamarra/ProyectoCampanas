@@ -53,7 +53,7 @@ include('templates/validar.php');
 
   $campania = new Campania();
   $campania->setuserid($cod);
-  $r = $campania->campaniaporusuario();
+  $r = $campania->campaniaporusuariomfechafinal();
 
   while($row=mysqli_fetch_array($r)){
   if($codcamp==$row[0]){
@@ -129,13 +129,19 @@ if($codcamp != 0 and $codvol == 0){
     echo "<tbody id='don'>";
 
     while($row=mysqli_fetch_array($r1)){  
+
+      if($row[5] == "5"){
+      $resul = "S/.".$row[4]."";
+      }else{
+      $resul = "".$row[4]." Unidades";
+      }
     
     echo "<tr bgcolor='white'>
     <td align='center'>".$numeracion."</td>
     <td align='center'>".$row[1]."</td>
     <td align='center'>".$row[2]."</td>
     <td align='center'>".$row[3]."</td>
-    <td align='center'>".$row[4]."</td>
+    <td align='center'>".$resul."</td>
     <td align='center'>
       <a class='btn btn-success' href='modificar-donacion.php?iddon=".$row["0"]."'>Modificar</a></td>
    <td align='center'>
@@ -163,13 +169,19 @@ if($codcamp != 0 and $codvol == 0){
    echo "<tbody id='don'>";
 
    while($row=mysqli_fetch_array($r2)){
+
+    if($row[5] == "5"){
+      $resul = "S/.".$row[4]."";
+      }else{
+      $resul = "".$row[4]." Unidades";
+      }
     
     echo "<tr bgcolor='white'>
     <td align='center'>".$numeracion."</td>
     <td align='center'>".$row[1]."</td>
     <td align='center'>".$row[2]."</td>
     <td align='center'>".$row[3]."</td>
-    <td align='center'>".$row[4]."</td>
+    <td align='center'>".$resul."</td>
     <td align='center'>
       <a class='btn btn-success' href='modificar-donacion.php?iddon=".$row["0"]."'>Modificar</a></td>
    <td align='center'>

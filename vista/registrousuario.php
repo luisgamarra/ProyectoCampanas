@@ -1,3 +1,8 @@
+<?php 
+header( 'X-Content-Type-Options: nosniff' );
+header( 'X-Frame-Options: SAMEORIGIN' );
+header( 'X-XSS-Protection: 1;mode=block' );
+ ?>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -74,7 +79,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="Contrasena" >Contraseña</label>
           <div class="col-md-4">
-          <input id="Contrasena" name="txtclave" type="password" placeholder="Contraseña" class="form-control input-md" data-minlength="6" required>
+          <input id="Contrasena" name="txtclave" type="password" placeholder="Contraseña" class="form-control input-md" data-minlength="6" autocomplete="off" required>
           <div class="help-block">Mínimo de seis (6) digitos</div>
           </div>
         </div>

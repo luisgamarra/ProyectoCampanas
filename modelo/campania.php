@@ -1,4 +1,5 @@
 <?php 
+require_once('../db/conexion.php');
 conectar();
 
 class Campania
@@ -154,9 +155,19 @@ class Campania
 
     }
 
+     public function campaniaporusuariomfechafinal(){
+       
+        $query="SELECT campaign_id,title,start_date,end_date from campaigns where user_id='".$this->userid."' and end_date>CURDATE() and estado = 1 order by start_date DESC" ;        
+        $tabla=ejecutar($query);
+        
+
+        return $tabla;
+
+    }
+
     public function campanias(){
         
-        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen from campaigns where estado = 1 order by start_date DESC" ;       
+        $query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen from campaigns where estado = 1 and start_date>CURDATE() order by start_date DESC" ;       
         $tabla=ejecutar($query);        
        
         return $tabla;
@@ -186,16 +197,14 @@ class Campania
     }
 
     public function buscarcampania($palabra){
-        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where user_id='".$this->userid."' and estado = 1 and title like
-     '%".$palabra."%'  " ; 
+        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where user_id='".$this->userid."' and estado = 1 and title like '%".$palabra."%'  " ; 
         $tabla = ejecutar($query);
 
         return $tabla;
     }
 
      public function buscar($palabra){
-        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen,start_date,end_date from campaigns where estado = 1 and title like
-     '%".$palabra."%'  " ; 
+        $query = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen,start_date,end_date from campaigns where estado = 1 and start_date>CURDATE() and title like '%".$palabra."%'  " ; 
         $tabla = ejecutar($query);
 
         return $tabla;
@@ -208,6 +217,13 @@ class Campania
        
         return $row;
     } 
+
+    public function contardesdehasta($fechainicio,$fechafinal,$codusuario){
+        $query = "SELECT c.title,DATE_FORMAT(c.start_date, '%d-%m-%Y'),DATE_FORMAT(c.end_date, '%d-%m-%Y'),ca.descripcion,COUNT(de.user_id) as voluntarios,c.vacant as quedaron,(COUNT(de.user_id)+c.vacant) as total,IF(c.end_date>CURDATE(),'En curso','Concluido') as estado from details_campaigns de inner join campaigns c on de.campaign_id=c.campaign_id inner join categorias ca on ca.categoria_id=c.categoria_id where c.start_date>'".$fechainicio."' and c.start_date<'".$fechafinal."' and c.user_id='".$codusuario."' and de.estado=1 group by c.title order by c.start_date DESC";
+         $tabla = ejecutar($query);
+
+        return $tabla;
+    }
    
 }
 

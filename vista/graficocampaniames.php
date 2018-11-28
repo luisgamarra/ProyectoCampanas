@@ -16,9 +16,7 @@ conectar();
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link href="css/notificacion.css" rel="stylesheet"> 
-    
-   
+    <link href="css/notificacion.css" rel="stylesheet">     
 </head>
 
 <body background="img/fondito.jpg">

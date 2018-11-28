@@ -223,7 +223,7 @@ Highcharts.chart('container3', {
 
     "series": [
          {
-            "name": "campaña",
+            "name": "voluntario",
             "colorByPoint": true,
             "data": [
 

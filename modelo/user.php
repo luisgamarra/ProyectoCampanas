@@ -1,4 +1,5 @@
 <?php
+require_once('../db/conexion.php');
 conectar();
 
 class User {
@@ -135,6 +136,16 @@ class User {
         $row=mysqli_fetch_array($tabla);
        
         return $row;
+
+    }
+
+    public function getUserbyEmail2(){
+
+        
+        $query="select * from users where email='".$this->email."' and estado = 1";        
+        $tabla=ejecutar($query);        
+       
+        return $tabla;
 
     }
 

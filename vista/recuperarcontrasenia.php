@@ -1,3 +1,7 @@
+<?php 
+header('X-Frame-Options: DENY');
+header("X-XSS-Protection: 1; mode=block");
+ ?>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -41,7 +45,9 @@
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">
-          <h3>Ingresa tu correo</h3>          
+          <h3>Ingresa tu correo:</h3>
+          <br/>
+          Te enviaremos un email con tu contraseña          
           </div>
         </div>      
 

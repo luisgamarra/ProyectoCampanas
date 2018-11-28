@@ -9,13 +9,13 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha" >Desde : </label>
           <div class="col-md-4">
-          <input id="fecha1" name="txtfecha1" type="text" placeholder="desde" class="form-control input-md">      
+          <input id="fecha1" onchange="ValidarFechaInicial();" name="txtfecha1" type="text" placeholder="desde" class="form-control input-md">      
           </div>
         </div>
          <div class="form-group">    
           <label class="col-md-4 control-label" for="fecha" >Hasta : </label>
           <div class="col-md-4">
-          <input id="fecha2" name="txtfecha2" type="text" placeholder="hasta" class="form-control input-md">         
+          <input id="fecha2" onchange="ValidarFechaFinal();" name="txtfecha2" type="text" placeholder="hasta" class="form-control input-md">         
           </div>
           </div>
 
@@ -49,7 +49,7 @@
         </div>
 
 
-            <div class="form-group">   
+          <div class="form-group">   
           <label class="col-md-4 control-label" for="lug" >Lugar : </label>
           <div class="col-md-4">
           <select class="form-control" name="lug" id="lug" >

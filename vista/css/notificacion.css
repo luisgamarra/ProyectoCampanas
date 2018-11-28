@@ -1,11 +1,10 @@
- <style>
-        #notificationContainer {
+#notificationContainer {
 background-color: #fff;
 width: 395px;
 }
 
 #notificationTitle {
-    text-align: center;
+text-align: center;
 z-index: 1000;
 font-weight: bold;
 padding: 8px;
@@ -16,20 +15,17 @@ border-bottom: 1px solid #dddddd;
 }
 
 #notificationsBody {
-
 height:400px;
 overflow:auto;
 }
 
 #noti {
-
-
 padding: 20px;
-
 background-color: lightblue;
 width: 395px;
 border-bottom: 1px solid #dddddd;
 }
+
 #notificationFooter {
 background-color: #e9eaed;
 text-align: center;
@@ -44,10 +40,7 @@ padding: 3px 7px 3px 7px;
 background: black;
 color: #ffffff;
 font-weight: bold;
-
 border-radius: 9px;
-
 margin-top: -11px;
 font-size: 11px;
 }
-    </style>

@@ -34,19 +34,16 @@ include('templates/validar.php');
           
 <div class="panel panel-info"> 
 <div class="panel-heading"><h3 style="text-align:center;">Modifica el registro de campaña</h3></div>  
-</div>    
-           
+</div>               
                 <?php 
                 $codcamp=$_REQUEST["idcamp"];
 
                 $camp=new Campania();
                 $camp->setId($codcamp);
                 $r = $camp->getCampaniabyCod();
+                ?>
 
-                 ?>
-
-
-  <form class="form-horizontal" action="../controlador/campaniacontrolador.php" method="post" enctype="multipart/form-data" data-toggle="validator">           
+<form class="form-horizontal" action="../controlador/campaniacontrolador.php" method="post" enctype="multipart/form-data" data-toggle="validator">           
          
                    <input value="<?=$r[0]?>" type="hidden" name="idcamp" />
 
@@ -69,7 +66,6 @@ include('templates/validar.php');
           echo "<option value='".$row[0]."' selected>".$row[1]."</option>";
           }if ($row[1] != $r[10]){
           echo "<option value='".$row[0]."' >".$row[1]."</option>"; 
-
           }
           }
           ?>  
@@ -107,7 +103,7 @@ include('templates/validar.php');
           <div class="help-block with-errors"></div>
         </div>
           
-           <!-- Text input-->
+        <!-- Text input-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="vacante" >Vacantes : </label>
           <div class="col-md-2">
@@ -115,23 +111,25 @@ include('templates/validar.php');
           </div>
          <div class="help-block with-errors"></div>
         </div>
-
-
         
+        <?php 
+          $fe1 = date('d/m/Y', strtotime(str_replace('/', '-', $r[8])));
+          $fe2 = date('d/m/Y', strtotime(str_replace('/', '-', $r[9])));
+         ?>
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha1" >Fecha de inicio : </label>
           <div class="col-md-4">
-        <input value="<?=$r[8]?>" id="fecha1" name="txtfecha1" type="text" class="form-control input-md" required>
+        <input value="<?=$fe1?>" onchange="ValidarFechaInicial();" id="fecha1" name="txtfecha1" type="text" class="form-control input-md" required>
           </div>
           <div class="help-block with-errors"></div>
-        </div>
+        </div>       
 
-       
+        
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha2" >Fecha final : </label>
           <div class="col-md-4">
-          <input value="<?=$r[9]?>" id="fecha2" name="txtfecha2" type="text" class="form-control input-md" required>
+          <input value="<?=$fe2?>" onchange="ValidarFechaFinal();" id="fecha2" name="txtfecha2" type="text" class="form-control input-md" required>
           </div>
           <div class="help-block with-errors"></div>
         </div>
@@ -148,17 +146,15 @@ include('templates/validar.php');
         <div class="form-group">
             <div class="col-md-4"></div>    
             <div class="col-md-4">
-               <?php   echo "<center><img src='img/".$r["7"]."' alt='Norway' width='50%' height='50%'></center> ";                       
-                 ?>               
+            <?php echo "<center><img src='img/".$r["7"]."' alt='Norway' width='50%' height='50%'></center> ";  ?>         
             </div>            
         </div>
 
                <!-- Button -->
         <div class="form-group">
           <div class="col-md-4"></div>
-          <div class="col-md-4">
-                                 
-        <button id="cambiar" class="btn btn-success" block="true" type="submit" name="action" value="modificar"> Guardar </button>
+          <div class="col-md-4">                                 
+        <button class="btn btn-success" block="true" type="submit" name="action" value="modificar"> Guardar </button>
           <a class='btn btn-info' href='detallecampania.php'>Cancelar</a>
           </div>
         </div>
@@ -209,9 +205,9 @@ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Ag
     
 });
  
-  </script>
+</script>
 
-  <script >
+<script >
 function validaNumericos(event) {
     if(event.charCode >= 48 && event.charCode <= 57){
       return true;
@@ -235,6 +231,38 @@ function validaNumericos(event) {
         document.getElementById(all.id).value = "";
         return; // Si la extension es no válida ya no chequeo lo de abajo.
     }}
+</script>
+
+<script>
+function ValidarFechaInicial()
+{
+var f1 = document.getElementById("fecha1").value;
+var f2 = document.getElementById("fecha2").value;
+ 
+if (($.datepicker.parseDate('dd/mm/yy', f1) > $.datepicker.parseDate('dd/mm/yy', f2)) && f2 != ""){
+     alert("La Fecha Inicial no puede ser mayor que la Fecha Final");
+     document.getElementById("fecha1").value = "";
+     return;
+}else{ 
+}
+}
+ 
+</script>
+
+<script>
+function ValidarFechaFinal()
+{
+var f1 = document.getElementById("fecha1").value;
+var f2 = document.getElementById("fecha2").value;
+ 
+if ($.datepicker.parseDate('dd/mm/yy', f2) < $.datepicker.parseDate('dd/mm/yy', f1)){
+     alert("La Fecha Final no puede ser menor que la Fecha Inicial");
+     document.getElementById("fecha2").value = "";
+     return;
+}else{ 
+}
+}
+ 
 </script>
 
 

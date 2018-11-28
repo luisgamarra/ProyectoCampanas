@@ -33,64 +33,52 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-    <div class="container-fluid">           
+<div class="container-fluid">           
 
 <?php 
 $cate = $_REQUEST["idcat"];
 $sql = "SELECT * from categorias where categoria_id=$cate";
 $fila = ejecutar($sql);
 $row = mysqli_fetch_array($fila);
-
- ?>
+?>
            
   <div class="panel panel-primary"> 
   <div class="panel-heading"><h1 style="text-align:center;"><b>Categoria: <?php echo $row[1] ?></b></div>  
   </div>
 
   <form class="form-horizontal" name="form1" method="post" action="" data-toggle="validator">
-
      <div class="col-md-4">
-        <a href="categoriacampania.php" class="btn btn-success"><<<<< Regresar</a>             
+     <a href="categoriacampania.php" class="btn btn-success"><<<<< Regresar</a>             
      </div>        
      <div class="col-md-4">
      <div class="input-group">
-      <span class="input-group-btn">
-        
+     <span class="input-group-btn">        
         <button class="btn btn-info" type="submit" name="submit" value="Buscar">Buscar</button>
-      </span>
-      <input type="text" name="busca" id="busca" class="form-control" placeholder="Ingresa un nombre de campaña" required>
-    </div>
-              <div class="help-block with-errors"></div>
-
-  </div>
-  <div class="col-md-4"></div> 
-
-</form>
-
+     </span>
+     <input type="text" name="busca" id="busca" class="form-control" placeholder="Ingresa un nombre de campaña" required>
+     </div>
+     <div class="help-block with-errors"></div>
+     </div>
+     <div class="col-md-4"></div> 
+  </form>
 
 <?php 
-
-
-
 if(!empty($_POST["busca"])){ 
 
   $cod = $_SESSION["cod"]; 
   $sql3 = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y'),DATE_FORMAT(end_date, '%d-%m-%Y'),imagen,start_date,end_date from campaigns where user_id=$cod and categoria_id=$cate and estado = 1 and title like '%".$_POST["busca"]."%'  " ; 
-  $r1 = ejecutar($sql3);
+  $r1 = ejecutar($sql3); 
   
-  
- echo "<a class='btn btn-success' href='vercategoria.php?idcat=".$row[0]."'>volver</a>";
-   
+ echo "<a class='btn btn-success' href='vercategoria.php?idcat=".$row[0]."'>volver</a>";   
 }
  ?>
               
 
          <section id="campanas" class="campanas contenedor seccion">
-
-          <ul class="lista-campanas clearfix" id="itemContainer">   
+         <ul class="lista-campanas clearfix" id="itemContainer">   
                       
 
-<?php                             
+<?php                            
             
     $cod = $_SESSION["cod"];           
 
@@ -104,7 +92,7 @@ if(empty($_POST["busca"])){
                         <li>                        
                           <div class='campana'>
                             <a class='campana-info' href='#campana".$row["0"]."'>
-                            <img src='img/".$row["7"]."' >
+                            <img src='img/".$row["7"]."' width='400px' height='200px' >
                             <p>".$row["1"]."</p>
                             </a>
                           </div>
@@ -129,7 +117,7 @@ if(empty($_POST["busca"])){
                         <li>                        
                           <div class='campana'>
                             <a class='campana-info' href='#campana".$row2["0"]."'>
-                            <img src='img/".$row2["7"]."' >
+                            <img src='img/".$row2["7"]."' width='400px' height='200px'>
                             <p>".$row2["1"]."</p>
                             </a>
                           </div>
@@ -152,14 +140,14 @@ if(empty($_POST["busca"])){
   ?>                           
            
             </ul>
-    </section>
+            </section>
 
 
 
 
 <center><div class="holder"></div></center>
 
-    </div>
+</div>
 </div>
 
 </div>   

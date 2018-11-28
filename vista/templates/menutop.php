@@ -13,9 +13,11 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-
-  <li class="dropdown">
-
+<?php 
+ $tipo =@$_SESSION['tipo'];
+if( $tipo == "1"){
+ ?>
+  <li>
     <a href="" id="notificacionLink" data-toggle="dropdown" style="color:#FFFFFF">
     <span id="notification_count">
       <?php 
@@ -67,11 +69,11 @@
           ?>
             
         </div>
-        <div id="notificationFooter"><a href="#">See All</a></div>
+       
         </div>
     </ul>
-
 </li>      
+<?php } ?>
 
 <li><a href="#" style="color:#FFFFFF"><span class="glyphicon glyphicon-user "></span> <?php echo $_SESSION["usuario"]; ?></a></li>
   <li><a href="../controlador/usuariocontrolador.php?action=logout" style="color:#FFFFFF"><span class="glyphicon glyphicon-log-in"> </span> Cerrar Sesión</a></li>

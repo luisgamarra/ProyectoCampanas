@@ -1,4 +1,8 @@
-
+<?php 
+header( 'X-Content-Type-Options: nosniff' );
+header( 'X-Frame-Options: SAMEORIGIN' );
+header( 'X-XSS-Protection: 1;mode=block' );
+?>
 <!doctype html>
 <html>
 
@@ -17,80 +21,9 @@
   <link rel="stylesheet" href="vista/css/normalize.css"> 
   <link rel="stylesheet" href="vista/css/main.css">
   <link rel="stylesheet" href="vista/css/bootstrap.min.css">
-
   <link rel="stylesheet" href="vista/css/colorbox.css">
-  <link rel="stylesheet" href="vista/css/jPages.css">
-  <link rel="stylesheet" href="vista/css/animate.css">
-
-  </script>
-  <style type="text/css">
-  .holder {
-    margin: 15px 0;
-  }
-  .holder a {
-    display: inline-block;
-    cursor: pointer;
-    margin: 0 5px;
-    padding: 4px;
-    border-radius: 50%;
-    background-color: #D4EE5E;
-  }
-  .holder a:hover {
-    background-color: #222;
-    color: #fff;
-  }
-  .holder a.jp-previous { margin-right: 15px; }
-  .holder a.jp-next { margin-left: 15px; }
-  .holder a.jp-current, a.jp-current:hover {
-    color: #FF4242;
-    font-weight: bold;
-  }
-  .holder a.jp-disabled, a.jp-disabled:hover {
-    color: #bbb;
-  }
-  .holder a.jp-current, a.jp-current:hover,
-  .holder a.jp-disabled, a.jp-disabled:hover {
-    cursor: default;
-    background-color: #FF4242;
-  }
-  .holder span { margin: 0 5px; }
-  </style>
-
-<style type="text/css">
-  .holder1 {
-    margin: 15px 0;
-  }
-
-  .holder1 a {
-    font-size: 12px;
-    cursor: pointer;
-    margin: 0 5px;
-    color: #333;
-  }
-
-  .holder1 a:hover {
-    background-color: #222;
-    color: #fff;
-  }
-
-  .holder1 a.jp-current, a.jp-current:hover {
-    color: #FF4242;
-    font-weight: bold;
-    cursor: default;
-    background: none;
-  }
-
-  .holder1 span { margin: 0 5px; }
-
-  .customBtns { position: relative; }
-  .arrowPrev, .arrowNext { width:29px; height:29px; position: absolute; top: 55px; cursor: pointer; }
-  .arrowPrev { background-image: url('vista/img/back.gif'); left: -45px; }
-  .arrowNext { background-image: url('vista/img/next.gif'); right: -40px; }
-
-  .arrowPrev.jp-disabled, .arrowNext.jp-disabled { display: none; }
-  </style>
-
-  
+  <link rel="stylesheet" href="vista/css/jPagesindex.css">
+  <link rel="stylesheet" href="vista/css/animate.css">  
 </head>
 
 <body>
@@ -187,25 +120,19 @@
         <li> <p class="numero">9</p>Campañas</li>
         <li> <p class="numero">107</p>Donativos</li>
       </ul>
-
   </div>
-
 </div>
 
 <?php include_once ('vista/templates/footer.php'); ?>
-
  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="vista/js/jquery.js"></script>
 <script src="vista/js/bootstrap.min.js"></script>
+<script src="vista/js/jquery.colorbox-min.js"></script>
+<script src="vista/js/jquery.animateNumber.min.js"></script>
+<script src="vista/js/main.js"></script>
+<script src="vista/js/jPages.js"></script>
 
-
-  <script src="vista/js/jquery.colorbox-min.js"></script>
-  <script src="vista/js/jquery.animateNumber.min.js"></script>
-  <script src="vista/js/main.js"></script>
-   <script src="vista/js/jPages.js"></script>
-
-    <script>
+  <script>
   /* when document is ready */
   $(function(){
   /*
@@ -224,7 +151,7 @@
   });
  });
   </script>
-    <script>
+  <script>
   /* when document is ready */
   $(function(){
   /*
@@ -234,11 +161,8 @@
    $("div.holder1").jPages({
     containerID : "itemContainer1",
     perPage     : 3,
-    first       : false,
-    previous    : "span.arrowPrev",
-    next        : "span.arrowNext",
-    last        : false,
-    links       : "blank"    
+    pause       : 4000,
+    clickStop   : false    
   });
  });
   </script>

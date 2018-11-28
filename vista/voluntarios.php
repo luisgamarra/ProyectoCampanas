@@ -50,7 +50,7 @@ include('templates/validar.php');
 
     $campania = new Campania();
     $campania->setUserid($cod);
-    $r = $campania->campaniaporusuario();
+    $r = $campania->campaniaporusuariomfechafinal();
 
     while($row=mysqli_fetch_array($r)){
     if($codcamp==$row[0]){

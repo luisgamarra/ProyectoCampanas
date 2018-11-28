@@ -12,7 +12,7 @@
            <li><a href="modulovoluntario.php">Sumate!!</a></li>
            <li><a href="categoriacampania.php">Categorias</a></li>          
            <li><a href="miscampanas.php">Mis campañas</a></li>            
-           <li><a href="reuniones.php">reuniones</a></li>     
+           <li><a href="reuniones.php">Reuniones</a></li>     
            <li><a href="ubicaciones.php">Ubicaciones</a></li>    
         </ul>
 
@@ -44,10 +44,8 @@
         </li>
         <ul class="sub-menu collapse" id="usuario">
           <li><a href="miperfil.php">Mi perfil</a></li>
-          <li><a href="cambiarcontra.php">Cambiar Contraseña</a></li>         
-        </ul> 
-
-        
+          <li><a href="cambiarcontra.php">Cambiar contraseña</a></li>         
+        </ul>         
 
         </br></br>
 

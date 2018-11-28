@@ -1,5 +1,4 @@
 <?php 
-
 require_once ('../db/conexion.php');
 require_once ('../modelo/reunion.php');
 conectar();
@@ -40,7 +39,7 @@ $re->setHours($_POST["txthora"]);
 $re->setUserid($cod);
 $fila = $re->getReunionbyFechayHora();
     
-if($fila==0){  
+if(mysqli_num_rows($fila)==0){  
 
     $reu=new Reunion();
     $reu->setTopic($_POST["txtasunto"]);
@@ -65,7 +64,7 @@ function modificar(){
 
 $idreu = $_POST["txtcod"];    
 
-    $fecha = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha"])));
+$fecha = date('Y/m/d', strtotime(str_replace('/', '-', $_POST["txtfecha"])));
 
 $cod = $_SESSION["cod"];    
 
@@ -74,8 +73,9 @@ $re->setDates($fecha);
 $re->setHours($_POST["txthora"]);
 $re->setUserid($cod);
 $fila = $re->getReunionbyFechayHora();
-    
-if($fila==0){  
+$resul = mysqli_fetch_array($fila);
+
+if(mysqli_num_rows($fila) == 0){  
  
     $reu = new Reunion();
     $reu->setTopic($_POST["txtasunto"]);
@@ -87,23 +87,35 @@ if($fila==0){
 
     echo "<script>alert('Actualizado Correctamente')
     document.location=('../vista/lista-reuniones.php')</script>";
+
+}elseif(mysqli_num_rows($fila) == 1 && $resul[0]==$_POST["txtcod"]){
+    $reu = new Reunion();
+    $reu->setTopic($_POST["txtasunto"]);
+    $reu->setDates($fecha);
+    $reu->setHours($_POST["txthora"]);
+    $reu->setCampaignid($_POST["camp"]);       
+    $reu->setId($_POST["txtcod"]);
+    $actualizar = $reu->actualizar();
+
+    echo "<script>alert('Actualizado Correctamente')
+    document.location=('../vista/lista-reuniones.php')</script>";
+
 }else{
-         echo "<script>alert('La FECHA Y HORA YA ESTAN REGISTRADAS ANTERIORMENTE')
+         echo "<script>alert('LA FECHA Y HORA YA ESTAN REGISTRADAS ANTERIORMENTE')
     document.location=('../vista/modificar-reunion.php?idreu=$idreu')</script>";   
 
    } 
 }
+
 function eliminar(){
-
-
 
 $idreu = $_REQUEST["idreu"];    
  
-    $reu = new Reunion();    
-    $reu->setId($idreu);
-    $eliminar = $reu->eliminar();
+$reu = new Reunion();    
+$reu->setId($idreu);
+$eliminar = $reu->eliminar();
 
-    echo "<script>alert('Reunion eliminada')
+echo "<script>alert('Reunion eliminada')
  document.location=('../vista/lista-reuniones.php')</script>";
 }
 

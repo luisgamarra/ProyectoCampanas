@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2018 a las 05:20:25
+-- Tiempo de generación: 28-11-2018 a las 17:33:54
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.8
 
@@ -47,13 +47,13 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`campaign_id`, `title`, `description`, `place`, `vacant`, `start_date`, `end_date`, `imagen`, `user_id`, `categoria_id`, `estado`) VALUES
-(1, 'friaje', 'Las estadisticas son de miedo. Segun el Ministerio de Salud (Minsa), a la fecha, 604 personas han fallecido por neumonia, producto de las bajas temperaturas. De estas muertes, mas de 400 corresponden a adultos mayores y 72 a ninios menores de cinco anios.\r\n\r\nPor ello, el Indeci recomendo a las poblaciones de las jurisdicciones azotadas por las heladas usar ropa abrigadora, evitar cambios bruscos de temperatura, asi como cumplir con el cronograma de vacunacion de los mas pequenios y guarecer en cobertizos a las crias de los animales.', 'Puno', 21, '2018-10-13', '2018-10-31', 'campana1.jpg', 1, 3, 1),
+(1, 'Friaje', 'Las estadisticas son de miedo. Segun el Ministerio de Salud (Minsa), a la fecha, 604 personas han fallecido por neumonia, producto de las bajas temperaturas. De estas muertes, mas de 400 corresponden a adultos mayores y 72 a ninios menores de cinco anios.\r\n\r\nPor ello, el Indeci recomendo a las poblaciones de las jurisdicciones azotadas por las heladas usar ropa abrigadora, evitar cambios bruscos de temperatura, asi como cumplir con el cronograma de vacunacion de los mas pequenios y guarecer en cobertizos a las crias de los animales.', 'Puno', 21, '2018-12-07', '2019-01-23', 'campana1.jpg', 1, 3, 1),
 (2, 'Asilos', 'Se inició como un voluntariado y compromiso social dando apoyo a ancianos de escasos recursos y salud deteriorada, con ayuda en su mismo lugar de residencia, pero al ver que no era suficiente las visitas y apoyo semanal, las integrantes decidieron fundar SPLENDOR Casa Hogar para la Tercera Edad, y desde Diciembre del 2004 alquilamos una vivienda donde venimos brindando casa, alimentación, enfermería geriátrica y cuidados personales.', 'Lima', 19, '2018-10-14', '2018-11-01', 'campana2.jpg', 1, 1, 1),
-(3, 'Hospital', 'Según explicó el Ministerio de Salud (Minsa), administrador de estos centros médicos, la medida forma parte de la Política Nacional de Hospitales Seguros frente a los Desastres. Para esto firmaron un convenio con la Universidad Nacional de Ingeniería (UNI),  que elaborará los expedientes técnicos de las obras necesarias para mejorar la infraestructura de estos hospitales ante un sismo. La lista incluye al Dos de Mayo, Hipólito Unanue, Cayetano Heredia, Arzobispo Loayza y María Auxiliadora. La inversión sería de más de 4 millones de soles para financiar estos estudios en un plazo de 70 días.', 'Lima', 19, '2018-10-15', '2018-11-02', 'campana3.jpg', 1, 2, 1),
+(3, 'Hospital', 'Según explicó el Ministerio de Salud (Minsa), administrador de estos centros médicos, la medida forma parte de la Política Nacional de Hospitales Seguros frente a los Desastres. Para esto firmaron un convenio con la Universidad Nacional de Ingeniería (UNI),  que elaborará los expedientes técnicos de las obras necesarias para mejorar la infraestructura de estos hospitales ante un sismo. La lista incluye al Dos de Mayo, Hipólito Unanue, Cayetano Heredia, Arzobispo Loayza y María Auxiliadora. La inversión sería de más de 4 millones de soles para financiar estos estudios en un plazo de 70 días.', 'Lima', 19, '2018-12-07', '2019-01-04', 'campana3.jpg', 1, 2, 1),
 (4, 'Orfanato', 'La aldea infantil Juan Pablo II, es una casa hogar para niños huérfanos y niños  Juan Pablo II - Voluntariado en Peru quienes han sido ubicados por las autoridades en este hogar para su cuidado. Tiene una población de 60 niños cuyas edades van de 0 a 18 años. Existen siete casas, en cada casa hay entre 8 y 9 niños viviendo con una “mama”. Las edades de los niños en las casas son mezclados, para simular una especie de situación de familia. Los niños de 3 años a más van a la escuela fuera del orfanato. El tiempo de enseñanza en la escuela es diferente, algunos van a la escuela por la mañana y otros por la tarde. ', 'Lima', 20, '2018-10-16', '2018-11-03', 'campana4.jpg', 1, 2, 1),
 (5, 'Inundaciones', 'Un nuevo desborde del río Rímac inundó ayer varias calles y zonas del distrito de San Juan de Lurigancho, el más grande y poblado de Lima con más de un millón de habitantes.\r\n\r\nLa región Lima ha registrado dos fallecidos y 2.739 damnificados por las inundaciones, y además tiene 9.550 personas afectadas por la emergencia climática, según el último reporte del Centro de Operaciones de Emergencia Nacional (Coen).\r\n\r\nA nivel nacional, las intensas lluvias e inundaciones han causado 64 muertos, más de 62.000 damnificados, 170 heridos, 7.974 casas colapsadas y 19 colegios derrumbados. \r\n\r\n', 'Tacna', 19, '2018-10-17', '2018-11-06', 'campana5.jpg', 1, 3, 1),
-(6, 'Sismo', 'El ‘Cinturón de fuego del Pacífico’ está conformado por todos los países que bordean el Océano Pacífico. Entre ellos está Filipinas, Papúa Nueva Guinea y el Perú. Esta zona es escenario de una intensa actividad sísmica y volcánica.\r\n\r\nPor eso, es indispensable que tengamos siempre lista en casa tu “mochila de emergencia” donde debes poner agua, alimentos no perecibles y artículos de primeros auxilios. \r\n', 'Piura', 20, '2018-10-18', '2018-11-05', 'campana6.jpg', 1, 3, 1),
-(7, 'Dona Sangre', 'breve descripcion', 'lima', 11, '2018-11-08', '2018-11-02', 'noviembre1.jpg', 1, 1, 1),
+(6, 'Sismo', 'El ‘Cinturón de fuego del Pacífico’ está conformado por todos los países que bordean el Océano Pacífico. Entre ellos está Filipinas, Papúa Nueva Guinea y el Perú. Esta zona es escenario de una intensa actividad sísmica y volcánica.\r\n\r\nPor eso, es indispensable que tengamos siempre lista en casa tu “mochila de emergencia” donde debes poner agua, alimentos no perecibles y artículos de primeros auxilios. \r\n', 'Piura', 19, '2018-10-18', '2018-11-05', 'campana6.jpg', 1, 3, 1),
+(7, 'Dona Sangre', 'breve descripcion', 'lima', 10, '2018-11-08', '2018-11-02', 'noviembre1.jpg', 1, 1, 1),
 (8, 'fff', 'fff', 'ffff', 44, '2017-10-31', '2017-10-31', 'octubre012017.png', 1, 4, 1),
 (12, 'enero1', 'breve descripcion', 'Piura', 20, '2018-01-25', '2018-01-30', 'enero1.jpg', 1, 1, 1),
 (13, ' enero2', 'breve descripcion', 'Piura', 20, '2018-01-26', '2018-01-30', 'enero2.jpg', 1, 2, 1),
@@ -79,7 +79,12 @@ INSERT INTO `campaigns` (`campaign_id`, `title`, `description`, `place`, `vacant
 (33, ' agosto3', 'breve descripcion', 'Piura', 20, '2018-08-25', '2018-09-15', 'agosto3.png', 1, 3, 1),
 (34, 'setiembre1', 'breve descripcion', 'Piura', 20, '2018-09-25', '2018-09-30', 'setiembre1.jpg', 1, 4, 1),
 (35, 'setiembre2', 'breve descripcion', 'Piura', 20, '2018-09-25', '2018-09-30', 'setiembre2.jpg', 1, 4, 1),
-(36, 'junio3', 'breve descripcion', 'Piura', 20, '2018-06-25', '2018-09-15', 'junio3.png', 1, 3, 1);
+(36, 'junio3', 'breve descripcion', 'Piura', 20, '2018-06-25', '2018-09-15', 'junio3.png', 1, 3, 1),
+(37, 'ayudemos a los adultos', 'ola ', 'Lima', 500, '2018-11-28', '2018-11-30', 'puerto 80.png', 1, 1, 1),
+(38, 'niñitos', 'abc ', 'Lima', 499, '2018-11-29', '2018-11-30', 'GHC.png', 1, 2, 1),
+(39, 'terremotos en ica', ' apoyemos', 'Ica', 199, '2018-11-21', '2018-11-30', 'terre.jpg', 1, 3, 1),
+(40, 'Capita de Ozono', 'ayudemos ', 'Lima', 100, '2018-11-20', '2018-11-30', 'capaozono.jpg', 1, 4, 1),
+(41, 'ggg', ' ggg', 'ggg', 55, '2018-11-28', '2018-11-30', 'GHC.png', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -198,7 +203,11 @@ INSERT INTO `details_campaigns` (`detail_campaign_id`, `campaign_id`, `user_id`,
 (14, 3, 5, 1),
 (40, 4, 2, 0),
 (41, 5, 2, 1),
-(42, 6, 2, 0);
+(42, 6, 2, 1),
+(43, 38, 2, 1),
+(44, 37, 2, 0),
+(45, 7, 2, 1),
+(46, 39, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -260,7 +269,7 @@ INSERT INTO `donations` (`donation_id`, `description`, `quantility`, `user_id`, 
 
 CREATE TABLE `foro` (
   `foro_id` int(11) NOT NULL,
-  `title` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `fecha` date DEFAULT NULL,
   `respuestas` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -359,11 +368,12 @@ INSERT INTO `points` (`point_id`, `direccion`, `cx`, `cy`, `campaign_id`, `user_
 (4, 'Rímac 15093', '-12.027484359898887', ' -77.03295707702637', 4, 1, 0),
 (12, 'Lima 15083', '-12.060137568764313', ' -77.0416259765625', 4, 1, 0),
 (13, 'Lima 15083', '-12.0671129', '-77.03576190000001', 3, 1, 0),
-(14, 'Paseo Colon 125', '-12.0604452', '-77.03699139999998', 3, 1, 1),
+(14, 'Paseo Colon 125', '-12.0604452', '-77.03699139999998', 3, 1, 0),
 (16, 'Paseo Colon 125', '-12.0604452', '-77.03699139999998', 3, 1, 0),
 (17, 'Avenida Alfonso Ugarte 848', '-12.049813204513864', ' -77.04299926757812', 4, 1, 1),
 (18, 'Cercado de Lima 15001', '-12.0491263', '-77.03053899999998', 5, 1, 0),
-(19, 'La Victoria 15033', '-12.0656394', '-77.02478099999996', 5, 1, 1);
+(19, 'La Victoria 15033', '-12.0656394', '-77.02478099999996', 5, 1, 1),
+(20, 'San Miguel 15088', '-12.0686147', '-77.08810340000002', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -386,7 +396,7 @@ CREATE TABLE `reunions` (
 --
 
 INSERT INTO `reunions` (`reunion_id`, `topic`, `dates`, `hours`, `user_id`, `campaign_id`, `estado`) VALUES
-(1, 'falta donaciones', '2018-10-13', '7:30pm', 1, 1, 1),
+(1, '1º Integracion', '2018-11-13', '7:30pm', 1, 1, 1),
 (2, 'segunda reunion', '2018-11-14', '7:30pm', 1, 1, 1),
 (3, 'tercera reunion', '2018-12-12', '7:30pm', 1, 1, 1),
 (4, 'cuarta reunion', '2018-10-16', '9:00pm', 1, 1, 1),
@@ -420,7 +430,8 @@ INSERT INTO `testimonios` (`testimonio_id`, `descripcion`, `user_id`, `estado`) 
 (3, 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,', 3, 1),
 (4, 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,', 5, 1),
 (5, 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,', 6, 1),
-(6, 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,', 7, 1);
+(6, 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,', 7, 1),
+(7, 'buen campaña de navidad el de ayer', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -593,7 +604,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT de la tabla `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -617,7 +628,7 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `details_campaigns`
 --
 ALTER TABLE `details_campaigns`
-  MODIFY `detail_campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `detail_campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `donations`
@@ -647,7 +658,7 @@ ALTER TABLE `notificaciones`
 -- AUTO_INCREMENT de la tabla `points`
 --
 ALTER TABLE `points`
-  MODIFY `point_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `point_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `reunions`
@@ -659,7 +670,7 @@ ALTER TABLE `reunions`
 -- AUTO_INCREMENT de la tabla `testimonios`
 --
 ALTER TABLE `testimonios`
-  MODIFY `testimonio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `testimonio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

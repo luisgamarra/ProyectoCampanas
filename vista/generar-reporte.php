@@ -114,13 +114,45 @@ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Ag
     
 });
  
-  </script>
-
- 
+  </script> 
 
 <?php 
 include('templates/notificacion.php');
  ?>
+
+ <script>
+function ValidarFechaInicial()
+{
+
+var f1 = document.getElementById("fecha1").value;
+var f2 = document.getElementById("fecha2").value;
+ 
+if (($.datepicker.parseDate('dd/mm/yy', f1) > $.datepicker.parseDate('dd/mm/yy', f2)) && f2 != ""){
+     alert("La Fecha Inicial no puede ser mayor que la Fecha Final");
+     document.getElementById("fecha1").value = "";
+     return
+}else{ 
+}
+}
+ 
+</script>
+
+<script>
+function ValidarFechaFinal()
+{
+
+var f1 = document.getElementById("fecha1").value;
+var f2 = document.getElementById("fecha2").value;
+ 
+if ($.datepicker.parseDate('dd/mm/yy', f2) < $.datepicker.parseDate('dd/mm/yy', f1)){
+     alert("La Fecha Final no puede ser menor que la Fecha Inicial");
+     document.getElementById("fecha2").value = "";
+     return
+}else{ 
+}
+}
+ 
+</script>
 
 
 </body>

@@ -20,7 +20,6 @@ include('templates/validar.php');
     <link href="css/jPages.css" rel="stylesheet">
     <link href="css/remodal.css" rel="stylesheet" >
     <link href="css/remodal-default-theme.css" rel="stylesheet" >
-    <link href="css/notificacion.css" rel="stylesheet">
 
     <style >
       .jumbotron {
@@ -261,10 +260,6 @@ function Confirmation() {
 </script>
 
 
-<?php 
-include('templates/notificacion.php');
- ?>
- 
 </body>
 
 </html>

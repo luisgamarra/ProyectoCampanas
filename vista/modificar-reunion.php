@@ -17,11 +17,9 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link href="css/jquery.timepicker.css" rel="stylesheet">
     <link href="css/jquery-ui.css" rel="stylesheet">
-    <link href="css/notificacion.css"rel="stylesheet">     
-
-    
+    <link href="css/notificacion.css"rel="stylesheet">
 </head>
 
 <body background="img/fondito1.jpg">
@@ -91,7 +89,7 @@ include('templates/validar.php');
 
           $campania = new Campania();
           $campania->setUserid($cod);
-          $rc = $campania->campaniaporusuario();  
+          $rc = $campania->campaniaporusuariomfechafinal();  
           
           while($row=mysqli_fetch_array($rc)){
           if($codcamp == $row[0]){

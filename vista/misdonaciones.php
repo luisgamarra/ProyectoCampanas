@@ -17,7 +17,7 @@ include('templates/validar.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/datatables.css" rel="stylesheet">
-    <link href="css/notificacion.css" rel="stylesheet">     
+    
     
 </head>
 
@@ -62,7 +62,7 @@ include('templates/validar.php');
         if($row[3] == 'Paypal'){
             $resul = "S/.".$row[4]."";
         }else{
-            $resul = $row[4];
+            $resul = "".$row[4]." Unidades";
         }
     
     echo "<tr bgcolor='white'>
@@ -140,10 +140,7 @@ include('templates/validar.php');
 
 </script>
 
-<?php 
-include('templates/notificacion.php');
- ?>
- 
+
 </body>
 
 </html>

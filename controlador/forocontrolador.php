@@ -1,5 +1,5 @@
 <?php 
-
+header("X-XSS-Protection: 1; mode=block");
 require_once ('../db/conexion.php');
 require_once ('../modelo/foro.php');
 

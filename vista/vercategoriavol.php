@@ -21,7 +21,7 @@ include('templates/validar.php');
     <link rel="stylesheet" href="css/colorbox.css">
     <link rel="stylesheet" href="css/jPages.css">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/notificacion.css" >      
+        
 </head>
 
 <body background="img/fondito.jpg">
@@ -71,7 +71,7 @@ $row = mysqli_fetch_array($fila);
 
 if(!empty($_POST["busca"])){ 
   
-  $consulta = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen,start_date,end_date from campaigns where categoria_id=$cate and estado = 1 and title like '%".$_POST["busca"]."%'  " ; 
+  $consulta = "SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen,start_date,end_date from campaigns where categoria_id=$cate and estado = 1 and start_date>CURDATE() and  title like '%".$_POST["busca"]."%'  " ; 
   $buscador=ejecutar($consulta);
 
   $array3 = array();
@@ -102,7 +102,7 @@ if(!empty($_POST["busca"])){
                              
 $cod = $_SESSION["cod"];             
                      
-$query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen from campaigns where estado = 1 and categoria_id=$cate order by start_date DESC" ;              
+$query="SELECT campaign_id,title,description,place,vacant,DATE_FORMAT(start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(end_date, '%d-%m-%Y') as final,imagen from campaigns where estado = 1 and categoria_id=$cate and start_date>CURDATE() order by start_date DESC" ;              
 $r1 = ejecutar($query);
                   
 $query2="SELECT c.title,c.place,DATE_FORMAT(c.start_date, '%d-%m-%Y') as inicio,DATE_FORMAT(c.end_date, '%d-%m-%Y') as final,c.imagen,c.campaign_id,d.detail_campaign_id,c.description,c.vacant from details_campaigns d inner join campaigns c on d.campaign_id=c.campaign_id where d.user_id =$cod and c.categoria_id=$cate and c.estado = 1 and d.estado = 1" ;        
@@ -138,8 +138,6 @@ $b =   array(
 $array2[] = $b;
 }
 
-
-
 if(empty($_POST["busca"])){
 
   foreach ($array1 as $value1) {
@@ -157,7 +155,7 @@ if(empty($_POST["busca"])){
           <a href='../controlador/campaniacontrolador.php?idcamp=".$value1["codigo"]."&&nomcamp=".$value1["titulo"]."&&action=sumarse'><button class='btn btn-primary btn-block'>Sumarse</button></a>
 
          <a class='campana-info' href='#campana".$value1["codigo"]."'>
-                            <img src='img/".$value1["imagen"]."' alt='Campaña1'>
+                            <img src='img/".$value1["imagen"]."' alt='Campaña1' width='400px' height='200px'>
                             <p>".$value1["titulo"]."</p>
                             </a>
 
@@ -167,7 +165,7 @@ if(empty($_POST["busca"])){
                           <div class='campana-info' id='campana".$value1["codigo"]."'>
                               <h2>".$value1["titulo"]."</h2>
                               <h3> <p>Lugar: ".$value1["lugar"]."</p></h3>
-                              <img src='img/".$value1["imagen"]."' alt='Campaña1'>
+                              <img src='img/".$value1["imagen"]."' alt='Campaña1' >
                               <p>".$value1["descripcion"]."</p>
                               <p> Fecha de inicio :".$value1["inicio"]."</p>
                               <p> Fecha final :".$value1["final"]."</p>     
@@ -201,7 +199,7 @@ if(empty($_POST["busca"])){
           <a href='../controlador/campaniacontrolador.php?idcamp=".$value3["codigo"]."&&nomcamp=".$value3["titulo"]."&&action=sumarse'><button class='btn btn-primary btn-block'>Sumarse</button></a>
 
          <a class='campana-info' href='#campana".$value3["codigo"]."'>
-                            <img src='img/".$value3["imagen"]."' alt='Campaña1'>
+                            <img src='img/".$value3["imagen"]."' alt='Campaña1' width='400px' height='200px'>
                             <p>".$value3["titulo"]."</p>
                             </a>
 
@@ -275,9 +273,7 @@ $(function(){
 
 </script>
 
-<?php 
-include('templates/notificacion.php');
- ?>
+
 
 </body>
 

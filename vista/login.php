@@ -1,3 +1,8 @@
+<?php 
+header( 'X-Content-Type-Options: nosniff' );
+header( 'X-Frame-Options: SAMEORIGIN' );
+header( 'X-XSS-Protection: 1;mode=block' );
+?>
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
@@ -60,7 +65,7 @@
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-4">                                   
-          <input type="password" name="txtpass" placeholder="Contraseña" class="form-control input-md" id="password" data-error="falta contraseña" required>
+          <input type="password" name="txtpass" placeholder="Contraseña" class="form-control input-md" id="password" data-error="falta contraseña" autocomplete="off" required>
           <div class="help-block with-errors"></div>
           <a href="recuperarcontrasenia.php">¿Olvidaste tu contraseña?</a>
           </div>

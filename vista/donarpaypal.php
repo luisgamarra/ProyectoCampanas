@@ -16,7 +16,7 @@ include('templates/validar.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link href="css/notificacion.css" rel="stylesheet"> 
+
     
 </head>
 
@@ -51,7 +51,7 @@ include('templates/validar.php');
 
           $campania = new Detallecampania();
           $campania->setUserid($cod);
-          $rc = $campania->campaniasporvoluntario();  
+          $rc = $campania->campaniasporvoluntariomfechafinal();  
           
           while($row=mysqli_fetch_array($rc)){
           if($codcamp == $row[5]){
@@ -151,9 +151,6 @@ function filter(__val__){
 </script>
 
 
-<?php 
-include('templates/notificacion.php');
- ?>
 </body>
 
 </html>

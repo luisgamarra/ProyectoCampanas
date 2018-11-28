@@ -33,51 +33,36 @@ include('templates/validar.php');
 <?php include("templates/menu-admin.php"); ?>
 
 <div id="page-content-wrapper">
-    <div class="container-fluid">           
+    <div class="container-fluid">         
 
-           
   <div class="panel panel-primary"> 
   <div class="panel-heading"><h1 style="text-align:center;"><b>Campañas Sociales</b></div>  
-  </div>
-
-               
+  </div>               
 
   <form class="form-horizontal" name="form1" method="post" action="" data-toggle="validator">
-
      <div class="col-md-4"></div>        
      <div class="col-md-4">
      <div class="input-group">
-      <span class="input-group-btn">
-        
+      <span class="input-group-btn">        
         <button class="btn btn-info" type="submit" name="submit" value="Buscar">Buscar</button>
       </span>
       <input type="text" name="busca" id="busca" class="form-control" placeholder="Ingresa un nombre de campaña" required>
-    </div>
-              <div class="help-block with-errors"></div>
-
-  </div>
-  <div class="col-md-4"></div> 
-
-
-
-
-</form>
+     </div>
+     <div class="help-block with-errors"></div>
+     </div>
+     <div class="col-md-4"></div> 
+  </form>
 
 <?php 
-
-
-
-if(!empty($_POST["busca"])){
- 
+if(!empty($_POST["busca"])){ 
 
   $cod = $_SESSION["cod"]; 
   $ca = new Campania();
   $ca->setUserid($cod);
   $r1 = $ca->buscarcampania($_POST["busca"]);
- echo "<a class='btn btn-success' href='listacampania.php'>volver</a>";
-   
+  echo "<a class='btn btn-success' href='listacampania.php'>volver</a>";   
 }
- ?>
+?>
               
 
          <section id="campanas" class="campanas contenedor seccion">
@@ -100,7 +85,7 @@ if(empty($_POST["busca"])){
                         <li>                        
                           <div class='campana'>
                             <a class='campana-info' href='#campana".$row["0"]."'>
-                            <img src='img/".$row["7"]."' >
+                            <img src='img/".$row["7"]."' width='400px' height='200px'>
                             <p>".$row["1"]."</p>
                             </a>
                           </div>
@@ -125,7 +110,7 @@ if(empty($_POST["busca"])){
                         <li>                        
                           <div class='campana'>
                             <a class='campana-info' href='#campana".$row2["0"]."'>
-                            <img src='img/".$row2["7"]."' >
+                            <img src='img/".$row2["7"]."' width='400px' height='200px'>
                             <p>".$row2["1"]."</p>
                             </a>
                           </div>

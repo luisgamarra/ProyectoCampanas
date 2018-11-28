@@ -79,7 +79,7 @@ include('templates/validar.php');
 
           $campania = new Campania();
           $campania->setUserid($cod);
-          $rc = $campania->campaniaporusuario();  
+          $rc = $campania->campaniaporusuariomfechafinal();  
           
           while($row=mysqli_fetch_array($rc)){
           if($codcamp == $row[0]){
@@ -125,11 +125,7 @@ include('templates/validar.php');
 <script src="js/bootstrap.min.js"></script>
 <script src="js/validator.js"></script> 
 <script src="js/jquery.timepicker.js"></script>
-
 <script src="js/jquery-ui.js"></script>
-
-
-
 
 <script>
   $("#menu-toggle").click(function(e) {

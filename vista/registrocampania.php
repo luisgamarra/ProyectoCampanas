@@ -108,7 +108,7 @@ include('templates/validar.php');
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha1" >Fecha de inicio : </label>
           <div class="col-md-4">
-        <input id="fecha1" name="txtfecha1" type="text" placeholder="Fecha de inicio" class="form-control input-md" required>
+        <input id="fecha1" onchange="ValidarFechaInicial();" name="txtfecha1" type="text" placeholder="Fecha de inicio" class="form-control input-md" required>
           </div>
           <div class="help-block with-errors"></div>
         </div>
@@ -123,7 +123,7 @@ include('templates/validar.php');
         <div class="form-group">
           <label class="col-md-4 control-label" for="fecha2" >Fecha final : </label>
           <div class="col-md-4">
-          <input id="fecha2" name="txtfecha2" type="text" placeholder="Fecha final" class="form-control input-md"  required>
+          <input id="fecha2" onchange="ValidarFechaFinal();" name="txtfecha2" type="text" placeholder="Fecha final" class="form-control input-md"  required>
           </div>
           <div class="help-block with-errors"></div>
         </div>
@@ -208,6 +208,7 @@ include('templates/validar.php');
   
  var dateToday = new Date(); 
 
+
 $("#fecha1").datepicker({  
 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],  
  dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
@@ -223,7 +224,7 @@ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Ag
      minDate: dateToday 
     
 });
- 
+
   </script>
 
   <script >
@@ -250,6 +251,40 @@ function validaNumericos(event) {
         document.getElementById(all.id).value = "";
         return; // Si la extension es no válida ya no chequeo lo de abajo.
     }}
+</script>
+
+<script>
+function ValidarFechaInicial()
+{
+
+var f1 = document.getElementById("fecha1").value;
+var f2 = document.getElementById("fecha2").value;
+ 
+if (($.datepicker.parseDate('dd/mm/yy', f1) > $.datepicker.parseDate('dd/mm/yy', f2)) && f2 != ""){
+     alert("La Fecha Inicial no puede ser mayor que la Fecha Final");
+     document.getElementById("fecha1").value = "";
+     return
+}else{ 
+}
+}
+ 
+</script>
+
+<script>
+function ValidarFechaFinal()
+{
+
+var f1 = document.getElementById("fecha1").value;
+var f2 = document.getElementById("fecha2").value;
+ 
+if ($.datepicker.parseDate('dd/mm/yy', f2) < $.datepicker.parseDate('dd/mm/yy', f1)){
+     alert("La Fecha Final no puede ser menor que la Fecha Inicial");
+     document.getElementById("fecha2").value = "";
+     return
+}else{ 
+}
+}
+ 
 </script>
 
 <?php 

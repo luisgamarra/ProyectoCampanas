@@ -29,7 +29,7 @@ include('templates/validar.php');
   <link rel="stylesheet" href="css/colorbox.css">
   <link rel="stylesheet" href="css/jPages.css">
   <link rel="stylesheet" href="css/animate.css">
-  <link rel="stylesheet" href="css/notificacion.css">      
+      
 </head>
 
 <body background="img/fondito1.jpg">
@@ -38,7 +38,7 @@ include('templates/validar.php');
 <div id="wrapper">
 
 <?php
-include("templates/menu-voluntario.php");   
+include("templates/menu-voluntario.php");    
 ?>
 
 <div id="page-content-wrapper">
@@ -145,9 +145,6 @@ $(function(){
 
 </script>
 
-<?php 
-include('templates/notificacion.php');
- ?>
 
 </body>
 

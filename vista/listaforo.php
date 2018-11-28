@@ -19,7 +19,6 @@ include('templates/validar.php');
     <link href="css/datatables.css" rel="stylesheet">
     <link href="css/remodal.css" rel="stylesheet">
     <link href="css/remodal-default-theme.css" rel="stylesheet" >
-    <link href="css/notificacion.css" rel="stylesheet"> 
 
 
     
@@ -189,9 +188,7 @@ function Confirmation() {
 </script>
 
 
-<?php 
-include('templates/notificacion.php');
- ?>
+
 
 </body>
 

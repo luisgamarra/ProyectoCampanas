@@ -1,5 +1,5 @@
 <?php 
-
+header("X-XSS-Protection: 1; mode=block"); 
 require_once ('../db/conexion.php');
 require_once ('../modelo/notificacion.php'); // para enviar notificacion
 require_once ('../modelo/campania.php'); // para buscar por campaña

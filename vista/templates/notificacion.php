@@ -1,4 +1,4 @@
-<script >
+<script>
         
             $("#notificacionLink").click(function(){
                 $("#notification_count").fadeOut("slow");

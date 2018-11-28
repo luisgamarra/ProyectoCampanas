@@ -9,7 +9,7 @@
       conectar();
       $sql = "SELECT campaign_id, title,description, place, start_date, imagen ";
       $sql .= " FROM campaigns ";
-      $sql .= " WHERE estado='1' and start_date>=CURDATE()";
+      $sql .= " WHERE estado='1' and start_date>CURDATE()";
       $sql .= " ORDER BY start_date DESC ";
 
       $resultado = ejecutar($sql);
@@ -28,7 +28,7 @@
                         <li>
                           <div class="campana">
                             <a class="campana-info" href="#campana<?php echo $campanas['campaign_id']; ?>">
-                            <img src="vista/img/<?php echo $campanas['imagen'] ?>" alt="Campaña1">
+                            <img src="vista/img/<?php echo $campanas['imagen'] ?>" alt="Campaña1" width='400px' height='200px'>
                             <p><?php echo $campanas['title'] ?></p>
                             </a>
                           </div>

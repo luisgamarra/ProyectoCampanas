@@ -1,12 +1,9 @@
 <?php 
-
 require_once ('../db/conexion.php');
-
 require_once ('../modelo/campania.php');
-
 require_once ('../modelo/detallecampania.php');
 
-conectar();
+conectar(); 
 session_start();
 
  $action = '';
@@ -149,8 +146,9 @@ if(mysqli_num_rows($r) == 0 && $fila[4] != 0){
         $rc->setId($idcamp);
         $rc->restarvacante();
         
-        include ('../vista/templates/correo.php');
-
+        //include ('../vista/templates/correo.php');
+        echo "<script>alert('Te sumaste a campaña')
+        document.location=('../vista/miscampanas.php')</script>"; 
         
     }
 
@@ -164,7 +162,9 @@ if(mysqli_num_rows($r) == 0 && $fila[4] != 0){
         $rc->setId($idcamp);
         $rc->restarvacante();
     
-    include ('../vista/templates/correo.php');
+    //include ('../vista/templates/correo.php');
+        echo "<script>alert('Te sumaste a campaña')
+        document.location=('../vista/miscampanas.php')</script>"; 
 
 }elseif ($fila[4] == 0) {
     echo "<script>alert('No hay vacantes suficientes')

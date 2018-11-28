@@ -22,7 +22,6 @@ include('templates/validar.php');
     <link rel="stylesheet" href="css/remodal-default-theme.css">
     <link rel="stylesheet" href="css/jPages.css">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/notificacion.css" >
 
 
    
@@ -199,9 +198,6 @@ function Confirmation() {
 }
 </script>
  
-<?php 
-include('templates/notificacion.php');
- ?>
 
 
 </body>

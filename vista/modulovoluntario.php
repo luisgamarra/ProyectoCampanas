@@ -22,7 +22,7 @@ include('templates/validar.php');
     <link rel="stylesheet" href="css/colorbox.css">
     <link rel="stylesheet" href="css/jPages.css">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/notificacion.css"> 
+    
   
 </head>
 
@@ -136,18 +136,17 @@ if(empty($_POST["busca"])){
     $encontrado=false;
     foreach ($array2 as $value2) {
        if ($value1 == $value2){
-        $encontrado=true;    
-                                 
+        $encontrado=true;                                     
        }
    }
     if ($encontrado == false){
           echo "<li>
                 <div class='campana'>
 
-          <a href='../controlador/campaniacontrolador.php?idcamp=".$value1["codigo"]."&&nomcamp=".$value1["titulo"]."&&action=sumarse'><button class='btn btn-primary btn-block'>Sumarse</button></a>
+          <a href='../controlador/campaniacontrolador.php?idcamp=".$value1["codigo"]."&&action=sumarse'><button class='btn btn-primary btn-block'>Sumarse</button></a>
 
          <a class='campana-info' href='#campana".$value1["codigo"]."'>
-                            <img src='img/".$value1["imagen"]."' alt='Campaña1'>
+                            <img src='img/".$value1["imagen"]."' alt='Campaña1' width='400px' height='200px'>
                             <p>".$value1["titulo"]."</p>
                             </a>
 
@@ -176,12 +175,11 @@ if(empty($_POST["busca"])){
                 }//fin if
                 else{
 
-                  foreach ($array3 as $value3) {
+    foreach ($array3 as $value3) {
     $encontrado=false;
     foreach ($array2 as $value2) {
        if ($value3 == $value2){
-        $encontrado=true;    
-                                 
+        $encontrado=true;                                     
        }
    }
     if ($encontrado == false){
@@ -191,7 +189,7 @@ if(empty($_POST["busca"])){
           <a href='../controlador/campaniacontrolador.php?idcamp=".$value3["codigo"]."&&nomcamp=".$value3["titulo"]."&&action=sumarse'><button class='btn btn-primary btn-block'>Sumarse</button></a>
 
          <a class='campana-info' href='#campana".$value3["codigo"]."'>
-                            <img src='img/".$value3["imagen"]."' alt='Campaña1'>
+                            <img src='img/".$value3["imagen"]."' alt='Campaña1' width='400px' height='200px'>
                             <p>".$value3["titulo"]."</p>
                             </a>
 
@@ -260,13 +258,7 @@ $(function(){
       animation   : "bounceInUp"
     });
   });
-
 </script>
-
-
-<?php 
-include('templates/notificacion.php');
- ?>
 
 </body>
 

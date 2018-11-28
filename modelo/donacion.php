@@ -1,5 +1,5 @@
 <?php 
-
+require_once('../db/conexion.php');
 conectar();
 
 class Donacion{
@@ -107,7 +107,7 @@ class Donacion{
 
    public function donacionesporcampania(){
         
-        $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.estado=1";    
+        $query="SELECT d.donation_id,u.firstname,u.lastname,d.description,d.quantility,d.catdon_id from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.estado=1";    
         $tabla=ejecutar($query);
         
         return $tabla;
@@ -116,7 +116,7 @@ class Donacion{
 
     public function donacionporvoluntario(){
 
-        $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.user_id ='".$this->userid."' and d.estado=1";    
+        $query="SELECT d.donation_id, u.firstname,u.lastname,d.description,d.quantility,d.catdon_id from donations d inner join users u on d.user_id=u.user_id where d.campaign_id = '".$this->campaignid."' and d.user_id ='".$this->userid."' and d.estado=1";    
         $tabla=ejecutar($query);
         
         return $tabla;

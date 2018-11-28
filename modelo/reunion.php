@@ -145,9 +145,9 @@ class Reunion{
         $query="SELECT * from reunions where dates='".$this->dates."' and hours='".$this->hours."' and user_id='".$this->userid."' and estado = 1" ;        
         $tabla=ejecutar($query);        
         
-       $row=mysqli_fetch_array($tabla);
+       //$row=mysqli_fetch_array($tabla);
         
-        return $row;
+        return $tabla;
 
     }
 
